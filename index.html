@@ -20,7 +20,7 @@
 <div id="map"></div>
 <div class="sidebar">
     <div style="font-weight:bold; margin-bottom:10px; border-bottom:2px solid #007bff;">旅の目次</div>
-    <div id="date-list">読み込み中...</div>
+    <div id="date-list"></div>
 </div>
 
 <script>
@@ -29,13 +29,13 @@
 
     const activeLayers = {}; 
 
-    // 数字（45666等）を「2025/1/10」形式に直す
     function formatExcelDate(val) {
+        if (!val) return "";
         if (typeof val === 'number') {
             const d = new Date(Math.round((val - 25569) * 86400 * 1000));
             return `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}`;
         }
-        return String(val || "").trim();
+        return String(val).trim();
     }
 
     async function load() {
@@ -43,24 +43,30 @@
             const res = await fetch('data.xlsx');
             const ab = await res.arrayBuffer();
             const wb = XLSX.read(new Uint8Array(ab), {type: 'array'});
-            const rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {header: 1}); 
+            const data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]); 
 
             const dateList = document.getElementById('date-list');
-            dateList.innerHTML = "";
             const grouped = {};
 
-            // 7行のデータを読み込み
-            for(let i=1; i < rows.length; i++) {
-                const r = rows[i];
-                if(!r || r.length < 4) continue;
+            data.forEach(row => {
+                // Excelの1行目の名前に合わせてデータを取得
+                // ここで「日付」などの名前が一致しないと空になります
+                const date = formatExcelDate(row["日付"] || row["Date"] || "");
+                const lat = parseFloat(row["緯度"] || row["Lat"] || 0);
+                const lon = parseFloat(row["経度"] || row["Lon"] || 0);
+                const gpx = row["GPX"] || row["GPXファイル名"] || "";
+                
+                if (!date || isNaN(lat) || lat === 0) return;
 
-                // 列の固定位置 (0:名, 1:緯, 2:経, 3:日, 5:備, 7:画, 10:GPX)
-                const date = formatExcelDate(r[3]); 
-                if(!date || date.includes(".")) continue; // 座標（点を含む）が混じったら飛ばす
-
-                if(!grouped[date]) grouped[date] = { points: [], gpx: r[10] };
-                grouped[date].points.push({ lat: r[1], lon: r[2], name: r[0], desc: r[5], img: r[7] });
-            }
+                if (!grouped[date]) grouped[date] = { points: [], gpx: gpx };
+                grouped[date].points.push({ 
+                    lat, 
+                    lon, 
+                    name: row["地点名"] || row["Name"] || "地点", 
+                    desc: row["備考"] || row["Note"] || "", 
+                    img: row["画像"] || row["Image"] || "" 
+                });
+            });
 
             Object.keys(grouped).sort().reverse().forEach(date => {
                 const div = document.createElement('div');
@@ -75,7 +81,6 @@
                         const group = L.layerGroup().addTo(map);
                         activeLayers[date] = group;
 
-                        // 軌跡(GPX)
                         if (grouped[date].gpx) {
                             const gpxPath = "logs/" + String(grouped[date].gpx).trim();
                             new L.GPX(gpxPath, {
@@ -85,7 +90,6 @@
                             }).on('loaded', e => map.fitBounds(e.target.getBounds())).addTo(group);
                         }
 
-                        // ピン
                         grouped[date].points.forEach(p => {
                             const html = `<b>${p.name}</b><br>${p.desc}${p.img ? `<br><img src="${p.img}" style="width:200px">` : ""}`;
                             L.marker([p.lat, p.lon]).bindPopup(html).addTo(group);
@@ -96,7 +100,7 @@
                 };
                 dateList.appendChild(div);
             });
-        } catch (e) { dateList.innerText = "読み込みエラー"; }
+        } catch (e) { console.error(e); }
     }
     load();
 </script>
