@@ -32,12 +32,14 @@
 
     const activeLayers = {}; 
 
-    // Excelの数値を「YYYY/MM/DD」形式に統一する関数（ソート用）
-    function getStandardDate(val) {
-        if (!val) return "0000/00/00";
+    function formatExcelDate(val) {
+        if (!val) return "";
         if (typeof val === 'number' && val > 30000) {
             const d = new Date(Math.round((val - 25569) * 86400 * 1000));
-            return `${d.getFullYear()}/${(d.getMonth()+1).toString().padStart(2,'0')}/${d.getDate().toString().padStart(2,'0')}`;
+            const y = d.getFullYear();
+            const m = (d.getMonth() + 1).toString().padStart(2, '0');
+            const day = d.getDate().toString().padStart(2, '0');
+            return `${y}/${m}/${day}`;
         }
         return val.toString().trim();
     }
@@ -48,32 +50,38 @@
             const arrayBuffer = await response.arrayBuffer();
             const workbook = XLSX.read(new Uint8Array(arrayBuffer), {type: 'array'});
             const sheet = workbook.Sheets[workbook.SheetNames[0]];
-            const rows = XLSX.utils.sheet_to_json(sheet, {header: 1}); 
+            
+            // 見出しの名前を使ってオブジェクト形式で読み込む（これなら列がズレても大丈夫）
+            const data = XLSX.utils.sheet_to_json(sheet); 
 
             const groupedData = {};
 
-            rows.forEach((row, i) => {
-                if (i === 0 || !row || row.length < 3) return;
-                
-                let dateKey = getStandardDate(row[3]); // 4列目を日付キーにする
-                let lat = parseFloat(row[1]);
-                let lon = parseFloat(row[2]);
-                let gpx = row[10] ? row[10].toString().trim() : "";
-                let img = row[7] || "";
-                let name = row[0] || "地点";
+            data.forEach(row => {
+                // Excelの1行目の名前に合わせてデータを取得（ここを実際のExcelの見出し名と合わせてください）
+                const dateRaw = row["日付"] || row["Date"] || row["Date欄"];
+                const date = formatExcelDate(dateRaw);
+                const lat = parseFloat(row["緯度"] || row["Lat"] || row["緯度欄"]);
+                const lon = parseFloat(row["経度"] || row["Lon"] || row["経度欄"]);
+                const gpx = row["GPXファイル名"] || row["GPX"] || row["GpxFile"] || "";
+                const img = row["画像URL"] || row["URL"] || row["Image"] || "";
+                const name = row["地点名"] || row["Name"] || "地点";
+                const desc = row["備考"] || row["詳細"] || "";
 
-                if (!dateKey || isNaN(lat)) return;
-                if (!groupedData[dateKey]) groupedData[dateKey] = { points: [], gpx: gpx };
-                groupedData[dateKey].points.push({ lat, lon, name, img, desc: row[5] || "" });
+                if (!date || isNaN(lat)) return;
+
+                if (!groupedData[date]) {
+                    groupedData[date] = { points: [], gpx: gpx.toString().trim() };
+                }
+                groupedData[date].points.push({ lat, lon, name, img, desc });
             });
 
             const dateList = document.getElementById('date-list');
-            // 日付を降順（新しい順）に並び替えて目次を作成
+            // 日付順に並び替えて目次を作成
             Object.keys(groupedData).sort((a, b) => b.localeCompare(a)).forEach(date => {
                 const dayData = groupedData[date];
                 const div = document.createElement('div');
                 div.className = 'date-item';
-                div.innerHTML = `<input type="checkbox" id="chk-${date}"> <label>${date}</label>`;
+                div.innerHTML = `<input type="checkbox"> <label>${date}</label>`;
                 
                 div.onclick = (e) => {
                     const chk = div.querySelector('input');
@@ -83,13 +91,13 @@
                         const group = L.layerGroup().addTo(map);
                         activeLayers[date] = group;
 
-                        // 1. ピンを表示
+                        // ピンを表示
                         dayData.points.forEach(p => {
                             const content = `<div><strong>${p.name}</strong><br>${p.desc}<br>${p.img ? `<img src="${p.img}" class="popup-image">` : ""}</div>`;
                             L.marker([p.lat, p.lon]).bindPopup(content).addTo(group);
                         });
 
-                        // 2. 軌跡（GPX）を表示
+                        // 軌跡（GPX）を表示
                         if (dayData.gpx) {
                             const gpxUrl = "logs/" + dayData.gpx;
                             new L.GPX(gpxUrl, {
