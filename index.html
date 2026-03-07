@@ -32,62 +32,56 @@
     let currentGpxLayer = null;
     let markers = [];
 
+    // Excelの数字（シリアル値）を日付文字列に変換する関数
+    function formatExcelDate(val) {
+        if (!val) return "";
+        if (typeof val === 'string') return val; // すでに文字列ならそのまま
+        if (typeof val === 'number' && val > 30000) { // Excel日付数値の判定
+            const date = new Date(Math.round((val - 25569) * 86400 * 1000));
+            const y = date.getFullYear();
+            const m = date.getMonth() + 1;
+            const d = date.getDate();
+            return `${y}年${m}月${d}日`;
+        }
+        return val.toString();
+    }
+
     async function loadArchive() {
         try {
             const response = await fetch('data.xlsx');
             const arrayBuffer = await response.arrayBuffer();
             const data = new Uint8Array(arrayBuffer);
-            // raw: false, cellText: true で「見たまま」を最優先
-            const workbook = XLSX.read(data, {type: 'array', cellText: true, raw: false});
+            const workbook = XLSX.read(data, {type: 'array'});
             const sheet = workbook.Sheets[workbook.SheetNames[0]];
-            
-            // どんな形式でもオブジェクトとして読み込む
-            const rows = XLSX.utils.sheet_to_json(sheet, {defval: ""}); 
+            const rows = XLSX.utils.sheet_to_json(sheet, {header: 1}); 
 
             const dateList = document.getElementById('date-list');
             const groupedData = {};
 
-            rows.forEach(row => {
-                // 列名が何であっても、値の内容から推測して取得
-                let date = "";
-                let lat = NaN, lon = NaN, gpx = "", img = "", name = "", desc = "";
+            for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                if (!row || row.length < 4) continue;
+                
+                // 列の対応: 0地点名, 1緯度, 2経度, 3日付
+                let date = formatExcelDate(row[3]); 
+                const placeName = row[0];
+                const lat = parseFloat(row[1]);
+                const lon = parseFloat(row[2]);
+                const imgUrl = row[7]; // 8列目(インデックス7)
+                const gpxFile = row[10]; // 11列目(インデックス10)
 
-                for (let key in row) {
-                    let val = row[key] ? row[key].toString().trim() : "";
-                    if (!val) continue;
-
-                    // 日付（年、月、日が含まれる、または特定の形式）
-                    if (key.includes("日付") || key.includes("Date") || val.includes("年")) date = val;
-                    // 緯度・経度
-                    if (key.includes("緯度") || key.includes("Lat") || (!isNaN(val) && val.startsWith("1"))) {
-                         if (val.includes(".")) {
-                             if (parseFloat(val) < 30) lat = parseFloat(val);
-                             else if (parseFloat(val) > 90) lon = parseFloat(val);
-                         }
-                    }
-                    if (key.includes("経度") || key.includes("Lon")) lon = parseFloat(val);
-                    // GPXファイル
-                    if (val.toLowerCase().endsWith(".gpx")) gpx = val;
-                    // 画像URL
-                    if (val.startsWith("http") && (val.includes(".jpg") || val.includes(".png") || val.includes("googleusercontent"))) img = val;
-                    // 地点名（最初の列など）
-                    if (key === Object.keys(row)[0]) name = val;
-                    // 詳細（備考など）
-                    if (key.includes("市場") || key.includes("詳細") || key.includes("備考")) desc = val;
-                }
-
-                if (!date) return;
+                if (!date || isNaN(lat)) continue;
 
                 if (!groupedData[date]) {
-                    groupedData[date] = { points: [], gpx: gpx };
+                    groupedData[date] = { points: [], gpx: gpxFile };
                     const div = document.createElement('div');
                     div.className = 'date-item';
                     div.innerText = date;
                     div.onclick = () => showDate(date);
                     dateList.appendChild(div);
                 }
-                groupedData[date].points.push({ lat, lon, name, img, desc });
-            });
+                groupedData[date].points.push({ lat, lon, name: placeName, img: imgUrl, desc: row[5] });
+            }
 
             function showDate(date) {
                 if (currentGpxLayer) map.removeLayer(currentGpxLayer);
@@ -97,19 +91,21 @@
                 const dayData = groupedData[date];
 
                 if (dayData.gpx) {
-                    const gpxPath = `logs/${dayData.gpx}`;
+                    const gpxPath = `logs/${dayData.gpx.toString().trim()}`;
                     currentGpxLayer = new L.GPX(gpxPath, {
                         async: true,
                         marker_options: { startIconUrl: '', endIconUrl: '', shadowUrl: '' },
                         polyline_options: { color: '#ff4500', weight: 5, opacity: 0.8 }
                     }).on('loaded', function(e) {
                         map.fitBounds(e.target.getBounds());
+                    }).on('error', function(e) {
+                        console.error("GPX読み込み失敗:", gpxPath);
                     }).addTo(map);
                 }
 
                 dayData.points.forEach(p => {
                     if (!isNaN(p.lat) && !isNaN(p.lon)) {
-                        const popupContent = `<div><strong>${p.name}</strong><br>${p.desc}<br>${p.img ? `<img src="${p.img}" class="popup-image">` : ""}</div>`;
+                        const popupContent = `<div><strong>${p.name}</strong><br>${p.desc || ""}<br>${p.img ? `<img src="${p.img}" class="popup-image">` : ""}</div>`;
                         const m = L.marker([p.lat, p.lon]).addTo(map).bindPopup(popupContent);
                         markers.push(m);
                     }
