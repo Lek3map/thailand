@@ -32,28 +32,15 @@
     let currentGpxLayer = null;
     let markers = [];
 
-    // Excelの数字（シリアル値）を日付文字列に変換する関数
-    function formatExcelDate(val) {
-        if (!val) return "";
-        if (typeof val === 'string') return val; // すでに文字列ならそのまま
-        if (typeof val === 'number' && val > 30000) { // Excel日付数値の判定
-            const date = new Date(Math.round((val - 25569) * 86400 * 1000));
-            const y = date.getFullYear();
-            const m = date.getMonth() + 1;
-            const d = date.getDate();
-            return `${y}年${m}月${d}日`;
-        }
-        return val.toString();
-    }
-
     async function loadArchive() {
         try {
             const response = await fetch('data.xlsx');
             const arrayBuffer = await response.arrayBuffer();
             const data = new Uint8Array(arrayBuffer);
-            const workbook = XLSX.read(data, {type: 'array'});
+            // raw: false で、Excelが計算した後の「見たままの文字列」を取得する
+            const workbook = XLSX.read(data, {type: 'array', cellNF: true, cellText: true});
             const sheet = workbook.Sheets[workbook.SheetNames[0]];
-            const rows = XLSX.utils.sheet_to_json(sheet, {header: 1}); 
+            const rows = XLSX.utils.sheet_to_json(sheet, {header: 1, raw: false}); 
 
             const dateList = document.getElementById('date-list');
             const groupedData = {};
@@ -62,13 +49,13 @@
                 const row = rows[i];
                 if (!row || row.length < 4) continue;
                 
-                // 列の対応: 0地点名, 1緯度, 2経度, 3日付
-                let date = formatExcelDate(row[3]); 
-                const placeName = row[0];
+                // 4列目（インデックス3）をそのまま日付として使用
+                let date = row[3] ? row[3].toString().trim() : ""; 
+                const placeName = row[0] || "地点";
                 const lat = parseFloat(row[1]);
                 const lon = parseFloat(row[2]);
-                const imgUrl = row[7]; // 8列目(インデックス7)
-                const gpxFile = row[10]; // 11列目(インデックス10)
+                const imgUrl = row[7]; 
+                const gpxFile = row[10]; 
 
                 if (!date || isNaN(lat)) continue;
 
@@ -98,8 +85,6 @@
                         polyline_options: { color: '#ff4500', weight: 5, opacity: 0.8 }
                     }).on('loaded', function(e) {
                         map.fitBounds(e.target.getBounds());
-                    }).on('error', function(e) {
-                        console.error("GPX読み込み失敗:", gpxPath);
                     }).addTo(map);
                 }
 
