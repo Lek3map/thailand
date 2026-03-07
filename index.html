@@ -1,53 +1,127 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Archive Test</title>
+    <title>Thailand Travel Archive</title>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
-        body { font-family: sans-serif; padding: 20px; }
-        #status { padding: 10px; background: #eee; border-radius: 5px; margin-bottom: 10px; }
-        .sidebar { width: 200px; border: 1px solid #ccc; padding: 10px; }
-        .date-item { cursor: pointer; color: blue; text-decoration: underline; margin-bottom: 5px; }
+        body { margin: 0; padding: 0; }
+        #map { height: 100vh; width: 100%; }
+        .sidebar { position: absolute; top: 10px; right: 10px; z-index: 1000; background: white; padding: 15px; max-height: 80vh; overflow-y: auto; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.3); width: 220px; font-family: sans-serif; }
+        .date-item { cursor: pointer; padding: 10px; border-bottom: 1px solid #eee; font-size: 14px; color: #333; font-weight: bold; }
+        .date-item:hover { background: #f0f7ff; color: #007bff; }
+        .popup-image { max-width: 250px; height: auto; display: block; margin-top: 10px; border-radius: 5px; }
+        .leaflet-popup-content { width: 260px !important; }
     </style>
 </head>
 <body>
 
-    <h2>アーカイブ表示テスト</h2>
-    <div id="status">確認中...</div>
-    
-    <div class="sidebar">
-        <h4>旅の目次（テスト）</h4>
-        <div id="date-list">
-            <div class="date-item">テスト：2025年1月10日</div>
-        </div>
-    </div>
+<div id="map"></div>
+<div class="sidebar">
+    <h3 style="margin:0 0 10px 0; font-size: 16px; border-bottom: 2px solid #007bff;">旅の目次</h3>
+    <div id="date-list"></div>
+</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <script>
-        const status = document.getElementById('status');
-        status.innerText = "プログラムは起動しました。Excelを探します...";
+<script>
+    const map = L.map('map').setView([15.0, 102.0], 6);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-        async function testLoad() {
-            try {
-                const response = await fetch('data.xlsx');
-                if (response.ok) {
-                    status.style.background = "#d4edda";
-                    status.innerText = "✅ data.xlsx が見つかりました！読み込みます...";
-                    
-                    const arrayBuffer = await response.arrayBuffer();
-                    const data = new Uint8Array(arrayBuffer);
-                    const workbook = XLSX.read(data, {type: 'array'});
-                    status.innerText += " -> 変換成功！";
-                } else {
-                    status.style.background = "#f8d7da";
-                    status.innerText = "❌ data.xlsx が見つかりません（404エラー）。ファイル名や場所を確認してください。";
-                }
-            } catch (e) {
-                status.style.background = "#fff3cd";
-                status.innerText = "⚠️ エラー発生: " + e.message;
-            }
+    let currentGpxLayer = null;
+    let markers = [];
+
+    // Excelの特殊な日付形式を「◯◯年◯月◯日」に直す魔法の関数
+    function formatExcelDate(val) {
+        if (!val) return "";
+        if (typeof val === 'number' && val > 30000) {
+            const date = new Date(Math.round((val - 25569) * 86400 * 1000));
+            return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
         }
-        testLoad();
-    </script>
+        return val.toString();
+    }
+
+    async function loadArchive() {
+        try {
+            const response = await fetch('data.xlsx');
+            const arrayBuffer = await response.arrayBuffer();
+            const data = new Uint8Array(arrayBuffer);
+            const workbook = XLSX.read(data, {type: 'array'});
+            const sheet = workbook.Sheets[workbook.SheetNames[0]];
+            // header: 1 で「列の番号」で正確に読み込む
+            const rows = XLSX.utils.sheet_to_json(sheet, {header: 1}); 
+
+            const dateList = document.getElementById('date-list');
+            const groupedData = {};
+
+            // 1行目は見出しなので 2行目(i=1)から読み込み
+            for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                if (!row || row.length < 4) continue;
+                
+                // ムクダハンのデータ並びに完全対応
+                // 0:地点名, 1:緯度, 2:経度, 3:日付, 7:画像URL, 10:GPX名
+                let date = formatExcelDate(row[3]); 
+                const placeName = row[0] || "地点";
+                const lat = parseFloat(row[1]);
+                const lon = parseFloat(row[2]);
+                const imgUrl = row[7] || ""; 
+                const gpxFile = row[10] || "";
+
+                if (!date || isNaN(lat)) continue;
+
+                if (!groupedData[date]) {
+                    groupedData[date] = { points: [], gpx: gpxFile };
+                    const div = document.createElement('div');
+                    div.className = 'date-item';
+                    div.innerText = date;
+                    div.onclick = () => showDate(date);
+                    dateList.appendChild(div);
+                }
+                // 詳細(備考)は5列目付近にあると想定
+                groupedData[date].points.push({ lat, lon, name: placeName, img: imgUrl, desc: row[5] || "" });
+            }
+
+            function showDate(date) {
+                if (currentGpxLayer) map.removeLayer(currentGpxLayer);
+                markers.forEach(m => map.removeLayer(m));
+                markers = [];
+
+                const dayData = groupedData[date];
+
+                // GPXの軌跡を表示
+                if (dayData.gpx && dayData.gpx.toString().trim() !== "") {
+                    const fileName = dayData.gpx.toString().trim();
+                    const gpxPath = `logs/${fileName}`;
+                    currentGpxLayer = new L.GPX(gpxPath, {
+                        async: true,
+                        marker_options: { startIconUrl: '', endIconUrl: '', shadowUrl: '' },
+                        polyline_options: { color: '#ff4500', weight: 5, opacity: 0.8 }
+                    }).on('loaded', function(e) {
+                        map.fitBounds(e.target.getBounds());
+                    }).addTo(map);
+                }
+
+                // ピンを表示
+                dayData.points.forEach(p => {
+                    if (!isNaN(p.lat) && !isNaN(p.lon)) {
+                        const popupContent = `
+                            <div>
+                                <strong style="font-size:14px;">${p.name}</strong><br>
+                                <span style="font-size:12px; color:#666;">${p.desc}</span><br>
+                                ${p.img ? `<img src="${p.img}" class="popup-image">` : ""}
+                            </div>
+                        `;
+                        const m = L.marker([p.lat, p.lon]).addTo(map).bindPopup(popupContent);
+                        markers.push(m);
+                    }
+                });
+            }
+        } catch (e) { console.error(e); }
+    }
+    loadArchive();
+</script>
 </body>
 </html>
