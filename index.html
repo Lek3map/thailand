@@ -49,19 +49,17 @@
             const grouped = {};
 
             data.forEach(row => {
-                // Excelの1行目の名前に合わせてデータを取得
-                // ここで「日付」などの名前が一致しないと空になります
                 const date = formatExcelDate(row["日付"] || row["Date"] || "");
                 const lat = parseFloat(row["緯度"] || row["Lat"] || 0);
                 const lon = parseFloat(row["経度"] || row["Lon"] || 0);
+                // GPXファイル名の取得
                 const gpx = row["GPX"] || row["GPXファイル名"] || "";
                 
                 if (!date || isNaN(lat) || lat === 0) return;
 
                 if (!grouped[date]) grouped[date] = { points: [], gpx: gpx };
                 grouped[date].points.push({ 
-                    lat, 
-                    lon, 
+                    lat, lon, 
                     name: row["地点名"] || row["Name"] || "地点", 
                     desc: row["備考"] || row["Note"] || "", 
                     img: row["画像"] || row["Image"] || "" 
@@ -81,13 +79,21 @@
                         const group = L.layerGroup().addTo(map);
                         activeLayers[date] = group;
 
+                        // 【最重要】GPXの読み込み
                         if (grouped[date].gpx) {
-                            const gpxPath = "logs/" + String(grouped[date].gpx).trim();
-                            new L.GPX(gpxPath, {
+                            // logs/ をつけず、Excelに書かれた文字をそのままURLとして使う
+                            const gpxUrl = String(grouped[date].gpx).trim();
+                            console.log("読み込み開始:", gpxUrl);
+
+                            new L.GPX(gpxUrl, {
                                 async: true,
                                 marker_options: { startIconUrl: '', endIconUrl: '' },
                                 polyline_options: { color: 'orange', weight: 6, opacity: 0.9 }
-                            }).on('loaded', e => map.fitBounds(e.target.getBounds())).addTo(group);
+                            }).on('loaded', e => {
+                                map.fitBounds(e.target.getBounds());
+                            }).on('error', e => {
+                                console.error("読み込めませんでした:", gpxUrl);
+                            }).addTo(group);
                         }
 
                         grouped[date].points.forEach(p => {
