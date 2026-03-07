@@ -3,121 +3,96 @@
 <head>
     <title>Thailand Travel Archive</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
-        body { margin: 0; padding: 0; }
-        #map { height: 100vh; width: 100%; background: #f0f0f0; }
-        .sidebar { position: absolute; top: 10px; right: 10px; z-index: 1000; background: white; padding: 15px; max-height: 80vh; overflow-y: auto; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.2); width: 250px; font-family: sans-serif; }
-        .date-item { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #eee; cursor: pointer; }
-        .date-item:hover { background: #f8f9fa; }
-        .date-item input { margin-right: 12px; width: 20px; height: 20px; }
-        .popup-img { max-width: 230px; height: auto; border-radius: 4px; margin-top: 8px; }
+        body { margin: 0; }
+        #map { height: 100vh; width: 100%; background: #eee; }
+        .sidebar { position: absolute; top: 10px; right: 10px; z-index: 1000; background: white; padding: 10px; max-height: 90vh; overflow-y: auto; width: 220px; border: 2px solid #333; }
+        .date-item { padding: 10px; border-bottom: 1px solid #ccc; font-size: 16px; cursor: pointer; display: flex; align-items: center; }
+        .date-item input { margin-right: 10px; width: 20px; height: 20px; }
     </style>
 </head>
 <body>
 
 <div id="map"></div>
 <div class="sidebar">
-    <h3 style="margin:0 0 10px 0; font-size: 16px; color: #333;">旅のアーカイブ</h3>
+    <div style="font-weight:bold; border-bottom:2px solid #333; margin-bottom:10px;">旅の目次</div>
     <div id="date-list">読み込み中...</div>
 </div>
 
 <script>
-    // 1. 地図を即座に初期化
+    // 1. 地図を表示
     const map = L.map('map').setView([15.0, 102.0], 6);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OSM'
-    }).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
     const activeLayers = {}; 
 
-    // Excelの特殊な日付を「西暦/月/日」に変換
-    function parseExcelDate(val) {
-        if (typeof val === 'number' && val > 30000) {
-            const d = new Date(Math.round((val - 25569) * 86400 * 1000));
-            return `${d.getFullYear()}/${(d.getMonth()+1).toString().padStart(2,'0')}/${d.getDate().toString().padStart(2,'0')}`;
-        }
-        return String(val || "").trim();
-    }
-
     async function load() {
         try {
+            // 2. Excel (data.xlsx) を読み込む
             const res = await fetch('data.xlsx');
             const ab = await res.arrayBuffer();
             const wb = XLSX.read(new Uint8Array(ab), {type: 'array'});
-            const sheet = wb.Sheets[wb.SheetNames[0]];
-            const rows = XLSX.utils.sheet_to_json(sheet, {header: 1}); 
+            const rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {header: 1}); 
 
             const dateList = document.getElementById('date-list');
             dateList.innerHTML = "";
             const grouped = {};
 
-            // データの仕分け（1行目は見出しとして飛ばす）
+            // 3. データを整理 (1列目:名, 2:緯度, 3:経度, 4:日, 6:備考, 8:画像, 11:GPX)
             for(let i=1; i < rows.length; i++) {
                 const r = rows[i];
                 if(!r || r.length < 4) continue;
 
-                const name = r[0] || "地点";
-                const lat = parseFloat(r[1]);
-                const lon = parseFloat(r[2]);
-                const date = parseExcelDate(r[3]);
-                const desc = r[5] || "";
-                const img = r[7] || "";
-                const gpx = r[10] ? String(r[10]).trim() : "";
+                // 日付が数字（45666等）の場合は変換
+                let dStr = r[3];
+                if(typeof dStr === 'number') {
+                    const d = new Date(Math.round((dStr - 25569) * 86400 * 1000));
+                    dStr = `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}`;
+                }
 
-                if(!date || isNaN(lat)) continue;
-                if(!grouped[date]) grouped[date] = { points: [], gpx: gpx };
-                grouped[date].points.push({ lat, lon, name, img, desc });
-                if(!grouped[date].gpx && gpx) grouped[date].gpx = gpx;
+                if(!grouped[dStr]) grouped[dStr] = { points: [], gpx: r[10] };
+                grouped[dStr].points.push({ lat: r[1], lon: r[2], name: r[0], desc: r[5], img: r[7] });
             }
 
-            // 目次の作成
+            // 4. 目次を作る
             Object.keys(grouped).sort().reverse().forEach(date => {
-                const day = grouped[date];
                 const div = document.createElement('div');
                 div.className = 'date-item';
-                div.innerHTML = `<input type="checkbox" id="chk-${date}"> <label for="chk-${date}">${date}</label>`;
+                div.innerHTML = `<input type="checkbox"> ${date}`;
                 
                 div.onclick = (e) => {
                     const chk = div.querySelector('input');
                     if (e.target !== chk) chk.checked = !chk.checked;
 
                     if (chk.checked) {
-                        const layerGroup = L.layerGroup().addTo(map);
-                        activeLayers[date] = layerGroup;
+                        const group = L.layerGroup().addTo(map);
+                        activeLayers[date] = group;
 
-                        // 軌跡(GPX)を優先表示
-                        if (day.gpx) {
-                            new L.GPX("logs/" + day.gpx, {
+                        // 軌跡(GPX)
+                        if (grouped[date].gpx) {
+                            new L.GPX("logs/" + grouped[date].gpx, {
                                 async: true,
-                                marker_options: { startIconUrl: '', endIconUrl: '', shadowUrl: '' },
-                                polyline_options: { color: '#ff4500', weight: 6, opacity: 0.9 }
-                            }).on('loaded', e => {
-                                map.fitBounds(e.target.getBounds());
-                            }).addTo(layerGroup);
+                                marker_options: { startIconUrl: '', endIconUrl: '' },
+                                polyline_options: { color: 'orange', weight: 6, opacity: 0.9 }
+                            }).on('loaded', e => map.fitBounds(e.target.getBounds())).addTo(group);
                         }
 
-                        // ピンを表示
-                        day.points.forEach(p => {
-                            const popup = `<b>${p.name}</b><br>${p.desc}${p.img ? `<br><img src="${p.img}" class="popup-img">` : ""}`;
-                            L.marker([p.lat, p.lon]).bindPopup(popup).addTo(layerGroup);
+                        // ピン
+                        grouped[date].points.forEach(p => {
+                            const html = `<b>${p.name}</b><br>${p.desc}${p.img ? `<br><img src="${p.img}" style="width:200px">` : ""}`;
+                            L.marker([p.lat, p.lon]).bindPopup(html).addTo(group);
                         });
                     } else {
-                        if (activeLayers[date]) {
-                            map.removeLayer(activeLayers[date]);
-                            delete activeLayers[date];
-                        }
+                        if (activeLayers[date]) { map.removeLayer(activeLayers[date]); delete activeLayers[date]; }
                     }
                 };
                 dateList.appendChild(div);
             });
-        } catch (e) {
-            document.getElementById('date-list').innerText = "Excel読み込み失敗";
-        }
+        } catch (e) { dateList.innerText = "エラー: " + e; }
     }
     load();
 </script>
