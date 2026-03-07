@@ -32,11 +32,11 @@
     let currentGpxLayer = null;
     let markers = [];
 
-    // Excelの数字（シリアル値）を日付文字列に変換する関数
-    function excelDateToJSDate(serial) {
-        if (typeof serial === 'string') return serial; // すでに文字列ならそのまま
-        const date = new Date(Math.round((serial - 25569) * 86400 * 1000));
-        return date.toISOString().split('T')[0];
+    // 日付を「そのままの見た目」で取得する関数
+    function formatAnyDate(val, sheet, cellRef) {
+        if (!val) return "";
+        // Excelの表示形式をそのまま使う設定
+        return XLSX.utils.format_cell(sheet[cellRef]);
     }
 
     async function loadArchive() {
@@ -44,11 +44,11 @@
             const response = await fetch('data.xlsx');
             const arrayBuffer = await response.arrayBuffer();
             const data = new Uint8Array(arrayBuffer);
-            const workbook = XLSX.read(data, {type: 'array'});
+            const workbook = XLSX.read(data, {type: 'array', cellNF: true, cellText: true});
             const sheet = workbook.Sheets[workbook.SheetNames[0]];
             
-            // cellDates: true を入れることで、可能な限り日付として読み込む
-            const rows = XLSX.utils.sheet_to_json(sheet, {header: 1}); 
+            // 配列形式で読み込み（1行目飛ばし用）
+            const rows = XLSX.utils.sheet_to_json(sheet, {header: 1, raw: false}); 
 
             const dateList = document.getElementById('date-list');
             const groupedData = {};
@@ -57,13 +57,12 @@
                 const row = rows[i];
                 if (!row || row.length < 4) continue;
                 
-                let dateRaw = row[3];
-                let date = excelDateToJSDate(dateRaw); // ここで数字を日付に変換
-
-                const placeName = row[0];
+                // 4列目（日付）を「見たまま」取得
+                const date = row[3] ? row[3].toString() : ""; 
+                const placeName = row[0] || "地点";
                 const lat = parseFloat(row[1]);
                 const lon = parseFloat(row[2]);
-                const imgUrl = row[8];
+                const imgUrl = row[8]; 
                 const gpxFile = row[11] || row[10];
 
                 if (!date || isNaN(lat)) continue;
