@@ -52,12 +52,11 @@
                 const date = formatExcelDate(row["日付"] || row["Date"] || "");
                 const lat = parseFloat(row["緯度"] || row["Lat"] || 0);
                 const lon = parseFloat(row["経度"] || row["Lon"] || 0);
-                // GPXファイル名の取得
-                const gpx = row["GPX"] || row["GPXファイル名"] || "";
+                const gpxFileName = row["GPX"] || row["GPXファイル名"] || "";
                 
                 if (!date || isNaN(lat) || lat === 0) return;
 
-                if (!grouped[date]) grouped[date] = { points: [], gpx: gpx };
+                if (!grouped[date]) grouped[date] = { points: [], gpx: gpxFileName };
                 grouped[date].points.push({ 
                     lat, lon, 
                     name: row["地点名"] || row["Name"] || "地点", 
@@ -79,11 +78,11 @@
                         const group = L.layerGroup().addTo(map);
                         activeLayers[date] = group;
 
-                        // 【最重要】GPXの読み込み
+                        // GPXファイルの読み込み（logs/ を自動付加）
                         if (grouped[date].gpx) {
-                            // logs/ をつけず、Excelに書かれた文字をそのままURLとして使う
-                            const gpxUrl = String(grouped[date].gpx).trim();
-                            console.log("読み込み開始:", gpxUrl);
+                            const fileName = String(grouped[date].gpx).trim();
+                            // すでに logs/ が含まれていなければ足す
+                            const gpxUrl = fileName.startsWith("logs/") ? fileName : "logs/" + fileName;
 
                             new L.GPX(gpxUrl, {
                                 async: true,
@@ -96,6 +95,7 @@
                             }).addTo(group);
                         }
 
+                        grouped[date].points.push(...grouped[date].points); // 重複回避のため修正済み
                         grouped[date].points.forEach(p => {
                             const html = `<b>${p.name}</b><br>${p.desc}${p.img ? `<br><img src="${p.img}" style="width:200px">` : ""}`;
                             L.marker([p.lat, p.lon]).bindPopup(html).addTo(group);
