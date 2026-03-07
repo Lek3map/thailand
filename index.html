@@ -35,29 +35,35 @@
     async function loadArchive() {
         try {
             const response = await fetch('data.xlsx');
+            if (!response.ok) throw new Error("Excelファイルが見つかりません");
+            
             const arrayBuffer = await response.arrayBuffer();
             const data = new Uint8Array(arrayBuffer);
-            // raw: false で、Excelが計算した後の「見たままの文字列」を取得する
-            const workbook = XLSX.read(data, {type: 'array', cellNF: true, cellText: true});
+            const workbook = XLSX.read(data, {type: 'array', cellText: true, raw: false});
             const sheet = workbook.Sheets[workbook.SheetNames[0]];
-            const rows = XLSX.utils.sheet_to_json(sheet, {header: 1, raw: false}); 
+            
+            // 全データを「文字列の配列」として取得
+            const rows = XLSX.utils.sheet_to_json(sheet, {header: 1, defval: ""}); 
 
             const dateList = document.getElementById('date-list');
             const groupedData = {};
 
-            for (let i = 1; i < rows.length; i++) {
-                const row = rows[i];
-                if (!row || row.length < 4) continue;
-                
-                // 4列目（インデックス3）をそのまま日付として使用
-                let date = row[3] ? row[3].toString().trim() : ""; 
+            // 1行目から全スキャン（見出しを無視しない）
+            rows.forEach((row, index) => {
+                if (row.length < 2) return;
+
+                // どんな形式でも「日付」が入っていそうな列（4列目付近）を特定
+                // ムクダハンの例に従い、row[3] を優先
+                let date = row[3] ? row[3].toString().trim() : "";
+                if (!date || date === "日付" || date === "Date") return;
+
                 const placeName = row[0] || "地点";
                 const lat = parseFloat(row[1]);
                 const lon = parseFloat(row[2]);
-                const imgUrl = row[7]; 
-                const gpxFile = row[10]; 
+                const imgUrl = row[7] || row[8]; 
+                const gpxFile = row[11] || row[10] || "";
 
-                if (!date || isNaN(lat)) continue;
+                if (isNaN(lat)) return;
 
                 if (!groupedData[date]) {
                     groupedData[date] = { points: [], gpx: gpxFile };
@@ -67,8 +73,8 @@
                     div.onclick = () => showDate(date);
                     dateList.appendChild(div);
                 }
-                groupedData[date].points.push({ lat, lon, name: placeName, img: imgUrl, desc: row[5] });
-            }
+                groupedData[date].points.push({ lat, lon, name: placeName, img: imgUrl, desc: row[5] || "" });
+            });
 
             function showDate(date) {
                 if (currentGpxLayer) map.removeLayer(currentGpxLayer);
@@ -90,13 +96,15 @@
 
                 dayData.points.forEach(p => {
                     if (!isNaN(p.lat) && !isNaN(p.lon)) {
-                        const popupContent = `<div><strong>${p.name}</strong><br>${p.desc || ""}<br>${p.img ? `<img src="${p.img}" class="popup-image">` : ""}</div>`;
+                        const popupContent = `<div><strong>${p.name}</strong><br>${p.desc}<br>${p.img ? `<img src="${p.img}" class="popup-image">` : ""}</div>`;
                         const m = L.marker([p.lat, p.lon]).addTo(map).bindPopup(popupContent);
                         markers.push(m);
                     }
                 });
             }
-        } catch (e) { console.error(e); }
+        } catch (e) {
+            alert("エラーが発生しました: " + e.message);
+        }
     }
     loadArchive();
 </script>
