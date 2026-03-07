@@ -32,51 +32,62 @@
     let currentGpxLayer = null;
     let markers = [];
 
-    // 日付を「そのままの見た目」で取得する関数
-    function formatAnyDate(val, sheet, cellRef) {
-        if (!val) return "";
-        // Excelの表示形式をそのまま使う設定
-        return XLSX.utils.format_cell(sheet[cellRef]);
-    }
-
     async function loadArchive() {
         try {
             const response = await fetch('data.xlsx');
             const arrayBuffer = await response.arrayBuffer();
             const data = new Uint8Array(arrayBuffer);
-            const workbook = XLSX.read(data, {type: 'array', cellNF: true, cellText: true});
+            // raw: false, cellText: true で「見たまま」を最優先
+            const workbook = XLSX.read(data, {type: 'array', cellText: true, raw: false});
             const sheet = workbook.Sheets[workbook.SheetNames[0]];
             
-            // 配列形式で読み込み（1行目飛ばし用）
-            const rows = XLSX.utils.sheet_to_json(sheet, {header: 1, raw: false}); 
+            // どんな形式でもオブジェクトとして読み込む
+            const rows = XLSX.utils.sheet_to_json(sheet, {defval: ""}); 
 
             const dateList = document.getElementById('date-list');
             const groupedData = {};
 
-            for (let i = 1; i < rows.length; i++) {
-                const row = rows[i];
-                if (!row || row.length < 4) continue;
-                
-                // 4列目（日付）を「見たまま」取得
-                const date = row[3] ? row[3].toString() : ""; 
-                const placeName = row[0] || "地点";
-                const lat = parseFloat(row[1]);
-                const lon = parseFloat(row[2]);
-                const imgUrl = row[8]; 
-                const gpxFile = row[11] || row[10];
+            rows.forEach(row => {
+                // 列名が何であっても、値の内容から推測して取得
+                let date = "";
+                let lat = NaN, lon = NaN, gpx = "", img = "", name = "", desc = "";
 
-                if (!date || isNaN(lat)) continue;
+                for (let key in row) {
+                    let val = row[key] ? row[key].toString().trim() : "";
+                    if (!val) continue;
+
+                    // 日付（年、月、日が含まれる、または特定の形式）
+                    if (key.includes("日付") || key.includes("Date") || val.includes("年")) date = val;
+                    // 緯度・経度
+                    if (key.includes("緯度") || key.includes("Lat") || (!isNaN(val) && val.startsWith("1"))) {
+                         if (val.includes(".")) {
+                             if (parseFloat(val) < 30) lat = parseFloat(val);
+                             else if (parseFloat(val) > 90) lon = parseFloat(val);
+                         }
+                    }
+                    if (key.includes("経度") || key.includes("Lon")) lon = parseFloat(val);
+                    // GPXファイル
+                    if (val.toLowerCase().endsWith(".gpx")) gpx = val;
+                    // 画像URL
+                    if (val.startsWith("http") && (val.includes(".jpg") || val.includes(".png") || val.includes("googleusercontent"))) img = val;
+                    // 地点名（最初の列など）
+                    if (key === Object.keys(row)[0]) name = val;
+                    // 詳細（備考など）
+                    if (key.includes("市場") || key.includes("詳細") || key.includes("備考")) desc = val;
+                }
+
+                if (!date) return;
 
                 if (!groupedData[date]) {
-                    groupedData[date] = { points: [], gpx: gpxFile };
+                    groupedData[date] = { points: [], gpx: gpx };
                     const div = document.createElement('div');
                     div.className = 'date-item';
                     div.innerText = date;
                     div.onclick = () => showDate(date);
                     dateList.appendChild(div);
                 }
-                groupedData[date].points.push({ lat, lon, name: placeName, img: imgUrl, desc: row[6] });
-            }
+                groupedData[date].points.push({ lat, lon, name, img, desc });
+            });
 
             function showDate(date) {
                 if (currentGpxLayer) map.removeLayer(currentGpxLayer);
@@ -86,11 +97,11 @@
                 const dayData = groupedData[date];
 
                 if (dayData.gpx) {
-                    const gpxPath = `logs/${dayData.gpx.toString().trim()}`;
+                    const gpxPath = `logs/${dayData.gpx}`;
                     currentGpxLayer = new L.GPX(gpxPath, {
                         async: true,
                         marker_options: { startIconUrl: '', endIconUrl: '', shadowUrl: '' },
-                        polyline_options: { color: '#e91e63', weight: 5, opacity: 0.8 }
+                        polyline_options: { color: '#ff4500', weight: 5, opacity: 0.8 }
                     }).on('loaded', function(e) {
                         map.fitBounds(e.target.getBounds());
                     }).addTo(map);
@@ -98,23 +109,14 @@
 
                 dayData.points.forEach(p => {
                     if (!isNaN(p.lat) && !isNaN(p.lon)) {
-                        const popupContent = `
-                            <div>
-                                <strong>${p.name}</strong><br>
-                                <span style="font-size:12px">${p.desc || ""}</span><br>
-                                ${p.img ? `<img src="${p.img}" class="popup-image">` : ""}
-                            </div>
-                        `;
+                        const popupContent = `<div><strong>${p.name}</strong><br>${p.desc}<br>${p.img ? `<img src="${p.img}" class="popup-image">` : ""}</div>`;
                         const m = L.marker([p.lat, p.lon]).addTo(map).bindPopup(popupContent);
                         markers.push(m);
                     }
                 });
             }
-        } catch (e) {
-            console.error(e);
-        }
+        } catch (e) { console.error(e); }
     }
-
     loadArchive();
 </script>
 </body>
