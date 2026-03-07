@@ -13,8 +13,7 @@
         #map { height: 100vh; width: 100%; }
         .sidebar { position: absolute; top: 10px; right: 10px; z-index: 1000; background: white; padding: 15px; max-height: 80vh; overflow-y: auto; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.3); width: 220px; font-family: sans-serif; }
         .date-item { cursor: pointer; padding: 8px; border-bottom: 1px solid #eee; font-size: 14px; color: #333; font-weight: bold; }
-        .date-item:hover { background: #f0f8ff; color: #007bff; }
-        /* 写真が画面一杯にならないよう調整 */
+        .date-item:hover { background: #eef6ff; color: #007bff; }
         .popup-image { max-width: 250px; height: auto; display: block; margin-top: 10px; border-radius: 5px; }
         .leaflet-popup-content { width: 260px !important; }
     </style>
@@ -41,26 +40,26 @@
             const data = new Uint8Array(arrayBuffer);
             const workbook = XLSX.read(data, {type: 'array'});
             const sheet = workbook.Sheets[workbook.SheetNames[0]];
-            // header:1 で読み込み、配列として処理
             const rows = XLSX.utils.sheet_to_json(sheet, {header: 1}); 
 
             const dateList = document.getElementById('date-list');
             const groupedData = {};
 
-            // i=1 から始めることで、1行目（見出し）をスキップします
+            // 1行目（見出し）を飛ばして2行目から読み込み
             for (let i = 1; i < rows.length; i++) {
                 const row = rows[i];
                 if (!row || row.length < 4) continue; 
                 
-                // 列の順番: 0地点名, 1緯度, 2経度, 3日付, ... 7画像URL, 10GPX名
+                // 列の対応（ムクダハンの例に準拠）
+                // 0:地点名, 1:緯度, 2:経度, 3:日付, 4:空?, 5:分類, 6:詳細, 7:タイ語, 8:画像URL, 9:GooglePhoto, 10:GPX名
                 const placeName = row[0];
                 const lat = parseFloat(row[1]);
                 const lon = parseFloat(row[2]);
-                const date = row[3];
-                const imgUrl = row[7];
-                const gpxFile = row[10];
+                const date = row[3]; // ここを日付列として固定
+                const imgUrl = row[8]; // 画像URLの列
+                const gpxFile = row[11] || row[10]; // GPXファイル名の列
 
-                if (!date) continue;
+                if (!date || isNaN(lat)) continue;
 
                 if (!groupedData[date]) {
                     groupedData[date] = { points: [], gpx: gpxFile };
@@ -70,7 +69,7 @@
                     div.onclick = () => showDate(date);
                     dateList.appendChild(div);
                 }
-                groupedData[date].points.push({ lat, lon, name: placeName, img: imgUrl, desc: row[5] });
+                groupedData[date].points.push({ lat, lon, name: placeName, img: imgUrl, desc: row[6] });
             }
 
             function showDate(date) {
@@ -80,19 +79,19 @@
 
                 const dayData = groupedData[date];
 
-                // GPXの軌跡を表示
+                // GPX表示
                 if (dayData.gpx) {
                     const gpxPath = `logs/${dayData.gpx.trim()}`;
                     currentGpxLayer = new L.GPX(gpxPath, {
                         async: true,
                         marker_options: { startIconUrl: '', endIconUrl: '', shadowUrl: '' },
-                        polyline_options: { color: '#007bff', weight: 5, opacity: 0.8 }
+                        polyline_options: { color: '#e91e63', weight: 4, opacity: 0.8 } // 軌跡をピンク系で見やすく
                     }).on('loaded', function(e) {
                         map.fitBounds(e.target.getBounds());
                     }).addTo(map);
                 }
 
-                // ピンを表示
+                // ピン表示
                 dayData.points.forEach(p => {
                     if (p.lat && p.lon) {
                         const popupContent = `
@@ -108,7 +107,7 @@
                 });
             }
         } catch (e) {
-            console.error("読み込みエラー:", e);
+            console.error("読み込み失敗:", e);
         }
     }
 
