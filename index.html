@@ -32,7 +32,6 @@
 
     const activeLayers = {}; 
 
-    // 日付を「2025/01/10」形式に揃える関数
     function formatToDate(val) {
         if (!val) return "";
         let d;
@@ -61,63 +60,11 @@
             rows.forEach((row, i) => {
                 if (i === 0 || !row || row.length < 4) return;
                 
-                // 列の番号で決め打ち（0:名前, 1:緯度, 2:経度, 3:日付, 7:画像, 10:GPX）
                 const name = row[0] || "地点";
                 const lat = parseFloat(row[1]);
                 const lon = parseFloat(row[2]);
-                const dateRaw = row[3];
-                const date = formatToDate(dateRaw);
+                const date = formatToDate(row[3]);
                 const img = row[7] || "";
                 const desc = row[5] || "";
-                const gpx = row[10] ? row[10].toString().trim() : "";
-
-                if (!date || isNaN(lat)) return;
-                if (!groupedData[date]) groupedData[date] = { points: [], gpx: gpx };
-                groupedData[date].points.push({ lat, lon, name, img, desc });
-            });
-
-            const dateList = document.getElementById('date-list');
-            // 日付を新しい順にソートして表示
-            Object.keys(groupedData).sort((a, b) => b.localeCompare(a)).forEach(date => {
-                const dayData = groupedData[date];
-                const div = document.createElement('div');
-                div.className = 'date-item';
-                div.innerHTML = `<input type="checkbox"> <label>${date}</label>`;
-                
-                div.onclick = (e) => {
-                    const chk = div.querySelector('input');
-                    if (e.target !== chk) chk.checked = !chk.checked;
-
-                    if (chk.checked) {
-                        const group = L.layerGroup().addTo(map);
-                        activeLayers[date] = group;
-
-                        // 軌跡の表示
-                        if (dayData.gpx) {
-                            new L.GPX("logs/" + dayData.gpx, {
-                                async: true,
-                                marker_options: { startIconUrl: '', endIconUrl: '', shadowUrl: '' },
-                                polyline_options: { color: '#ff4500', weight: 4, opacity: 0.8 }
-                            }).on('loaded', e => map.fitBounds(e.target.getBounds())).addTo(group);
-                        }
-
-                        // ピンの表示
-                        dayData.points.forEach(p => {
-                            const content = `<div><strong>${p.name}</strong><br>${p.desc}<br>${p.img ? `<img src="${p.img}" class="popup-image">` : ""}</div>`;
-                            L.marker([p.lat, p.lon]).bindPopup(content).addTo(group);
-                        });
-                    } else {
-                        if (activeLayers[date]) {
-                            map.removeLayer(activeLayers[date]);
-                            delete activeLayers[date];
-                        }
-                    }
-                };
-                dateList.appendChild(div);
-            });
-        } catch (e) { console.error(e); }
-    }
-    loadArchive();
-</script>
-</body>
-</html>
+                // 11列目(K列)のGPXファイル名を取得
+                const
