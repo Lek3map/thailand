@@ -10,29 +10,36 @@
     <style>
         body { margin: 0; }
         #map { height: 100vh; width: 100%; background: #eee; }
-        .sidebar { position: absolute; top: 10px; right: 10px; z-index: 1000; background: white; padding: 10px; max-height: 90vh; overflow-y: auto; width: 220px; border: 2px solid #333; }
-        .date-item { padding: 10px; border-bottom: 1px solid #ccc; font-size: 16px; cursor: pointer; display: flex; align-items: center; }
-        .date-item input { margin-right: 10px; width: 20px; height: 20px; }
+        .sidebar { position: absolute; top: 10px; right: 10px; z-index: 1000; background: white; padding: 10px; max-height: 90vh; overflow-y: auto; width: 220px; border: 1px solid #333; font-family: sans-serif; }
+        .date-item { padding: 8px; border-bottom: 1px solid #eee; font-size: 15px; cursor: pointer; display: flex; align-items: center; }
+        .date-item input { margin-right: 10px; width: 18px; height: 18px; }
     </style>
 </head>
 <body>
 
 <div id="map"></div>
 <div class="sidebar">
-    <div style="font-weight:bold; border-bottom:2px solid #333; margin-bottom:10px;">旅の目次</div>
+    <div style="font-weight:bold; margin-bottom:10px; border-bottom:2px solid #007bff;">旅の目次</div>
     <div id="date-list">読み込み中...</div>
 </div>
 
 <script>
-    // 1. 地図を表示
     const map = L.map('map').setView([15.0, 102.0], 6);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
     const activeLayers = {}; 
 
+    // 数字（45666等）を「2025/1/10」形式に直す
+    function formatExcelDate(val) {
+        if (typeof val === 'number') {
+            const d = new Date(Math.round((val - 25569) * 86400 * 1000));
+            return `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}`;
+        }
+        return String(val || "").trim();
+    }
+
     async function load() {
         try {
-            // 2. Excel (data.xlsx) を読み込む
             const res = await fetch('data.xlsx');
             const ab = await res.arrayBuffer();
             const wb = XLSX.read(new Uint8Array(ab), {type: 'array'});
@@ -42,23 +49,19 @@
             dateList.innerHTML = "";
             const grouped = {};
 
-            // 3. データを整理 (1列目:名, 2:緯度, 3:経度, 4:日, 6:備考, 8:画像, 11:GPX)
+            // 7行のデータを読み込み
             for(let i=1; i < rows.length; i++) {
                 const r = rows[i];
                 if(!r || r.length < 4) continue;
 
-                // 日付が数字（45666等）の場合は変換
-                let dStr = r[3];
-                if(typeof dStr === 'number') {
-                    const d = new Date(Math.round((dStr - 25569) * 86400 * 1000));
-                    dStr = `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}`;
-                }
+                // 列の固定位置 (0:名, 1:緯, 2:経, 3:日, 5:備, 7:画, 10:GPX)
+                const date = formatExcelDate(r[3]); 
+                if(!date || date.includes(".")) continue; // 座標（点を含む）が混じったら飛ばす
 
-                if(!grouped[dStr]) grouped[dStr] = { points: [], gpx: r[10] };
-                grouped[dStr].points.push({ lat: r[1], lon: r[2], name: r[0], desc: r[5], img: r[7] });
+                if(!grouped[date]) grouped[date] = { points: [], gpx: r[10] };
+                grouped[date].points.push({ lat: r[1], lon: r[2], name: r[0], desc: r[5], img: r[7] });
             }
 
-            // 4. 目次を作る
             Object.keys(grouped).sort().reverse().forEach(date => {
                 const div = document.createElement('div');
                 div.className = 'date-item';
@@ -74,7 +77,8 @@
 
                         // 軌跡(GPX)
                         if (grouped[date].gpx) {
-                            new L.GPX("logs/" + grouped[date].gpx, {
+                            const gpxPath = "logs/" + String(grouped[date].gpx).trim();
+                            new L.GPX(gpxPath, {
                                 async: true,
                                 marker_options: { startIconUrl: '', endIconUrl: '' },
                                 polyline_options: { color: 'orange', weight: 6, opacity: 0.9 }
@@ -92,7 +96,7 @@
                 };
                 dateList.appendChild(div);
             });
-        } catch (e) { dateList.innerText = "エラー: " + e; }
+        } catch (e) { dateList.innerText = "読み込みエラー"; }
     }
     load();
 </script>
