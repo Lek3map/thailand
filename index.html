@@ -30,7 +30,7 @@
     const map = L.map('map').setView([15.0, 102.0], 6);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-    const activeLayers = {}; // 表示中のレイヤー（ピンと軌跡）を管理
+    const activeLayers = {}; 
 
     function parseDate(val) {
         if (!val) return "";
@@ -49,24 +49,22 @@
             const sheet = workbook.Sheets[workbook.SheetNames[0]];
             const rows = XLSX.utils.sheet_to_json(sheet, {header: 1}); 
 
-            const dateList = document.getElementById('date-list');
             const groupedData = {};
 
             rows.forEach((row, i) => {
                 if (i === 0 || !row || row.length < 3) return;
-                
                 let date = "", lat = NaN, lon = NaN, gpx = "", img = "", name = row[0];
                 row.forEach((cell, idx) => {
                     if (!cell) return;
-                    const str = cell.toString().toLowerCase();
+                    const str = cell.toString().trim();
                     if ((typeof cell === 'number' && cell > 30000 && cell < 60000) || str.includes("年")) date = parseDate(cell);
-                    const num = parseFloat(cell);
+                    const num = parseFloat(str);
                     if (!isNaN(num)) {
                         if (num > 5 && num < 25) lat = num;
                         if (num > 95 && num < 110) lon = num;
                     }
-                    if (str.endsWith(".gpx")) gpx = cell;
-                    if (str.startsWith("http") && (str.includes("google") || str.includes(".jpg"))) img = cell;
+                    if (str.toLowerCase().endsWith(".gpx")) gpx = str;
+                    if (str.startsWith("http")) img = str;
                 });
 
                 if (!date || isNaN(lat)) return;
@@ -74,7 +72,7 @@
                 groupedData[date].points.push({ lat, lon, name, img, desc: row[5] || "" });
             });
 
-            // 目次の作成（日付順）
+            const dateList = document.getElementById('date-list');
             Object.keys(groupedData).sort().reverse().forEach(date => {
                 const dayData = groupedData[date];
                 const div = document.createElement('div');
@@ -86,31 +84,32 @@
                     if (e.target !== chk) chk.checked = !chk.checked;
 
                     if (chk.checked) {
-                        // 新しいレイヤーグループを作成
                         const group = L.layerGroup().addTo(map);
                         activeLayers[date] = group;
 
-                        // ピンを表示
+                        // 1. ピンを表示
                         dayData.points.forEach(p => {
                             const content = `<div><strong>${p.name}</strong><br>${p.desc}<br>${p.img ? `<img src="${p.img}" class="popup-image">` : ""}</div>`;
                             L.marker([p.lat, p.lon]).bindPopup(content).addTo(group);
                         });
 
-                        // 軌跡（GPX）を表示
+                        // 2. 軌跡（GPX）を表示
                         if (dayData.gpx) {
-                            const gpxUrl = `logs/${dayData.gpx.toString().trim()}`;
-                            const gpxLayer = new L.GPX(gpxUrl, {
+                            // logs/ フォルダの中身を確実に指定
+                            const gpxUrl = "logs/" + dayData.gpx;
+                            console.log("Loading GPX:", gpxUrl); // ブラウザの裏側で読み込みを確認
+
+                            new L.GPX(gpxUrl, {
                                 async: true,
                                 marker_options: { startIconUrl: '', endIconUrl: '', shadowUrl: '' },
-                                polyline_options: { color: '#e91e63', weight: 5, opacity: 0.8 }
+                                polyline_options: { color: '#ff4500', weight: 4, opacity: 0.8 }
                             }).on('loaded', (e) => {
                                 map.fitBounds(e.target.getBounds());
-                            }).on('error', (e) => {
-                                console.error("GPX読み込み失敗:", gpxUrl);
+                            }).on('error', (err) => {
+                                console.error("GPX Error:", err.target._gpx);
                             }).addTo(group);
                         }
                     } else {
-                        // チェックを外したら消す
                         if (activeLayers[date]) {
                             map.removeLayer(activeLayers[date]);
                             delete activeLayers[date];
@@ -119,8 +118,7 @@
                 };
                 dateList.appendChild(div);
             });
-
-        } catch (e) { console.error(e); }
+        } catch (e) { console.error("Load Error:", e); }
     }
     loadArchive();
 </script>
