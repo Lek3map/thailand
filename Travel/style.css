@@ -1,0 +1,108 @@
+﻿/* ページ全体 */
+body {
+	margin: 10px 0px 0px 10px;
+	background-color: white;
+	font-family: Arial, Helvetica, "メイリオ", "ヒラギノ角ゴPro W3", Osaka, sans-serif;
+}
+/* リンクのスタイル（通常時） */
+a:link, a:visited {
+	text-decoration: none;
+	color: mediumblue;
+}
+/* リンクのスタイル（ロールオーバー時） */
+a:hover {
+	text-decoration: none;
+	color: orange;
+}
+/* リンクのスタイル(クリック時） */
+a:active {
+	text-decoration: none;
+	color: red;
+}
+/* コンテンツの外枠 */
+#container {
+	margin: 0px;
+}
+/* 地図表示部 */
+#map {
+	margin: 0px;
+	float: left;
+}
+/* マーカーリストの外枠 */
+#markerlistbox {
+	float: left;
+	overflow: auto;
+}
+/* ページの表題 */
+h1 {
+	margin: 0px 0px 10px 0px;
+	padding: 4px 10px;
+	font-size: 24px;
+	font-weight: normal;
+	text-align: center;
+	color: white;
+	background-color: darkgreen;
+}
+/* マーカーリストのヘッダ部 */
+.markerlist_header {
+	margin: 0px 0px 10px 10px;
+	padding: 2px 2px 2px 10px;
+	background-color: lightsteelblue;
+	font-size: 12px;
+	font-weight: bold;
+}
+/* マーカーリスト全体 */
+ul.markerlist {
+	margin: 0px 0px 0px 10px;
+	padding: 0px;
+}
+/* マーカーリストの項目 */
+ul.markerlist li {
+	margin: 2px 0px;
+	padding: 0px;
+	font-size: 12px;
+	line-height: 120%;
+	list-style-type: none;
+}
+/* ポップアップウィンドウ全体 */
+.marker {
+	width: 340px;
+	margin: 10px 0px 0px 0px;
+	font-family: Arial, Helvetica, "メイリオ", "ヒラギノ角ゴPro W3", Osaka, sans-serif;
+}
+/* ポップアップウィンドウの表題 */
+.marker .marker_subject {
+	border: solid 1px gray;
+	padding: 4px;
+	font-size: 16px;
+}
+/* ポップアップウィンドウの日付時間 */
+.marker .marker_time {
+	padding: 4px;
+	font-size: 16px;
+}
+/* ポップアップウィンドウの座標・高度 */
+.marker .marker_location {
+	padding: 4px;
+	font-size: 16px;
+}
+/* ポップアップウィンドウの画像ボックス */
+.marker .marker_image {
+	padding: 10px;
+	text-align: center;
+}
+/* ポップアップウィンドウの画像 */
+.marker .marker_image img {
+	border: 0px;
+}
+/* ポップアップウィンドウの参照リンク */
+.marker .marker_url {
+	padding: 4px;
+	font-size: 12px;
+}
+/* ポップアップウィンドウの説明 */
+.marker .marker_desc {
+	padding: 4px;
+	font-size: 14px;
+	line-height: 130%;
+}
