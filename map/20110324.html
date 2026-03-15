@@ -2,7 +2,7 @@
 <html lang='ja'>
 <head>
 <meta charset='utf-8'>
-<title>2011年03月24日 の地図日記</title>
+<title>2011年03月24日の地図日記</title>
 <meta property='og:image' content='https://lek3map.github.io/thailand/map/20110324.jpg'>
 <link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
 <script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
@@ -16,8 +16,9 @@
 </head>
 <body>
 <div id='map'></div>
-<div id='sidebar'><div class='photo-thumb' onclick='moveToMarker(0)'><img src='start.png' title='スタート'></div>
+<div id='sidebar'><center><font color=white size=4>2011年03月24日 </font></center><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://assets.st-note.com/production/uploads/images/246161073/rectangle_large_type_2_05da3341b357da8ff833c15c9a179d4b.jpeg?width=1280' title='スタート'></div>
 <div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh6.googleusercontent.com/_5jLw98T_xQ4/TYw4GIKBuXI/AAAAAAAAEcI/nV3lUjRO-Sw/s680/110324007.jpg' title='Tham Sam Ancient Remains'></div>
+<div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://assets.st-note.com/production/uploads/images/246161073/rectangle_large_type_2_05da3341b357da8ff833c15c9a179d4b.jpeg?width=1280' title='無事帰宅'></div>
 </div>
 <script>
 var markers = {};
@@ -31,8 +32,14 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
                     iconAnchor: [15, 30],
                     popupAnchor: [0, -30]
                 });
-                var icon_tera_png = L.icon({
-                    iconUrl: 'https://lek3map.github.io/thailand/icon/tera.png',
+                var icon_iseki_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/iseki.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_end_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/end.png',
                     iconSize: [30, 30],
                     iconAnchor: [15, 30],
                     popupAnchor: [0, -30]
@@ -46,8 +53,9 @@ if (pathPoints.length > 0) {
     map.setView([13.7563, 100.5018], 6); 
 }
 
-markers[0] = L.marker([8.466628, 98.531045], {icon: icon_start_png}).addTo(map).bindPopup("<div style='width:300px;'><a href='#' target='_blank'><img src='start.png' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0; font-size:1.1em;'>スタート</h3><div style='font-size:0.95em; color:#333; margin:10px 0; line-height:1.6;'>トランにかえります</div><hr style='border:0; border-top:1px solid #eee; margin:10px 0;'><a href='https://www.google.com/maps?q=8.466628,98.531045' target='_blank' style='color:#007bff; text-decoration:none; font-size:0.85em; font-weight:bold;'>📍 Google Mapsで開く</a></div>", { maxWidth: 320 });
-markers[1] = L.marker([8.464626, 98.539113], {icon: icon_tera_png}).addTo(map).bindPopup("<div style='width:300px;'><a href='https://goo.gl/photos/5rXaat99or38Wnfz7' target='_blank'><img src='https://lh6.googleusercontent.com/_5jLw98T_xQ4/TYw4GIKBuXI/AAAAAAAAEcI/nV3lUjRO-Sw/s680/110324007.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0; font-size:1.1em;'>Tham Sam Ancient Remains</h3><div style='color:#666; font-size:0.85em;'>โบราณสถานถ้ำสำ</div><hr style='border:0; border-top:1px solid #eee; margin:10px 0;'><a href='https://www.google.com/maps?q=8.464626,98.539113' target='_blank' style='color:#007bff; text-decoration:none; font-size:0.85em; font-weight:bold;'>📍 Google Mapsで開く</a></div>", { maxWidth: 320 });
+markers[0] = L.marker([8.466628, 98.531045], {icon: icon_start_png}).addTo(map).bindPopup("<div style='width:300px;'><a href='https://note.com/raplom/n/ne8ce58a4bdf4' target='_blank'><img src='https://assets.st-note.com/production/uploads/images/246161073/rectangle_large_type_2_05da3341b357da8ff833c15c9a179d4b.jpeg?width=1280' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0; font-size:1.5em;'>スタート</h3><div style='color:#666; font-size:1.3em;'>パンガー</div><div style='font-size:1.3em; color:#333; margin:10px 0; line-height:1.6;'>トランに向かいます</div><hr style='border:0; border-top:1px solid #eee; margin:10px 0;'><a href='https://www.google.com/maps?q=8.466628,98.531045' target='_blank' style='color:#007bff; text-decoration:none; font-size:1em; font-weight:bold;'>📍 Google Mapsで開く</a></div>", { maxWidth: 320 });
+markers[1] = L.marker([8.464626, 98.539113], {icon: icon_iseki_png}).addTo(map).bindPopup("<div style='width:300px;'><a href='https://goo.gl/photos/5rXaat99or38Wnfz7' target='_blank'><img src='https://lh6.googleusercontent.com/_5jLw98T_xQ4/TYw4GIKBuXI/AAAAAAAAEcI/nV3lUjRO-Sw/s680/110324007.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0; font-size:1.5em;'>Tham Sam Ancient Remains</h3><div style='color:#666; font-size:1.3em;'>パンガー</div><hr style='border:0; border-top:1px solid #eee; margin:10px 0;'><a href='https://www.google.com/maps?q=8.464626,98.539113' target='_blank' style='color:#007bff; text-decoration:none; font-size:1em; font-weight:bold;'>📍 Google Mapsで開く</a></div>", { maxWidth: 320 });
+markers[2] = L.marker([7.572602, 99.613993], {icon: icon_end_png}).addTo(map).bindPopup("<div style='width:300px;'><a href='https://note.com/raplom/n/ne8ce58a4bdf4' target='_blank'><img src='https://assets.st-note.com/production/uploads/images/246161073/rectangle_large_type_2_05da3341b357da8ff833c15c9a179d4b.jpeg?width=1280' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0; font-size:1.5em;'>無事帰宅</h3><div style='color:#666; font-size:1.3em;'>トラン</div><hr style='border:0; border-top:1px solid #eee; margin:10px 0;'><a href='https://www.google.com/maps?q=7.572602,99.613993' target='_blank' style='color:#007bff; text-decoration:none; font-size:1em; font-weight:bold;'>📍 Google Mapsで開く</a></div>", { maxWidth: 320 });
 
 function moveToMarker(id) { var m = markers[id]; if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } }
 </script>
