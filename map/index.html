@@ -12,7 +12,19 @@
             --accent-color: #3498db;
             --hover-bg: #34495e;
         }
-        body { display: flex; margin: 0; height: 100vh; font-family: sans-serif; background: #fff; overflow: hidden; }
+        body {
+  display: flex;
+  margin: 0;
+  height: 100vh;
+  font-family: sans-serif;
+  background: #fff;
+  overflow: hidden;
+
+  background-image: url('back.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
         
         #sidebar { 
             width: 300px; background: var(--sidebar-bg); color: var(--sidebar-text); 
@@ -43,7 +55,7 @@
 </head>
 <body>
     <div id="sidebar">
-        <h3 style="text-align:center">アジアの風に吹かれて<br>🏍️</h3>
+        <h3 style="text-align:center">アジアの風に吹かれて<br>🚲　🏍️　🚙</h3>
         <details>
   <summary>南部４県<br>🏍️　872Ｋｍ</summary>
   <div class="menu-item summary" onclick="loadMap('20110303-06.html')">🚩 期間まとめ</div>
@@ -95,7 +107,7 @@
     <div id="content-area">
         <div id="random-welcome">
             <h2 style="color:#2c3e50">今日のピックアップ</h2>
-            <p id="album-name" style="font-size: 1.2em; margin: 20px 0;"></p>
+            <p id="album-name" style="font-size: 1.5em; margin: 20px 0;"></p>
             <a id="album-link" href="#" target="_blank" class="album-btn">Googleフォトで見る</a>
             <p style="font-size: 0.8em; margin-top: 30px; color: #999;">※左メニューから日付を選ぶと、ここに走行ルートが表示されます。</p>
         </div>
