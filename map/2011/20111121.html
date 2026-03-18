@@ -19,7 +19,7 @@
 </head>
 <body>
 <div id='map'></div>
-<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2011年11月21日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://assets.st-note.com/production/uploads/images/251893342/rectangle_large_type_2_cf86296a4ce6c8c15a380f5c6c71c351.jpeg?width=1280' title='出発点'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2011年11月21日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://assets.st-note.com/production/uploads/images/251944631/rectangle_large_type_2_d6b13b40bcf5d4853ca72fcd85d6c8f2.jpeg?width=1280' title='出発点'></div>
 <div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh5.googleusercontent.com/-iZ3EiD9t0hc/Ttc1iui7UDI/AAAAAAAADhU/rtNxac9OvUo/s680/111121014.jpg' title='ユーラシア大陸最南端'></div>
 <div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lh3.googleusercontent.com/-ciDuFYOwDDI/TsoyM84JpcI/AAAAAAAADQI/Wtq20e9w4WU/s680/111121020.jpg' title='ジョホール日本人墓地'></div>
 <div class='photo-thumb' onclick='moveToMarker(3)'><img src='https://lh4.googleusercontent.com/-3JfoveFPzHI/Ttc4ZFy439I/AAAAAAAAbC0/6tToIGfA4-0/s680/111121035.jpg' title='時計台'></div>
@@ -47,8 +47,8 @@ var pathPoints = [[1.4799883, 103.3885817], [1.4799, 103.3886717], [1.47992, 103
                     iconAnchor: [15, 30],
                     popupAnchor: [0, -30]
                 });
-                var icon_default_png = L.icon({
-                    iconUrl: 'https://lek3map.github.io/thailand/icon/default.png',
+                var icon_hakab_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/hakab.png',
                     iconSize: [30, 30],
                     iconAnchor: [15, 30],
                     popupAnchor: [0, -30]
@@ -59,9 +59,9 @@ var pathPoints = [[1.4799883, 103.3885817], [1.4799, 103.3886717], [1.47992, 103
                     iconAnchor: [15, 30],
                     popupAnchor: [0, -30]
                 });
-markers[0] = L.marker([1.479988, 103.388582], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://note.com/raplom/n/n60fbab07201f' target='_blank'><img src='https://assets.st-note.com/production/uploads/images/251893342/rectangle_large_type_2_cf86296a4ce6c8c15a380f5c6c71c351.jpeg?width=1280' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発点</h3><div style='color:#666; font-size:1.1em;'>ジョホール</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=1.479988,103.388582' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[0] = L.marker([1.479988, 103.388582], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://note.com/raplom/n/n60fbab07201f' target='_blank'><img src='https://assets.st-note.com/production/uploads/images/251944631/rectangle_large_type_2_d6b13b40bcf5d4853ca72fcd85d6c8f2.jpeg?width=1280' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発点</h3><div style='color:#666; font-size:1.1em;'>ジョホール</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=1.479988,103.388582' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
 markers[1] = L.marker([1.265807, 103.512383], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/fSM6ssmVD7n6bmt18' target='_blank'><img src='https://lh5.googleusercontent.com/-iZ3EiD9t0hc/Ttc1iui7UDI/AAAAAAAADhU/rtNxac9OvUo/s680/111121014.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>ユーラシア大陸最南端</h3><div style='color:#666; font-size:1.1em;'>タンジュンピアイ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=1.265807,103.512383' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
-markers[2] = L.marker([1.48929, 103.755759], {icon: icon_default_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/3Ra8JVsexVLakAnp9' target='_blank'><img src='https://lh3.googleusercontent.com/-ciDuFYOwDDI/TsoyM84JpcI/AAAAAAAADQI/Wtq20e9w4WU/s680/111121020.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>ジョホール日本人墓地</h3><div style='color:#666; font-size:1.1em;'>ジョホール</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=1.48929,103.755759' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[2] = L.marker([1.48929, 103.755759], {icon: icon_hakab_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/3Ra8JVsexVLakAnp9' target='_blank'><img src='https://lh3.googleusercontent.com/-ciDuFYOwDDI/TsoyM84JpcI/AAAAAAAADQI/Wtq20e9w4WU/s680/111121020.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>ジョホール日本人墓地</h3><div style='color:#666; font-size:1.1em;'>ジョホール</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=1.48929,103.755759' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
 markers[3] = L.marker([1.460186, 103.742026], {icon: icon_clock_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lh4.googleusercontent.com/-3JfoveFPzHI/Ttc4ZFy439I/AAAAAAAAbC0/6tToIGfA4-0/s2048/111121035.jpg' target='_blank'><img src='https://lh4.googleusercontent.com/-3JfoveFPzHI/Ttc4ZFy439I/AAAAAAAAbC0/6tToIGfA4-0/s680/111121035.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>時計台</h3><div style='color:#666; font-size:1.1em;'>ジョホール</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=1.460186,103.742026' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
 
 

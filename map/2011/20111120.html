@@ -19,7 +19,10 @@
 </head>
 <body>
 <div id='map'></div>
-<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2011年11月20日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://assets.st-note.com/production/uploads/images/251893342/rectangle_large_type_2_cf86296a4ce6c8c15a380f5c6c71c351.jpeg?width=1280' title='出発点'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2011年11月20日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://assets.st-note.com/production/uploads/images/251944631/rectangle_large_type_2_d6b13b40bcf5d4853ca72fcd85d6c8f2.jpeg?width=1280' title='出発点'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh4.googleusercontent.com/-1AFjjdDU9Jk/TtcxHrWKLBI/AAAAAAAAbCc/O9jcKVAStwE/s680/111120001.jpg' title='ポンティアンスタジアム'></div>
+<div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lh6.googleusercontent.com/-7ji-o7eOH5Y/TtcxKNQ6dFI/AAAAAAAAbCg/PwYTlX7t0wM/s680/111120002.jpg' title='時計台'></div>
+<div class='photo-thumb' onclick='moveToMarker(3)'><img src='https://lh4.googleusercontent.com/-mGixsICHjmc/TtcxOV2r_pI/AAAAAAAAbCo/3X7_jUwnBb8/s680/111120010.jpg' title='パイナップル'></div>
 </div>
 <script>
 var map = L.map('map');
@@ -38,7 +41,28 @@ var pathPoints = [[2.1889967, 102.2526633], [2.1889067, 102.252995], [2.1889133,
                     iconAnchor: [15, 30],
                     popupAnchor: [0, -30]
                 });
-markers[0] = L.marker([2.188997, 102.252663], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://note.com/raplom/n/n60fbab07201f' target='_blank'><img src='https://assets.st-note.com/production/uploads/images/251893342/rectangle_large_type_2_cf86296a4ce6c8c15a380f5c6c71c351.jpeg?width=1280' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発点</h3><div style='color:#666; font-size:1.1em;'>マラッカ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=2.188997,102.252663' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+                var icon_parks_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/parks.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_clock_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/clock.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_monument_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/monument.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([2.188997, 102.252663], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://note.com/raplom/n/n60fbab07201f' target='_blank'><img src='https://assets.st-note.com/production/uploads/images/251944631/rectangle_large_type_2_d6b13b40bcf5d4853ca72fcd85d6c8f2.jpeg?width=1280' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発点</h3><div style='color:#666; font-size:1.1em;'>マラッカ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=2.188997,102.252663' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([1.48944, 103.387017], {icon: icon_parks_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lh4.googleusercontent.com/-1AFjjdDU9Jk/TtcxHrWKLBI/AAAAAAAAbCc/O9jcKVAStwE/s2048/111120001.jpg' target='_blank'><img src='https://lh4.googleusercontent.com/-1AFjjdDU9Jk/TtcxHrWKLBI/AAAAAAAAbCc/O9jcKVAStwE/s680/111120001.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>ポンティアンスタジアム</h3><div style='color:#666; font-size:1.1em;'>ジョホール</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=1.48944,103.387017' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[2] = L.marker([1.48979, 103.387748], {icon: icon_clock_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lh6.googleusercontent.com/-7ji-o7eOH5Y/TtcxKNQ6dFI/AAAAAAAAbCg/PwYTlX7t0wM/s2048/111120002.jpg' target='_blank'><img src='https://lh6.googleusercontent.com/-7ji-o7eOH5Y/TtcxKNQ6dFI/AAAAAAAAbCg/PwYTlX7t0wM/s680/111120002.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>時計台</h3><div style='color:#666; font-size:1.1em;'>ジョホール</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=1.48979,103.387748' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[3] = L.marker([1.480472, 103.388421], {icon: icon_monument_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lh4.googleusercontent.com/-mGixsICHjmc/TtcxOV2r_pI/AAAAAAAAbCo/3X7_jUwnBb8/s2048/111120010.jpg' target='_blank'><img src='https://lh4.googleusercontent.com/-mGixsICHjmc/TtcxOV2r_pI/AAAAAAAAbCo/3X7_jUwnBb8/s680/111120010.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>パイナップル</h3><div style='color:#666; font-size:1.1em;'>ジョホール</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=1.480472,103.388421' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
 
 
 if (pathPoints.length > 0) {

@@ -19,7 +19,15 @@
 </head>
 <body>
 <div id='map'></div>
-<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2011年11月19日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://assets.st-note.com/production/uploads/images/251893342/rectangle_large_type_2_cf86296a4ce6c8c15a380f5c6c71c351.jpeg?width=1280' title='出発点'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2011年11月19日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://assets.st-note.com/production/uploads/images/251944631/rectangle_large_type_2_d6b13b40bcf5d4853ca72fcd85d6c8f2.jpeg?width=1280' title='出発点'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh5.googleusercontent.com/-B8vEjdqEgXY/TsmDUkChbsI/AAAAAAAADOw/MJAQCmqDagg/s680/111119003.jpg' title='マラッカ日本人墓地'></div>
+<div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lh3.googleusercontent.com/-zdxM_cnT8uk/TtcIDu0ueVI/AAAAAAAADfs/g3JFsyK1L1k/s680/111119010.jpg' title='宝山亭'></div>
+<div class='photo-thumb' onclick='moveToMarker(3)'><img src='https://lh4.googleusercontent.com/-boe2fgN-lrs/TtcH1oZWERI/AAAAAAAADfU/5_fOhAeYmr8/s680/111119018.jpg' title='忠貞足式(抗日碑)'></div>
+<div class='photo-thumb' onclick='moveToMarker(4)'><img src='https://lh6.googleusercontent.com/-caFDUWTzLc8/TtbaPALjo0I/AAAAAAAAbB4/77ypVBWY018/s680/111119023.jpg' title='時計台'></div>
+<div class='photo-thumb' onclick='moveToMarker(5)'><img src='https://lh3.googleusercontent.com/-IOvVrem-2fY/TtcHn5KzE-I/AAAAAAAADe8/JgZQfgXPjrE/s680/111119025.jpg' title='マラッカ博物館'></div>
+<div class='photo-thumb' onclick='moveToMarker(6)'><img src='https://lh5.googleusercontent.com/-MsTKxTfPO2o/TtbaUtIMJII/AAAAAAAAbCA/rKcw4i3wEhY/s680/111119030.jpg' title='Democratic Government Museum'></div>
+<div class='photo-thumb' onclick='moveToMarker(7)'><img src='https://lh5.googleusercontent.com/-uuUzdr1FVMg/TtbabLU6rSI/AAAAAAAAbCM/QuoBUC1roWY/s680/111119034.jpg' title='井戸'></div>
+<div class='photo-thumb' onclick='moveToMarker(8)'><img src='https://lh3.googleusercontent.com/-ekRPzgeJoAA/TtcHcU6AmjI/AAAAAAAADek/QW3srNnzYxA/s680/111119036.jpg' title='St Peter Church'></div>
 </div>
 <script>
 var map = L.map('map');
@@ -38,7 +46,51 @@ var pathPoints = [[2.188525, 102.2524117], [2.188425, 102.25263], [2.188475, 102
                     iconAnchor: [15, 30],
                     popupAnchor: [0, -30]
                 });
-markers[0] = L.marker([2.188525, 102.252412], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://note.com/raplom/n/n60fbab07201f' target='_blank'><img src='https://assets.st-note.com/production/uploads/images/251893342/rectangle_large_type_2_cf86296a4ce6c8c15a380f5c6c71c351.jpeg?width=1280' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発点</h3><div style='color:#666; font-size:1.1em;'>マラッカ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=2.188525,102.252412' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+                var icon_hakab_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/hakab.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_inori_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/inori.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_sekihi_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/sekihi.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_clock_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/clock.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_yakata_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/yakata.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_other_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/other.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([2.188525, 102.252412], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://note.com/raplom/n/n60fbab07201f' target='_blank'><img src='https://assets.st-note.com/production/uploads/images/251944631/rectangle_large_type_2_d6b13b40bcf5d4853ca72fcd85d6c8f2.jpeg?width=1280' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発点</h3><div style='color:#666; font-size:1.1em;'>マラッカ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=2.188525,102.252412' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([2.223186, 102.273744], {icon: icon_hakab_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/eVqSp2t89pdBmUYM7' target='_blank'><img src='https://lh5.googleusercontent.com/-B8vEjdqEgXY/TsmDUkChbsI/AAAAAAAADOw/MJAQCmqDagg/s680/111119003.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>マラッカ日本人墓地</h3><div style='color:#666; font-size:1.1em;'>マラッカ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=2.223186,102.273744' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[2] = L.marker([2.196012, 102.255467], {icon: icon_inori_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/U5TEUPAbQX7a2tNV7' target='_blank'><img src='https://lh3.googleusercontent.com/-zdxM_cnT8uk/TtcIDu0ueVI/AAAAAAAADfs/g3JFsyK1L1k/s680/111119010.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>宝山亭</h3><div style='color:#666; font-size:1.1em;'>マラッカ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=2.196012,102.255467' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[3] = L.marker([2.195615, 102.255429], {icon: icon_sekihi_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/7AkyndXYiVJ9fMvM6' target='_blank'><img src='https://lh4.googleusercontent.com/-boe2fgN-lrs/TtcH1oZWERI/AAAAAAAADfU/5_fOhAeYmr8/s680/111119018.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>忠貞足式(抗日碑)</h3><div style='color:#666; font-size:1.1em;'>マラッカ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=2.195615,102.255429' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[4] = L.marker([2.194384, 102.249095], {icon: icon_clock_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lh6.googleusercontent.com/-caFDUWTzLc8/TtbaPALjo0I/AAAAAAAAbB4/77ypVBWY018/s2048/111119023.jpg' target='_blank'><img src='https://lh6.googleusercontent.com/-caFDUWTzLc8/TtbaPALjo0I/AAAAAAAAbB4/77ypVBWY018/s680/111119023.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>時計台</h3><div style='color:#666; font-size:1.1em;'>マラッカ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=2.194384,102.249095' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[5] = L.marker([2.19407, 102.248962], {icon: icon_yakata_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/gfj2yokhBHoTnhv18' target='_blank'><img src='https://lh3.googleusercontent.com/-IOvVrem-2fY/TtcHn5KzE-I/AAAAAAAADe8/JgZQfgXPjrE/s680/111119025.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>マラッカ博物館</h3><div style='color:#666; font-size:1.1em;'>マラッカ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=2.19407,102.248962' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[6] = L.marker([2.193265, 102.248911], {icon: icon_yakata_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lh5.googleusercontent.com/-MsTKxTfPO2o/TtbaUtIMJII/AAAAAAAAbCA/rKcw4i3wEhY/s2048/111119030.jpg' target='_blank'><img src='https://lh5.googleusercontent.com/-MsTKxTfPO2o/TtbaUtIMJII/AAAAAAAAbCA/rKcw4i3wEhY/s680/111119030.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Democratic Government Museum</h3><div style='color:#666; font-size:1.1em;'>マラッカ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=2.193265,102.248911' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[7] = L.marker([2.195815, 102.255223], {icon: icon_other_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lh5.googleusercontent.com/-uuUzdr1FVMg/TtbabLU6rSI/AAAAAAAAbCM/QuoBUC1roWY/s2048/111119034.jpg' target='_blank'><img src='https://lh5.googleusercontent.com/-uuUzdr1FVMg/TtbabLU6rSI/AAAAAAAAbCM/QuoBUC1roWY/s680/111119034.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>井戸</h3><div style='color:#666; font-size:1.1em;'>マラッカ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=2.195815,102.255223' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[8] = L.marker([2.202467, 102.253101], {icon: icon_inori_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/CErZc8Nb3XLtM9vQ8' target='_blank'><img src='https://lh3.googleusercontent.com/-ekRPzgeJoAA/TtcHcU6AmjI/AAAAAAAADek/QW3srNnzYxA/s680/111119036.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>St Peter Church</h3><div style='color:#666; font-size:1.1em;'>マラッカ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=2.202467,102.253101' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
 
 
 if (pathPoints.length > 0) {
