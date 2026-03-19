@@ -1,0 +1,75 @@
+
+<html>
+<head>
+
+<meta http-equiv="Content-Language" content="ja">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+
+<title>年代を選択して下さい</title>
+
+</head>
+
+<body>
+
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="55%">
+  <tr>
+    <td width="50%" height="59" align="center">
+    
+	<select name="year_menu" onchange="if(this.value) location.href=this.value;">
+	<option value="">ツーリングマップ</option>
+	
+	 <!-- 
+	 
+	<option value="2003.html">2003年</option>
+	<option value="2004.html">2004年</option>
+	<option value="2005.html">2005年</option>
+	<option value="2006.html">2006年</option>
+	<option value="2007.html">2007年</option>
+	<option value="2008.html">2008年</option>
+	<option value="2009.html">2009年</option>
+	<option value="2010.html">2010年</option>　　-->
+	<option value="./map/2011/index.html">2011年</option>
+	
+	<!--
+	<option value="2012.html">2012年</option>
+	<option value="2013.html">2013年</option>
+	<option value="2014.html">2014年</option>
+	<option value="2015.html">2015年</option>
+	<option value="2016.html">2016年</option>
+	<option value="2017.html">2017年</option>
+	<option value="2018.html">2018年</option>
+	<option value="2019.html">2019年</option>
+	<option value="2020.html">2020年</option>
+	<option value="2021.html">2021年</option>
+	<option value="2022.html">2022年</option>
+	<option value="2023.html">2023年</option>
+	<option value="2024.html">2024年</option>	
+	<option value="2025.html">2025年</option>
+	<option value="2026.html">2026年</option>	-->
+	
+	
+	
+	
+	
+	
+	
+	
+	</select>
+	</td>
+    <td width="50%" height="59" align="center">
+      <select name="year_menu" onchange="if(this.value) location.href=this.value;">
+        <option value="">選択してください</option>
+        <script language="JavaScript">
+          for (var i = 2000; i <= 2026; i++) {
+            document.write('<option value="' + i + '.html">' + i + '年</option>');
+          }
+        </script>
+      </select>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
