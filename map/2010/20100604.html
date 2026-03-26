@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2010年06月04日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2010年06月04日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2010年06月04日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='http://lh3.ggpht.com/_5jLw98T_xQ4/TBA04v7MOyI/AAAAAAAAAV0/GsYoUOSSiA8/s680/100604003.jpg' title='Wat Mahabut'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[13.7089367, 100.59985], [13.7093083, 100.6013483], [13.70954, 100.6012917], [13.7103133, 100.60136], [13.709975, 100.6015133], [13.70996, 100.60158], [13.7100317, 100.60166], [13.71011, 100.6017533], [13.71018, 100.6018467], [13.7103483, 100.602035], [13.7105333, 100.60218], [13.7105917, 100.60236], [13.710645, 100.602475], [13.710685, 100.602615], [13.7107333, 100.6027267], [13.710785, 100.6028933], [13.71089, 100.6029983], [13.7110233, 100.6030933], [13.7109767, 100.603215], [13.711235, 100.6034133], [13.711275, 100.6035767], [13.7113867, 100.60372], [13.71137, 100.6037883], [13.7114433, 100.6039183], [13.7115067, 100.604055], [13.7115517, 100.60415], [13.7117817, 100.6044533], [13.7118633, 100.6044717], [13.7118583, 100.6046033], [13.7121367, 100.6049317], [13.7125483, 100.6056183], [13.7120883, 100.6053167], [13.7119967, 100.6056083], [13.7121083, 100.6061417], [13.712185, 100.606195], [13.7123117, 100.6062683], [13.71234, 100.60637], [13.7126233, 100.606985], [13.7126683, 100.6069767], [13.712685, 100.6071217], [13.712685, 100.6071733], [13.7128433, 100.6073667], [13.7136033, 100.606935], [13.713615, 100.6070117], [13.713625, 100.6069683], [13.7136717, 100.6069767], [13.713705, 100.6069767], [13.7137367, 100.6069683], [13.713955, 100.6069733], [13.71412, 100.60695], [13.7142533, 100.6069583], [13.7143917, 100.6071783], [13.71407, 100.6064217], [13.7140867, 100.60647], [13.7141267, 100.6065283], [13.7141683, 100.6065683], [13.714675, 100.6067833], [13.714525, 100.6067867], [13.7146033, 100.6068617], [13.7145817, 100.6068983], [13.7145867, 100.6069317], [13.71459, 100.6069683], [13.7146517, 100.6072517], [13.71478, 100.6072617], [13.7148817, 100.6072533], [13.7148083, 100.60697], [13.71488, 100.606865], [13.7147883, 100.6067517], [13.7148317, 100.6066967], [13.7148833, 100.606405], [13.7147717, 100.6064817], [13.7148817, 100.606715], [13.7149617, 100.6066717], [13.7152217, 100.6064667], [13.7153383, 100.6065], [13.7152617, 100.6064833], [13.7153317, 100.6066883], [13.715615, 100.6065683], [13.7155883, 100.60642], [13.7153, 100.6066533], [13.715325, 100.6066683], [13.7153183, 100.6065733], [13.7152983, 100.6065667], [13.7153083, 100.60658], [13.71533, 100.6066033], [13.7153167, 100.6066033], [13.7153233, 100.6066167], [13.7153117, 100.606625], [13.71531, 100.6066283], [13.7153233, 100.60662], [13.71533, 100.6066217], [13.7153533, 100.6066267], [13.7153583, 100.60664], [13.7153683, 100.6066533], [13.7148767, 100.6064183], [13.714705, 100.6064217], [13.7147183, 100.6065633], [13.714585, 100.606575], [13.7144583, 100.6065917], [13.7144333, 100.6066533], [13.7145083, 100.6067567], [13.7143117, 100.60675], [13.7142967, 100.6068317], [13.714355, 100.6069317], [13.7143917, 100.6070183], [13.7144367, 100.60705], [13.7143933, 100.606915], [13.7142167, 100.6066917], [13.71402, 100.6066967], [13.7138917, 100.6066683], [13.713825, 100.6067833], [13.7137083, 100.6068383], [13.71359, 100.6068717], [13.7133967, 100.606955], [13.7132017, 100.60704], [13.7130983, 100.6072267], [13.712975, 100.6072433], [13.7128367, 100.6072167], [13.7127567, 100.6071933], [13.7127317, 100.607105], [13.71269, 100.60682], [13.7126267, 100.60668], [13.7125517, 100.6066383]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_tera_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/tera.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([13.708937, 100.59985], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/aruki.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>バンコク</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=13.708937,100.59985' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([13.71507, 100.607493], {icon: icon_tera_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/jjvyNBXgJ3EDsD9H8' target='_blank'><img src='http://lh3.ggpht.com/_5jLw98T_xQ4/TBA04v7MOyI/AAAAAAAAAV0/GsYoUOSSiA8/s680/100604003.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Wat Mahabut</h3><div style='color:#666; font-size:1.1em;'>バンコク</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>ナン・ナーク寺</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=13.71507,100.607493' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>
