@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2010年07月21日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2010年07月21日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2010年07月21日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://1.bp.blogspot.com/-5yB7OS1q8jk/YSWiYIA5IUI/AAAAAAAH5VA/-o6QBRkGSeEEXWG4Y3bUEOiODRY--VSCwCLcBGAsYHQ/s680/100721008.jpg' title='シンガポール・マレーシア国境'></div>
+<div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://1.bp.blogspot.com/-wI4uj9b_65o/YSWhDBOId3I/AAAAAAAH5UU/BG2NKkUD5oQZNicifW3GAdUcuUfjQFTBQCLcBGAsYHQ/s680/100721013.jpg' title='ラーキン・バスターミナル'></div>
+<div class='photo-thumb' onclick='moveToMarker(3)'><img src='https://lh3.googleusercontent.com/-CQJgFdtkytE/Tzhx2zSbjJI/AAAAAAAACtU/VtD6GdesOf4/s680/100721017.jpg' title='メルシン'></div>
+<div class='photo-thumb' onclick='moveToMarker(4)'><img src='https://lh3.googleusercontent.com/-11_p_mq_j8c/Tzhzxerpw_I/AAAAAAAACzc/LybUSshJhec/s680/100722015.jpg' title='ティオマン島'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[2.3718867, 103.8452683], [2.37475, 103.8450667], [2.3772333, 103.84592], [2.379555, 103.845885], [2.3820667, 103.84543], [2.3850217, 103.8462], [2.3866833, 103.8476833], [2.3879583, 103.8493617], [2.3885767, 103.85117], [2.3897583, 103.8528083], [2.391635, 103.853395], [2.3944017, 103.8536983], [2.39699, 103.8543717], [2.3994967, 103.8542717], [2.401795, 103.8531933], [2.4040867, 103.852205], [2.406315, 103.850985], [2.4085417, 103.8492183], [2.4111467, 103.847125], [2.41323, 103.8447833], [2.4152867, 103.842335], [2.4169167, 103.8402867], [2.418285, 103.8386717], [2.4195467, 103.837565], [2.4206167, 103.8371583], [2.4226233, 103.8363283], [2.4249383, 103.8355433], [2.4271983, 103.8347017], [2.4291733, 103.83439], [2.4302067, 103.8349567], [2.4305767, 103.8351233], [2.4309433, 103.8345417], [2.4311367, 103.833995], [2.43126, 103.8327817], [2.4311867, 103.8330783], [2.4311717, 103.8331483], [2.43132, 103.8332533], [2.4313383, 103.8331717], [2.43136, 103.8331567], [2.4313433, 103.8333283], [2.4313433, 103.8334567], [2.43132, 103.833615], [2.43156, 103.8334783], [2.431075, 103.83374], [2.4312867, 103.8338067], [2.4313083, 103.8339683], [2.4312833, 103.83408], [2.43117, 103.8341517], [2.4310333, 103.83421], [2.4309617, 103.8343367], [2.430985, 103.8344733], [2.4310417, 103.8346417], [2.43105, 103.8348483], [2.431005, 103.8349783], [2.430955, 103.83512], [2.4309317, 103.835255], [2.4308633, 103.83536], [2.4307517, 103.835375], [2.4306817, 103.835485], [2.4306833, 103.835325], [2.430685, 103.8354167], [2.4306417, 103.8356517], [2.4305967, 103.83586], [2.430605, 103.8360983], [2.4307483, 103.8362183], [2.43081, 103.8362517], [2.4308867, 103.8364117], [2.4309383, 103.8365567], [2.4310117, 103.836745], [2.431015, 103.8367967], [2.4310483, 103.8371033], [2.43115, 103.8373983], [2.4312783, 103.83753], [2.4313633, 103.8376683], [2.4315967, 103.8378367], [2.4316683, 103.8380033], [2.4319067, 103.8379783], [2.4320167, 103.838055], [2.4321333, 103.837995], [2.432285, 103.8380783], [2.4324067, 103.838185], [2.4325317, 103.8381367], [2.4326917, 103.8382117], [2.43284, 103.8383367], [2.43296, 103.8384867], [2.4332583, 103.8388183], [2.433305, 103.83869], [2.4333317, 103.8387283], [2.4334667, 103.8389617], [2.4335717, 103.8390567], [2.4336617, 103.8391617], [2.433725, 103.839365], [2.4338433, 103.8394833], [2.4339983, 103.8394033], [2.4340933, 103.83943], [2.4341467, 103.8395017], [2.4341783, 103.8395633], [2.4341967, 103.8397067], [2.4341267, 103.8401267], [2.4343517, 103.839725], [2.4340833, 103.83927], [2.4340617, 103.8390183], [2.434255, 103.8392583], [2.4343017, 103.8391083], [2.4343867, 103.8390133], [2.4343367, 103.8389467], [2.43429, 103.8388567], [2.43431, 103.8389683], [2.4343033, 103.83896], [2.4342367, 103.8391333], [2.4340783, 103.839325], [2.4341217, 103.8394433], [2.4341767, 103.8395533], [2.434235, 103.839725], [2.434475, 103.8400717], [2.4344867, 103.8400367], [2.4345267, 103.84002], [2.4345433, 103.84002], [2.4346017, 103.840035], [2.434605, 103.8400533], [2.4346117, 103.8400633], [2.4345933, 103.840065], [2.43458, 103.8400683], [2.4345833, 103.84007], [2.43458, 103.8400767], [2.4345667, 103.8400767], [2.4345667, 103.8400733], [2.4345783, 103.8400683], [2.4345817, 103.8400683], [2.43457, 103.8400667], [2.4345733, 103.8400633], [2.43457, 103.8400617], [2.4345617, 103.84006], [2.434685, 103.8383833], [2.43458, 103.838495], [2.8414033, 104.158425], [2.841425, 104.1584117], [2.8414083, 104.1583117], [2.8414017, 104.1583767], [2.8413983, 104.1584117], [2.8414233, 104.15827], [2.84146, 104.15819], [2.84157, 104.1583283], [2.8415467, 104.1583533], [2.84153, 104.158375], [2.84148, 104.1582833], [2.8414433, 104.1582117], [2.841445, 104.1581983], [2.8414633, 104.1581933], [2.841505, 104.15828], [2.8414167, 104.1582817], [2.8413467, 104.1582467], [2.8413933, 104.1582533], [2.841455, 104.1583317], [2.8414567, 104.158245], [2.8415167, 104.1583617], [2.8414983, 104.1583483], [2.8414883, 104.15838], [2.8414367, 104.1583033], [2.8413417, 104.1582433], [2.841395, 104.1582467], [2.8413867, 104.15832], [2.8413867, 104.1583033], [2.8413683, 104.1582617], [2.8414133, 104.1582383], [2.8414183, 104.158205], [2.8414217, 104.1582283], [2.8414233, 104.1582217], [2.841445, 104.1582317], [2.8414467, 104.1582583], [2.84139, 104.1582383], [2.841395, 104.1582133], [2.8413767, 104.158195], [2.841465, 104.1582367], [2.8414617, 104.1582483], [2.8413883, 104.158325], [2.841365, 104.1583117], [2.84138, 104.1583067], [2.8414017, 104.1583133], [2.8413967, 104.1584117], [2.8413333, 104.15842], [2.8414533, 104.1583983], [2.8415817, 104.1591817], [2.8386967, 104.1604017], [2.8380917, 104.16014], [2.8372217, 104.1602733], [2.83551, 104.1603433], [2.835555, 104.1604217], [2.8355267, 104.1603733], [2.83547, 104.16006], [2.8343367, 104.159995], [2.8353717, 104.1601967], [2.8353617, 104.1602317], [2.8353333, 104.160225]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_border_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/border.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_bus_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/bus.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_starr_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/starr.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([2.371887, 103.845268], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/aruki.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>ジョホール</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=2.371887,103.845268' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([1.464018, 103.764859], {icon: icon_border_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/Dmaqxh5zVchG2Vxy7' target='_blank'><img src='https://1.bp.blogspot.com/-5yB7OS1q8jk/YSWiYIA5IUI/AAAAAAAH5VA/-o6QBRkGSeEEXWG4Y3bUEOiODRY--VSCwCLcBGAsYHQ/s680/100721008.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>シンガポール・マレーシア国境</h3><div style='color:#666; font-size:1.1em;'>ジョホール</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=1.464018,103.764859' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[2] = L.marker([1.494952, 103.742674], {icon: icon_bus_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/71in44T8eni86CUCA' target='_blank'><img src='https://1.bp.blogspot.com/-wI4uj9b_65o/YSWhDBOId3I/AAAAAAAH5UU/BG2NKkUD5oQZNicifW3GAdUcuUfjQFTBQCLcBGAsYHQ/s680/100721013.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>ラーキン・バスターミナル</h3><div style='color:#666; font-size:1.1em;'>ジョホール</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=1.494952,103.742674' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[3] = L.marker([2.431956, 103.834917], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/zGrRjnhVSHDW2SJ86' target='_blank'><img src='https://lh3.googleusercontent.com/-CQJgFdtkytE/Tzhx2zSbjJI/AAAAAAAACtU/VtD6GdesOf4/s680/100721017.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>メルシン</h3><div style='color:#666; font-size:1.1em;'>メルシン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=2.431956,103.834917' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[4] = L.marker([2.791779, 104.170563], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/1wBVUWQf8B96JTht6' target='_blank'><img src='https://lh3.googleusercontent.com/-11_p_mq_j8c/Tzhzxerpw_I/AAAAAAAACzc/LybUSshJhec/s680/100722015.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>ティオマン島</h3><div style='color:#666; font-size:1.1em;'>メルシン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=2.791779,104.170563' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>

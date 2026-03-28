@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2010年07月19日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2010年07月19日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2010年07月19日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' title='出発地'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[5.418565, 100.33871333333333], [5.418293333333334, 100.33879166666667], [5.4182266666666665, 100.33871166666667], [5.41769, 100.338475], [5.417536666666667, 100.33850333333334], [5.417806666666666, 100.33822333333333], [5.417948333333333, 100.33818], [5.41794, 100.33824166666666], [5.41803, 100.33849333333333], [5.418071666666667, 100.33860833333334], [5.4184383333333335, 100.33818833333333], [5.418013333333334, 100.338525], [5.418001666666667, 100.33840666666667], [5.418013333333334, 100.33833], [5.418015, 100.33828166666666], [5.418446666666667, 100.33776666666667], [5.418561666666666, 100.337605], [5.418583333333333, 100.3375], [5.418721666666666, 100.33745666666667], [5.4185566666666665, 100.33732], [5.418301666666666, 100.337025], [5.418205, 100.336955], [5.41835, 100.336575], [5.418541666666667, 100.336405], [5.418528333333334, 100.33621666666667], [5.418401666666667, 100.336065], [5.418525, 100.33589333333333], [5.418591666666667, 100.33578166666666], [5.418705, 100.33566166666667], [5.41877, 100.33552833333333], [5.418841666666666, 100.33537833333334], [5.4189766666666666, 100.33520333333334], [5.419158333333334, 100.33503666666667], [5.4191633333333336, 100.33496], [5.41911, 100.33485666666667], [5.4190933333333335, 100.33475666666666], [5.418985, 100.334675], [5.41913, 100.33456666666666], [5.419171666666666, 100.33455333333333], [5.419193333333333, 100.33468666666667], [5.41884, 100.334825], [5.419073333333333, 100.33493333333334], [5.418943333333333, 100.33506666666666], [5.419005, 100.335165], [5.418891666666667, 100.33528333333334], [5.41884, 100.335525], [5.418745, 100.33565166666666], [5.418593333333333, 100.3358], [5.418516666666667, 100.33594833333333], [5.418453333333333, 100.33609666666666], [5.418448333333333, 100.336175], [5.41858, 100.33629833333333], [5.4187183333333335, 100.336355], [5.418825, 100.33641833333333], [5.418798333333333, 100.33642666666667], [5.418725, 100.33645], [5.418715, 100.33645666666666], [5.4186966666666665, 100.33644833333334], [5.4186966666666665, 100.33645166666666], [5.418753333333333, 100.3365], [5.41901, 100.33663], [5.419201666666667, 100.33675], [5.419333333333333, 100.336825]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([5.418565, 100.338713], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/aruki.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>ペナン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=5.418565,100.338713' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>

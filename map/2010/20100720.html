@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2010年07月20日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2010年07月20日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2010年07月20日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://1.bp.blogspot.com/-VwJbuOcm1EQ/YROHRrNmOXI/AAAAAAAHzVA/PsPYaukOSvgI3q8YgPALGv_jhqECaubwgCLcBGAsYHQ/s680/100720013.jpg' title='Malabar Mosque'></div>
+<div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://1.bp.blogspot.com/-hjaXCnishEQ/YROHhekc4FI/AAAAAAAHzVM/TrjDJtQ42CMIPHUbNkibUk9KVlAaR-hMwCLcBGAsYHQ/s680/100720025.jpg' title='Sultan Mosque'></div>
+<div class='photo-thumb' onclick='moveToMarker(3)'><img src='https://lh5.googleusercontent.com/-pFOdIb3JHXg/TzhfxJNEA_I/AAAAAAAACrw/7KNgjrL4E2A/s680/100720048.jpg' title='Sakya Muni Buddha Gaya Temple'></div>
+<div class='photo-thumb' onclick='moveToMarker(4)'><img src='https://lh4.googleusercontent.com/-7QfN_qajVes/TzhfemMhF1I/AAAAAAAACq4/AMagEYBP0V0/s680/100720061.jpg' title='Sri Srinivasa Perumal Temple'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[1.304635, 103.8592917], [1.3043383, 103.85891], [1.3043217, 103.8588983], [1.3042467, 103.8588333], [1.304815, 103.85864], [1.3038217, 103.85859], [1.3027717, 103.8575483], [1.3029967, 103.85826], [1.30315, 103.85802], [1.302985, 103.8579033], [1.3030017, 103.858105], [1.3029383, 103.8581017], [1.3028317, 103.8579783], [1.30279, 103.857935], [1.3027017, 103.8579267], [1.3026417, 103.8579067], [1.3024683, 103.857785], [1.3023517, 103.8577233], [1.3022867, 103.857665], [1.3022717, 103.8576317], [1.302155, 103.857505], [1.3020083, 103.8573817], [1.3019733, 103.8571267], [1.3016283, 103.85858], [1.3019467, 103.8584267], [1.3019717, 103.8584867], [1.302095, 103.85863], [1.3019883, 103.858725], [1.3020833, 103.8587533], [1.3021633, 103.85862], [1.3011433, 103.8578083], [1.3013, 103.8579833], [1.3012067, 103.8579683], [1.3010933, 103.8578817], [1.3008883, 103.8578817], [1.30089, 103.858095], [1.3009533, 103.8581167], [1.3009583, 103.8581683], [1.299795, 103.8572967], [1.3001083, 103.8567117], [1.30019, 103.857005], [1.30012, 103.8569917], [1.3001183, 103.85704], [1.30008, 103.856945], [1.300085, 103.8569133], [1.3000167, 103.8573667], [1.3000917, 103.8573133], [1.3000317, 103.8571383], [1.3009, 103.8572583], [1.3004467, 103.85656], [1.3006617, 103.8568267], [1.3009, 103.856895], [1.30095, 103.8565767], [1.3009317, 103.856515], [1.3009017, 103.856385], [1.3009117, 103.8563083], [1.3008267, 103.8565683], [1.3134417, 103.8557267], [1.3137283, 103.855595], [1.3138317, 103.855725], [1.3139033, 103.8558417], [1.3139467, 103.8559017], [1.3139917, 103.85601], [1.3140433, 103.8560333], [1.3141133, 103.8561483], [1.3141917, 103.8562683], [1.314245, 103.8563317], [1.313945, 103.8560817], [1.3142733, 103.8559467], [1.3143, 103.855995], [1.3143283, 103.856015], [1.3143483, 103.8560367], [1.3143517, 103.8560267], [1.3150183, 103.8569883], [1.3145117, 103.85654], [1.314685, 103.8565783], [1.3147767, 103.85658], [1.3148967, 103.8567683], [1.314935, 103.8568067], [1.3149133, 103.8568317], [1.3149033, 103.8568533], [1.3148983, 103.8568883], [1.3148367, 103.8568833], [1.31508, 103.8571367], [1.3149933, 103.8569967], [1.31503, 103.857025], [1.314785, 103.856885], [1.3148517, 103.85671], [1.314715, 103.8566183], [1.3146117, 103.85653], [1.314485, 103.856445], [1.31434, 103.8563633], [1.31425, 103.8564383], [1.3140567, 103.8564617], [1.3140083, 103.8562567], [1.3140567, 103.8562533], [1.3140433, 103.85637], [1.3137833, 103.85649], [1.3136767, 103.85659], [1.3135233, 103.856665], [1.3135233, 103.8567167], [1.313375, 103.85655], [1.3133017, 103.8565433], [1.3132367, 103.8564433], [1.313265, 103.8563633], [1.3132867, 103.8563233], [1.3133283, 103.8563267], [1.313275, 103.85633], [1.313235, 103.8564033], [1.3131967, 103.8565583], [1.3132567, 103.8565483], [1.3132233, 103.8565417], [1.3132083, 103.8565533], [1.3130733, 103.8565317], [1.312925, 103.8565417], [1.3128, 103.8564767], [1.3128817, 103.856235], [1.3126867, 103.8562867], [1.3124283, 103.856355], [1.3122917, 103.856445], [1.3121433, 103.85652], [1.3120367, 103.8565433], [1.31196, 103.8565483], [1.3120117, 103.8567467], [1.3034217, 103.859445], [1.30329, 103.8596], [1.30318, 103.8598333], [1.3031933, 103.8598367], [1.3032333, 103.8599267], [1.303275, 103.8600033], [1.30323, 103.8601583], [1.3036783, 103.8614567], [1.3037933, 103.8612333], [1.3038667, 103.861005], [1.3038133, 103.860985], [1.3037683, 103.860985], [1.3037117, 103.8609767], [1.3036783, 103.8611233], [1.3032517, 103.8608983], [1.3032467, 103.860915], [1.3032217, 103.8609217], [1.3032217, 103.8609267], [1.3032167, 103.8609317], [1.302955, 103.860995], [1.302795, 103.8611083], [1.3026633, 103.8612383], [1.3025167, 103.8613017], [1.3024017, 103.8613533], [1.3022583, 103.8614417], [1.3021833, 103.8614533], [1.3021433, 103.8615167], [1.3021033, 103.8615317], [1.3020833, 103.8615467], [1.3020417, 103.8615667], [1.30199, 103.8615817], [1.3019517, 103.86159], [1.3019017, 103.8615983], [1.3017867, 103.8618483], [1.3018333, 103.86295], [1.30267, 103.8634183], [1.3027383, 103.8632817], [1.3027983, 103.8630833], [1.3028983, 103.8631983], [1.30299, 103.8630417], [1.30299, 103.863165], [1.3030883, 103.8631883], [1.3031633, 103.8632767], [1.3032117, 103.8632967], [1.303515, 103.8635967], [1.302865, 103.8641117], [1.3027933, 103.8643517], [1.3029583, 103.8644233], [1.30301, 103.8639183], [1.3035367, 103.8639383], [1.3033783, 103.8638633], [1.3033567, 103.8642617], [1.301155, 103.8635817], [1.30386, 103.8637083], [1.3037267, 103.8636483], [1.3036467, 103.8636083], [1.303605, 103.8635417], [1.303595, 103.8634567], [1.3036067, 103.863325], [1.3030017, 103.8625533], [1.3028233, 103.8618233], [1.3030217, 103.8617467], [1.3031983, 103.861915], [1.3032217, 103.8618417], [1.303345, 103.8617983], [1.3033883, 103.8616983], [1.30341, 103.8615833], [1.3034067, 103.861355], [1.303585, 103.8614067], [1.30376, 103.861255], [1.3039983, 103.861255], [1.304045, 103.8609367], [1.3040767, 103.860945], [1.3040983, 103.8607917], [1.3040633, 103.86062], [1.3039617, 103.8605367], [1.3039883, 103.8602267], [1.30402, 103.8602917], [1.3040367, 103.8603067], [1.3039417, 103.86036], [1.3038867, 103.8602867], [1.3037833, 103.86017], [1.30374, 103.8599167], [1.3030983, 103.8597367], [1.30276, 103.8597767], [1.3030383, 103.8593183], [1.3031417, 103.8593433], [1.3027883, 103.8593933], [1.3029883, 103.8589167], [1.302725, 103.8590217], [1.3031133, 103.8589883], [1.302815, 103.85944], [1.3027217, 103.859385], [1.3027017, 103.8593783], [1.3026417, 103.8595467], [1.3026433, 103.8595583], [1.302655, 103.8595383], [1.302785, 103.8594], [1.3028633, 103.8592217], [1.303245, 103.859275], [1.3036833, 103.85956], [1.30376, 103.8596383], [1.3038767, 103.8596267]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_mosk_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/mosk.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_tera_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/tera.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_hind_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/hind.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([1.304635, 103.859292], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/aruki.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>シンガポール</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=1.304635,103.859292' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([1.305096, 103.859888], {icon: icon_mosk_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://1.bp.blogspot.com/-VwJbuOcm1EQ/YROHRrNmOXI/AAAAAAAHzVA/PsPYaukOSvgI3q8YgPALGv_jhqECaubwgCLcBGAsYHQ/s2048/100720013.jpg' target='_blank'><img src='https://1.bp.blogspot.com/-VwJbuOcm1EQ/YROHRrNmOXI/AAAAAAAHzVA/PsPYaukOSvgI3q8YgPALGv_jhqECaubwgCLcBGAsYHQ/s680/100720013.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Malabar Mosque</h3><div style='color:#666; font-size:1.1em;'>シンガポール</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=1.305096,103.859888' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[2] = L.marker([1.30239, 103.859198], {icon: icon_mosk_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/5mRgFh2hKNw7Ba6d6' target='_blank'><img src='https://1.bp.blogspot.com/-hjaXCnishEQ/YROHhekc4FI/AAAAAAAHzVM/TrjDJtQ42CMIPHUbNkibUk9KVlAaR-hMwCLcBGAsYHQ/s680/100720025.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Sultan Mosque</h3><div style='color:#666; font-size:1.1em;'>シンガポール</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=1.30239,103.859198' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[3] = L.marker([1.31473, 103.856892], {icon: icon_tera_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/L4zAhEaxA8AphqCZA' target='_blank'><img src='https://lh5.googleusercontent.com/-pFOdIb3JHXg/TzhfxJNEA_I/AAAAAAAACrw/7KNgjrL4E2A/s680/100720048.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Sakya Muni Buddha Gaya Temple</h3><div style='color:#666; font-size:1.1em;'>シンガポール</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>仏像　高さ15ｍ、重さ300トン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=1.31473,103.856892' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[4] = L.marker([1.313545, 103.856043], {icon: icon_hind_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/2pSTqVkZb6uEg4n77' target='_blank'><img src='https://lh4.googleusercontent.com/-7QfN_qajVes/TzhfemMhF1I/AAAAAAAACq4/AMagEYBP0V0/s680/100720061.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Sri Srinivasa Perumal Temple</h3><div style='color:#666; font-size:1.1em;'>シンガポール</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=1.313545,103.856043' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>
