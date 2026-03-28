@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2012年04月04日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2012年04月04日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2012年04月04日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' title='出発地'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[13.745268333333334, 100.51661333333334], [13.745191666666667, 100.51674], [13.745156666666666, 100.51668166666667], [13.745161666666666, 100.51668666666667], [13.745155, 100.51647], [13.745075, 100.51653166666667], [13.74508, 100.51643833333333], [13.74509, 100.51647666666666], [13.74507, 100.516505], [13.745045, 100.51651666666666], [13.744991666666667, 100.516485], [13.745035, 100.51651833333334], [13.74506, 100.516605], [13.745093333333333, 100.51662166666667], [13.74521, 100.51675833333333], [13.745266666666666, 100.51681333333333], [13.74524, 100.516855], [13.745283333333333, 100.51686666666667], [13.745303333333334, 100.51680666666667], [13.745285, 100.51665666666666], [13.745275, 100.51666333333333], [13.74528, 100.51670833333333], [13.745268333333334, 100.5167], [13.745255, 100.51668], [13.745293333333333, 100.51665333333334], [13.745308333333334, 100.51665666666666], [13.74534, 100.51662166666667], [13.745145, 100.51649], [13.7449, 100.51638666666666], [13.744886666666666, 100.516485], [13.744813333333333, 100.51648333333333], [13.744721666666667, 100.51649333333333], [13.744373333333334, 100.51638166666666], [13.74431, 100.51641], [13.74417, 100.51633666666666], [13.744088333333334, 100.516335], [13.74399, 100.51634]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([13.745268, 100.516613], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/aruki.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>トラン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=13.745268,100.516613' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>
