@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2012年01月27日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2012年01月27日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2012年01月27日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' title='出発地'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[7.5723117, 99.6127083], [7.57231, 99.612715], [7.5723083, 99.6127233], [7.5723117, 99.6127167], [7.5723133, 99.612715], [7.5722783, 99.6127333], [7.5722467, 99.612705], [7.5722767, 99.6127183], [7.572315, 99.61261], [7.572435, 99.6126033], [7.573325, 99.61244], [7.57435, 99.612085], [7.5749717, 99.6118467], [7.5762183, 99.6107633], [7.57718, 99.6105983], [7.5793733, 99.6093183], [7.5800383, 99.60888], [7.5812817, 99.6082967], [7.5810367, 99.60769], [7.5800533, 99.6067617], [7.5787333, 99.6054517], [7.57771, 99.6039767], [7.5774817, 99.6035733], [7.5774783, 99.60356], [7.5777783, 99.6031483], [7.578915, 99.60266], [7.5787283, 99.601895], [7.5788567, 99.6011933], [7.5796933, 99.60085], [7.58059, 99.5992533], [7.5812767, 99.5984], [7.58184, 99.5968117], [7.5818283, 99.5946167], [7.5818617, 99.5929117], [7.5819083, 99.591125], [7.582265, 99.588905], [7.58243, 99.58869], [7.5822833, 99.58873], [7.5828, 99.5884217], [7.584915, 99.5890967], [7.5875767, 99.5899017], [7.58983, 99.5904633], [7.5929783, 99.590625], [7.5947633, 99.58929], [7.80361, 99.5898033], [7.8033917, 99.5877267], [7.80306, 99.585195], [7.80268, 99.5823283], [7.8021567, 99.5804867], [7.8015717, 99.5776183], [7.8013433, 99.5744183], [7.8005017, 99.57114], [7.799455, 99.5679033], [7.7989217, 99.56486], [7.7981267, 99.562995], [7.797395, 99.5616067], [7.797485, 99.5601183], [7.7977833, 99.5582267], [7.798565, 99.5554483], [7.79914, 99.5540833], [7.799525, 99.5525833], [7.7998917, 99.5514533], [7.800425, 99.5491517], [7.8003467, 99.5489533], [7.80007, 99.5489067], [7.7998367, 99.5489467]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([7.572312, 99.612708], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/bike.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>トラン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=7.572312,99.612708' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>

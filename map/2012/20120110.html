@@ -19,7 +19,7 @@
 </head>
 <body>
 <div id='map'></div>
-<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2012年01月10日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://assets.st-note.com/production/uploads/images/253196613/rectangle_large_type_2_de6cbc8c5bc9defab5e76247a8311a5c.jpeg?width=1280' title='出発点'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2012年01月10日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' title='出発地'></div>
 </div>
 <script>
 var map = L.map('map');
@@ -38,7 +38,7 @@ var pathPoints = [[7.572376666666667, 99.61272833333334], [7.572331666666667, 99
                     iconAnchor: [15, 30],
                     popupAnchor: [0, -30]
                 });
-markers[0] = L.marker([7.572377, 99.612728], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://note.com/raplom/n/nf8f13d81999f' target='_blank'><img src='https://assets.st-note.com/production/uploads/images/253196613/rectangle_large_type_2_de6cbc8c5bc9defab5e76247a8311a5c.jpeg?width=1280' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発点</h3><div style='color:#666; font-size:1.1em;'>トラン</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>トラン ⇔ パタニー</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=7.572377,99.612728' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[0] = L.marker([7.572377, 99.612728], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/bike.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>トラン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=7.572377,99.612728' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
 
 
 if (pathPoints.length > 0) {
