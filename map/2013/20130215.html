@@ -39,8 +39,14 @@ var pathPoints = [[4.85095, 100.7409983], [4.8512983, 100.7405933], [4.8513033, 
                     iconAnchor: [15, 30],
                     popupAnchor: [0, -30]
                 });
-markers[0] = L.marker([4.85095, 100.740998], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/bike.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>タイピン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=4.85095,100.740998' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
-markers[1] = L.marker([7.564873, 99.60507], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/bike.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>帰宅</h3><div style='color:#666; font-size:1.1em;'>トラン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=7.564873,99.60507' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+                var icon_end_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/end.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([4.85095, 100.740998], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/bike.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>タイピン, マレーシア</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=4.85095,100.740998' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([7.564873, 99.60507], {icon: icon_end_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/bike.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>帰宅</h3><div style='color:#666; font-size:1.1em;'>トラン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=7.564873,99.60507' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
 
 
 if (pathPoints.length > 0) {
