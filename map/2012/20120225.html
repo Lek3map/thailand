@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2012年02月25日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2012年02月25日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2012年02月25日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' title='出発地'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[6.624675, 100.067925], [6.625698333333333, 100.06811166666667], [6.62679, 100.068325], [6.627945, 100.068525], [6.628768333333333, 100.068685], [6.6288366666666665, 100.0687], [6.631493333333333, 100.06954666666667], [6.63275, 100.07003333333333], [6.634, 100.07048333333333], [6.635235, 100.07091166666666], [6.636538333333333, 100.07135166666667], [6.637875, 100.07184166666667], [6.639236666666667, 100.07223333333333], [6.640603333333333, 100.072635], [6.64183, 100.07295], [6.6419250000000005, 100.07297333333334], [6.643185, 100.07332], [6.644065, 100.07351], [6.645481666666667, 100.07385], [6.6469716666666665, 100.07421833333333], [6.648453333333333, 100.07458666666666], [6.649933333333333, 100.07493833333334], [6.650996666666667, 100.07520333333333], [6.652428333333333, 100.075555], [6.653501666666667, 100.075835], [6.6535633333333335, 100.07587], [6.65355, 100.075885], [6.65415, 100.07602833333333], [6.655475, 100.07640166666667], [6.656853333333333, 100.07674833333333], [6.658335, 100.07699], [6.659881666666667, 100.07693333333333], [6.6604383333333335, 100.07687333333334], [6.660528333333334, 100.076855], [6.660561666666666, 100.07696833333334], [6.660585, 100.076985], [6.66057, 100.07693166666667], [6.6605799999999995, 100.07691333333334], [6.660558333333333, 100.076965], [6.660546666666667, 100.07759833333333], [6.660526666666667, 100.078275], [6.660558333333333, 100.07915666666666], [6.66062, 100.07958166666667], [6.660691666666667, 100.079995], [6.661215, 100.08008666666667], [6.66179, 100.08006833333333], [6.662303333333333, 100.07993166666667], [6.662686666666667, 100.07989666666667], [6.662895, 100.07986666666666], [6.662933333333333, 100.07983], [6.6629249999999995, 100.07984833333333], [6.662991666666667, 100.079835], [6.663045, 100.07982833333334], [6.6629933333333335, 100.07981166666667], [6.662945, 100.07982833333334], [6.662866666666667, 100.07985], [6.662931666666667, 100.07983]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([6.624675, 100.067925], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/bike.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>サトゥン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=6.624675,100.067925' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>

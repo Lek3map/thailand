@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2012年02月24日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2012年02月24日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2012年02月24日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh5.googleusercontent.com/-Hq9tfN05XxY/T0sCvkbTHzI/AAAAAAAADv0/wKFCOwFHZs4/s680/120224050.jpg' title='International Kite Festival'></div>
+<div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lh4.googleusercontent.com/-lPaUXP_r7kA/T0sBFxn96dI/AAAAAAAADrI/tIUdfy8uoE0/s680/120224006.jpg' title='Wat Chanathip Chaloem'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[6.618135, 100.0668717], [6.61922, 100.0670383], [6.62038, 100.067225], [6.6212683, 100.0673633], [6.6219317, 100.067485], [6.6230467, 100.0675983], [6.624215, 100.067735], [6.6253667, 100.0679367], [6.6265183, 100.0680833], [6.62763, 100.0682383], [6.62878, 100.0683533], [6.63002, 100.0688117], [6.63122, 100.0692733], [6.6324517, 100.0697633], [6.6336883, 100.0702133], [6.6348017, 100.07062], [6.6360033, 100.0709783], [6.6372217, 100.0713367], [6.638155, 100.0717083], [6.639345, 100.072095], [6.6403433, 100.072495], [6.641585, 100.072855], [6.6425783, 100.0730833], [6.6431, 100.073185], [6.6433333, 100.073225], [6.6441117, 100.0734317], [6.6451317, 100.07371], [6.6462267, 100.0740067], [6.6473567, 100.0742317], [6.6485467, 100.0744917], [6.6498417, 100.0748983], [6.6515933, 100.07538], [6.653085, 100.0757583], [6.6535333, 100.0758433], [6.6535033, 100.0758683], [6.6545917, 100.076205], [6.6562217, 100.0767], [6.6578583, 100.0769733], [6.6595567, 100.0769067], [6.6604767, 100.076855], [6.6604767, 100.0771917], [6.6605117, 100.0780117], [6.6604967, 100.0787283], [6.6605267, 100.0792667], [6.6605667, 100.0795817], [6.6606083, 100.079865], [6.66061, 100.0799383], [6.660585, 100.0799283], [6.66055, 100.0798683], [6.66056, 100.0798867], [6.66059, 100.0799533], [6.6606183, 100.0800383], [6.66066, 100.0801083], [6.6606567, 100.08004], [6.6606367, 100.0800017], [6.6605983, 100.0798983], [6.6606133, 100.0800283], [6.66063, 100.0801567], [6.66063, 100.0801767], [6.660635, 100.0801367], [6.6606317, 100.08008], [6.6606117, 100.0799467], [6.6605817, 100.0798317], [6.660545, 100.0797617], [6.6605333, 100.0797633], [6.6605267, 100.0797933], [6.6605517, 100.079865], [6.6105, 100.0646583], [6.610855, 100.0645217], [6.6108767, 100.0645033], [6.6109517, 100.0645333], [6.6109833, 100.0645967], [6.610975, 100.06463], [6.610995, 100.0646667], [6.611095, 100.0646683], [6.6111617, 100.0647683], [6.6111867, 100.0647867], [6.6110767, 100.0646867], [6.6110333, 100.06457], [6.6110033, 100.0645033], [6.6109933, 100.0645], [6.6109433, 100.0645283], [6.6109083, 100.0645117], [6.61083, 100.0644933], [6.6107833, 100.0645017], [6.610865, 100.0644], [6.6108833, 100.0644167], [6.6108883, 100.0644433], [6.6108433, 100.0644717], [6.6108267, 100.0645183], [6.610865, 100.0645283], [6.6107333, 100.0645867], [6.6105567, 100.064705], [6.6105867, 100.0647117], [6.6105233, 100.064565], [6.6104317, 100.0645033], [6.6104733, 100.0644983], [6.610655, 100.06442], [6.6107017, 100.064305], [6.6106417, 100.06439], [6.6106633, 100.0644567], [6.610685, 100.0644483], [6.6107567, 100.0644417], [6.6108383, 100.06449], [6.6110483, 100.0644583], [6.61111, 100.06439], [6.6111583, 100.0643617], [6.6110967, 100.06418], [6.6111033, 100.0640967], [6.6110467, 100.0641717], [6.6110067, 100.0642833], [6.6110267, 100.0642983], [6.6109867, 100.064355], [6.61098, 100.064455], [6.6109483, 100.064455], [6.610845, 100.0644333], [6.6107433, 100.0644017], [6.610695, 100.06431], [6.6106633, 100.0642583], [6.6106283, 100.06422], [6.6106333, 100.0641967], [6.6106667, 100.06422], [6.6106183, 100.0642217], [6.61058, 100.0642317], [6.6105633, 100.0642833], [6.6105583, 100.0643], [6.610565, 100.0643283], [6.6105767, 100.0643067], [6.61059, 100.064305], [6.61059, 100.064345], [6.6106083, 100.0643483], [6.610655, 100.0642083], [6.6107817, 100.0642267]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_matsuri_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/matsuri.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_tera_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/tera.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([6.618135, 100.066872], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/bike.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>サトゥン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=6.618135,100.066872' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([6.660984, 100.079055], {icon: icon_matsuri_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/U7QXt1p45DbjOA3W2' target='_blank'><img src='https://lh5.googleusercontent.com/-Hq9tfN05XxY/T0sCvkbTHzI/AAAAAAAADv0/wKFCOwFHZs4/s680/120224050.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>International Kite Festival</h3><div style='color:#666; font-size:1.1em;'>サトゥン</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>国際凧揚げ大会</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=6.660984,100.079055' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[2] = L.marker([6.610979, 100.064324], {icon: icon_tera_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/j8RQzmkdeeenCwm78' target='_blank'><img src='https://lh4.googleusercontent.com/-lPaUXP_r7kA/T0sBFxn96dI/AAAAAAAADrI/tIUdfy8uoE0/s680/120224006.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Wat Chanathip Chaloem</h3><div style='color:#666; font-size:1.1em;'>サトゥン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=6.610979,100.064324' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>
