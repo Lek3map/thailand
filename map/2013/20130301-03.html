@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        body { margin:0; display:flex; height:100vh; font-family:sans-serif; }
+        #map { flex:1; }
+        #side { width:240px; background:#2c3e50; color:white; overflow-y:auto; border-left:1px solid #000; }
+        .map-title { background:#1a252f; padding:15px 10px; font-size:16px; font-weight:bold; color:#fff; border-bottom:2px solid #3498db; }   #タイトル文字 18
+        .section-title { background:#34495e; padding:8px 10px; font-size:18px; font-weight:bold; color:#bdc3c7; border-top:1px solid #1a252f; }
+        .row { padding:2px 12px; border-bottom:1px solid #3e5871; font-size:16px; cursor:pointer; display:flex; align-items:center; }
+        .row:hover { background:#3e5871; }
+        .popup-box { width:300px; }
+        .popup-top { border-bottom:1px solid #ccc; padding-bottom:5px; margin-bottom:5px; }
+        .name-ja { font-size:20px; font-weight:bold; color:#000; display:block; }
+        .name-th { font-size:18px; color:#666; display:block; }
+        .popup-img { width:100%; height:auto; margin:5px 0; border:1px solid #ddd; display:block; }
+        .popup-bottom { font-size:16px; color:#333; line-height:1.5; }
+        .geo-info { font-size:14px; color:#888; margin-top:5px; border-top:1px dotted #ccc; padding-top:5px; }
+        .map-link { color: #3498db; text-decoration: none; font-weight: bold; }
+        .map-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div id="side">
+        <div class="map-title">国際凧揚げ大会＠サトゥン</div>
+        <div class="section-title">📅 日付別地点を表示</div>
+        <div id="date-list"></div>
+        <div class="section-title">🏍 走行軌跡を表示</div>
+        <div id="gpx-list"></div>
+    </div>
+    <script>
+        const map = L.map('map').setView([13.7, 100.5], 6);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        
+        const rData = [];
+        const pData = [{"date":"2013年03月01日","name":"国際凧揚げ大会","tname":"","img":"https://lh4.googleusercontent.com/-wy8IqsdoLwQ/UTE3kwArxmI/AAAAAAAAJDo/F4a5C2wmMLE/s680/130301009.jpg","pref":"サトゥン","des":"<p>動画 ： <a target=\"_blank\" href=\"https://youtu.be/5N7eZYsTJPc\">１日</a>　<a target=\"_blank\" href=\"https://youtu.be/HxSFZGKE7Y8\">２日</a></p>","cat":"祭り・イベント","lat":6.661427,"lng":100.080232,"album_url":"https://photos.app.goo.gl/I5XmIKPPh0zvvNt42"}];
+        const categoryMap = {"仏教寺院":"tera.png","中華寺院":"ctemp.png","回教寺院":"mosk.png","ヒンドゥ寺院":"hind.png","教会":"charch.png","ラク・ムアン":"lak.png","祈り・社・廟":"inori.png","空港":"plane.png","駅":"station.png","バスターミナル":"bus.png","桟橋":"fune.png","ウエルカムゲート":"gate.png","碑・石碑":"sekihi.png","博物館、～館":"yakata.png","遺跡":"iseki.png","洞窟":"tam.png","ダム":"dam.png","温泉":"onsen.png","郵便局":"postbox.png","モニュメント":"monument.png","時計台":"clock.png","街灯":"gaitou.png","道路標識":"hyoushiki.png","公園・～園":"parks.png","祭り・イベント":"matsuri.png","海・海岸":"beach.png","景勝地・物":"starr.png","市場":"market.png","国境":"border.png","噴水":"funsui.png","その他":"other.png","スタート":"start.png","墓":"hakab.png","ゴール":"end.png"};
+        const ICON_BASE = "https://lek3map.github.io/thailand/icon/";
+        const IMAGE_BASE = "https://lek3map.github.io/thailand/photo/";
+        
+        let fg = L.featureGroup().addTo(map);
+
+        function refresh() {
+            fg.clearLayers();
+            const checked = Array.from(document.querySelectorAll('.cb:checked')).map(c => c.value);
+            rData.forEach(r => { if(checked.includes("GPX_" + r.name)) L.polyline(r.pts, {color:'red', weight:3, opacity:0.7}).addTo(fg); });
+            pData.forEach(p => {
+                if(checked.includes("DATE_" + p.date)) {
+                    let iconFile = "";
+                    for(let k in categoryMap) { if((p.cat||"").includes(k) || (p.name||"").includes(k)) { iconFile=categoryMap[k]; break; } }
+                    let opt = iconFile ? { icon: L.icon({ iconUrl: ICON_BASE + iconFile, iconSize:[32,32], iconAnchor:[16,32], popupAnchor:[0,-32] }) } : {};
+                    
+                    let imgHtml = "";
+                    if(p.img) {
+                        const imgPath = (String(p.img).startsWith('http')) ? p.img : IMAGE_BASE + p.img;
+                        // アルバムURL(Excelの最後列の値)があればそちらを。なければ画像へ。
+                        const linkUrl = p.album_url || imgPath;
+                        imgHtml = '<a href="' + linkUrl + '" target="_blank"><img src="' + imgPath + '" class="popup-img" onerror="this.style.display=\'none\'"></a>';
+                    }
+
+                    const gmapUrl = "https://www.google.com/maps?q=" + p.lat + "," + p.lng;
+                    let html = '<div class="popup-box">' +
+                               '<div class="popup-top"><span class="name-ja">' + (p.name||"") + '</span>' + (p.tname ? '<span class="name-th">' + p.tname + '</span>' : '') + '</div>' +
+                               imgHtml +
+                               '<div class="popup-bottom">' + (p.pref ? '<b>県名:</b> ' + p.pref + '<br>' : '') + '<b>説明:</b> ' + (p.des || "-") + '</div>' +
+                               '<div class="geo-info"><a href="' + gmapUrl + '" target="_blank" class="map-link">📍 ' + p.lat.toFixed(5) + ', ' + p.lng.toFixed(5) + ' (Googleマップ)</a></div></div>';
+                    L.marker([p.lat, p.lng], opt).addTo(fg).bindPopup(html);
+                }
+            });
+            if(fg.getLayers().length > 0) map.fitBounds(fg.getBounds(), {padding:[30,30]});
+        }
+        const sortedDates = [...new Set(pData.map(p => p.date))].sort();
+        function addRow(container, id, label, isFirst) {
+            const d = document.createElement('div'); d.className='row';
+            const checked = isFirst ? 'checked' : '';
+            d.innerHTML = '<input type="checkbox" class="cb" value="'+id+'" '+checked+' style="margin-right:10px;"> <span>' + label + '</span>';
+            d.onclick = (e) => { if(e.target.tagName !== "INPUT") { const c=d.querySelector('.cb'); c.checked=!c.checked; } refresh(); };
+            container.appendChild(d);
+        }
+        sortedDates.forEach((d, i) => addRow(document.getElementById('date-list'), "DATE_"+d, d, i===0));
+        rData.forEach((r, i) => addRow(document.getElementById('gpx-list'), "GPX_"+r.name, r.name, i===0));
+        refresh();
+    </script>
+</body>
+</html>
