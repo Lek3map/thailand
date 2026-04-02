@@ -19,7 +19,8 @@
 </head>
 <body>
 <div id='map'></div>
-<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2012年03月18日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://assets.st-note.com/production/uploads/images/260935078/rectangle_large_type_2_69bf3c7bc630fd2f21f80f52a1920c15.jpeg' title='出発点'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2012年03月18日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh3.googleusercontent.com/pw/AP1GczPI_QpgqAuefKBepznjaQabvDznCFumoDki6M-WGutEXiN4MgUQoV0HUMw97NSFgtEpY3TayPL3mFEKCM2YQROs63LOpZBFa3_22CF2oSJB6ClPEFM-Ceu5q0w2_0jcd6ldqxGtKryPi5kyVUD-ucbkWg=w1159-h869-s-no-gm?authuser=0' title='パンク修理'></div>
 </div>
 <script>
 var map = L.map('map');
@@ -38,7 +39,14 @@ var pathPoints = [[16.2995017, 104.16816], [16.29946, 104.1681967], [16.2995183,
                     iconAnchor: [15, 30],
                     popupAnchor: [0, -30]
                 });
-markers[0] = L.marker([16.299502, 104.16816], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://note.com/raplom/n/n98a2f6a9fddc' target='_blank'><img src='https://assets.st-note.com/production/uploads/images/260935078/rectangle_large_type_2_69bf3c7bc630fd2f21f80f52a1920c15.jpeg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発点</h3><div style='color:#666; font-size:1.1em;'>ロイエット</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>イサーン＋の旅、ナコンパトムまでバイクを鉄道で送りそこから出発</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=16.299502,104.16816' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+                var icon_bikered_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/bikered.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([16.299502, 104.16816], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/bike.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>ロイエット</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=16.299502,104.16816' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([16.094341, 103.783343], {icon: icon_bikered_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lh3.googleusercontent.com/pw/AP1GczPI_QpgqAuefKBepznjaQabvDznCFumoDki6M-WGutEXiN4MgUQoV0HUMw97NSFgtEpY3TayPL3mFEKCM2YQROs63LOpZBFa3_22CF2oSJB6ClPEFM-Ceu5q0w2_0jcd6ldqxGtKryPi5kyVUD-ucbkWg=w1159-h869-s-no-gm?authuser=0' target='_blank'><img src='https://lh3.googleusercontent.com/pw/AP1GczPI_QpgqAuefKBepznjaQabvDznCFumoDki6M-WGutEXiN4MgUQoV0HUMw97NSFgtEpY3TayPL3mFEKCM2YQROs63LOpZBFa3_22CF2oSJB6ClPEFM-Ceu5q0w2_0jcd6ldqxGtKryPi5kyVUD-ucbkWg=w1159-h869-s-no-gm?authuser=0' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>パンク修理</h3><div style='color:#666; font-size:1.1em;'>ロイエット</div><div style='font-size:1.1em; color:#333; margin:10px 0;'><p><a target='_blank' href='https://note.com/raplom/n/n55be3b78d7c7'>no+e</a></p></div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=16.094341,103.783343' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
 
 
 if (pathPoints.length > 0) {
