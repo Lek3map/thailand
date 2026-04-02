@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2013年12月21日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2013年12月21日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2013年12月21日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh4.googleusercontent.com/-X5sckbN0lFU/UrWNHeUlvKI/AAAAAAAAOqY/l84uzIZ29PE/s680/131221002.jpg' title='Wat Pa Wiwek Tham'></div>
+<div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lh4.googleusercontent.com/-6HU4vlXMbjI/UreVzGQsk4I/AAAAAAAAO-I/R9iebHBLiDY/s680/131221089.jpg' title='Wat Phochai Song Yang'></div>
+<div class='photo-thumb' onclick='moveToMarker(3)'><img src='https://lh4.googleusercontent.com/-eZNp2fGzkoA/UrV8Byfjo_I/AAAAAAAAOiQ/JOAxKZlTRdQ/s680/131221008.jpg' title='Non Sao Ae Or Bot Rang'></div>
+<div class='photo-thumb' onclick='moveToMarker(4)'><img src='https://lh6.googleusercontent.com/-SP2y8MYuSzk/UreVIQAhmfI/AAAAAAAAO8E/z_7Ze63hGc8/s680/131221024.jpg' title='Wat Don Ku'></div>
+<div class='photo-thumb' onclick='moveToMarker(5)'><img src='https://lh4.googleusercontent.com/-sWisd8a9LxI/UrWFkTPROoI/AAAAAAAAOk0/tTfXMEa3enQ/s680/131221060.jpg' title='Phra That Yakhu'></div>
+<div class='photo-thumb' onclick='moveToMarker(6)'><img src='https://lh3.googleusercontent.com/-WuAPXhuWmP0/UrWO43sSwAI/AAAAAAAAOsQ/36QJ5p7rtx4/s680/131221043.jpg' title='Wat Pho Chai Semaram'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[16.2903583, 103.5338467], [16.2903383, 103.5335967], [16.2903267, 103.5335783], [16.2901383, 103.5337], [16.289965, 103.5335333], [16.28995, 103.5335117], [16.2899067, 103.5336767], [16.2896833, 103.5337983], [16.2897233, 103.53375], [16.2897783, 103.5336917], [16.2897517, 103.5337117], [16.2897467, 103.5337433], [16.2897333, 103.5337617], [16.2897367, 103.533745], [16.2896767, 103.53375], [16.289705, 103.53377], [16.2897283, 103.53378], [16.2897383, 103.533785], [16.28975, 103.53379], [16.2896733, 103.53379], [16.2894667, 103.5337417], [16.2893617, 103.5336667], [16.289375, 103.5336667], [16.289515, 103.5336483], [16.2896017, 103.5335867], [16.289585, 103.533585], [16.2896267, 103.53356], [16.2896117, 103.53359], [16.2896133, 103.53365], [16.27963, 103.4944683], [16.27954, 103.4944583], [16.2795383, 103.49445], [16.2795467, 103.4944517], [16.2793167, 103.4945217], [16.2791483, 103.49473], [16.2791533, 103.4947683], [16.2792217, 103.4947483], [16.279275, 103.4947483], [16.2792883, 103.4946867], [16.2793167, 103.4947433], [16.2793417, 103.4947683], [16.2792283, 103.4947617], [16.279285, 103.4948133], [16.2793017, 103.4948967], [16.279245, 103.4948583], [16.2791917, 103.494865], [16.2791933, 103.4948683], [16.279355, 103.4950133], [16.27931, 103.4950083], [16.2791833, 103.4951333], [16.2791317, 103.4951333], [16.2791233, 103.4951067], [16.2791383, 103.4950967], [16.2791617, 103.4950967], [16.2791467, 103.4950283], [16.278985, 103.495045], [16.279, 103.495115], [16.2788783, 103.4950267], [16.2788117, 103.49504], [16.278755, 103.4950417], [16.2788267, 103.49486], [16.278725, 103.4947767], [16.2787567, 103.4947833], [16.27876, 103.4948], [16.2786867, 103.4948017], [16.278575, 103.494735], [16.2785733, 103.4946167], [16.2786883, 103.4946583], [16.2786933, 103.4947367], [16.2787167, 103.49464], [16.2786633, 103.4946533], [16.2785767, 103.4945933], [16.2787183, 103.494575], [16.2787083, 103.4946017], [16.278685, 103.4946383], [16.278905, 103.49475], [16.2789983, 103.4947517], [16.2973233, 103.4942283], [16.2973417, 103.4942067], [16.297315, 103.4942083], [16.297345, 103.4941567], [16.2973533, 103.49409], [16.2973483, 103.494075], [16.297325, 103.494205], [16.2973417, 103.49421], [16.2974033, 103.4941067], [16.2974233, 103.4941333], [16.29743, 103.4941383], [16.2973817, 103.49417], [16.2973817, 103.4942017], [16.297385, 103.4941733], [16.2973617, 103.4941217], [16.297375, 103.4940167], [16.297265, 103.4938867], [16.2972817, 103.493755], [16.29735, 103.4936867], [16.2972083, 103.4936967], [16.2970567, 103.493665], [16.296965, 103.493645], [16.29698, 103.4936367], [16.2971117, 103.4937567], [16.2971667, 103.4938433], [16.2972083, 103.4939417], [16.2971533, 103.4940767], [16.2972583, 103.4941867], [16.2973, 103.494285], [16.2973033, 103.494235], [16.2974433, 103.4942167], [16.2974033, 103.4942133], [16.314845, 103.5184533], [16.3150417, 103.5185117], [16.31511, 103.5185367], [16.31517, 103.518525], [16.315275, 103.5184817], [16.31531, 103.5184417], [16.315275, 103.518445], [16.3153367, 103.5184733], [16.3154733, 103.5185917], [16.31557, 103.5187267], [16.3155683, 103.5188383], [16.3155883, 103.5188583], [16.31538, 103.5189133], [16.3153167, 103.5189217], [16.31527, 103.5189033], [16.31515, 103.5189067], [16.3151117, 103.519045], [16.3150217, 103.519045], [16.3149867, 103.5190867], [16.315005, 103.51906], [16.3150517, 103.5189833], [16.3150383, 103.5189417], [16.31505, 103.51892], [16.3150267, 103.51891], [16.315005, 103.5188267], [16.31499, 103.5188067], [16.31485, 103.5187617], [16.314785, 103.518825], [16.31469, 103.51878], [16.31469, 103.518845], [16.3146667, 103.5187933], [16.314615, 103.51882], [16.3146667, 103.51882], [16.3146983, 103.5187967], [16.3147267, 103.518845], [16.3147067, 103.518775], [16.31484, 103.518805], [16.3148867, 103.5187], [16.3150317, 103.5187133], [16.31506, 103.5185917], [16.3149983, 103.5185717], [16.314905, 103.5184667], [16.3148583, 103.5184], [16.3149533, 103.5184967], [16.3150667, 103.5185467], [16.3150333, 103.51851], [16.3150567, 103.518555], [16.3150783, 103.5185267], [16.3151, 103.5184833], [16.315105, 103.5184667], [16.31509, 103.5185], [16.3150033, 103.51855], [16.3148817, 103.5186233], [16.3148917, 103.518595], [16.315195, 103.5189133], [16.3154533, 103.518995], [16.31611, 103.5191817], [16.3170683, 103.5193367], [16.3177183, 103.5193217], [16.31845, 103.5193617], [16.318815, 103.51958], [16.31874, 103.5198183], [16.3187533, 103.5199617], [16.3186633, 103.5200167], [16.31851, 103.519965], [16.3184083, 103.5199117], [16.3185033, 103.52002], [16.3185117, 103.5200233], [16.3185533, 103.5200183], [16.3185717, 103.520075], [16.31866, 103.5201767], [16.31873, 103.5202317], [16.3188117, 103.5202817], [16.31889, 103.520375], [16.318965, 103.5204317], [16.3189917, 103.5204117], [16.319135, 103.5204483], [16.3190567, 103.520485], [16.3190567, 103.520485], [16.3190317, 103.5205083], [16.3190017, 103.5204867], [16.3191417, 103.5204883], [16.31915, 103.520505], [16.3191817, 103.520505], [16.3192583, 103.5204033], [16.3193117, 103.5202067], [16.3194133, 103.5200933], [16.3194717, 103.5200533], [16.31943, 103.52005], [16.3194083, 103.5200283], [16.3193717, 103.5200517], [16.3193867, 103.5200067], [16.31931, 103.5198083], [16.3193217, 103.5198167], [16.3192867, 103.5198017], [16.31932, 103.5197917], [16.3192917, 103.5198033], [16.319245, 103.5198133], [16.31931, 103.5199417], [16.3192033, 103.5199833], [16.3190633, 103.5199833], [16.3189417, 103.519985], [16.318835, 103.5200367], [16.31889, 103.5200617], [16.3188017, 103.520125], [16.3188683, 103.5201283], [16.3188317, 103.5201733], [16.3188283, 103.5201783], [16.3188467, 103.5202083], [16.31889, 103.52021], [16.3188017, 103.5202383], [16.3187133, 103.520205], [16.3186267, 103.5200633], [16.318515, 103.5199717], [16.3186767, 103.5194417], [16.3184467, 103.519755], [16.3184517, 103.51976], [16.3184133, 103.5197633], [16.3184183, 103.519775], [16.31852, 103.5197767], [16.3185633, 103.5198117], [16.3185517, 103.5198883], [16.3184683, 103.5199283], [16.3183717, 103.5199533], [16.3184033, 103.5199633], [16.318505, 103.519925], [16.318735, 103.51992], [16.31882, 103.5199133], [16.2998083, 103.5288333], [16.2997933, 103.5288983], [16.299765, 103.5290017], [16.2997717, 103.5289867], [16.29977, 103.5289133], [16.299775, 103.5288717], [16.2997217, 103.52885], [16.299715, 103.5288933], [16.2997917, 103.528895], [16.299985, 103.5290083], [16.2998633, 103.528865], [16.2999367, 103.5288], [16.2999, 103.5287417], [16.2999417, 103.52879], [16.2997317, 103.5288067], [16.2997733, 103.5287667], [16.2997683, 103.5287233], [16.2997467, 103.5287067], [16.2996933, 103.5286583], [16.2997183, 103.5287183], [16.299725, 103.5288733], [16.2996867, 103.5288283], [16.29968, 103.5288083], [16.299675, 103.52873], [16.2995433, 103.528685], [16.2994217, 103.5288083], [16.2993367, 103.5288583], [16.2993517, 103.5288617], [16.29937, 103.5288783], [16.2994917, 103.528645], [16.29968, 103.5287], [16.2997717, 103.528855], [16.2998217, 103.5288683], [16.2998183, 103.5288283], [16.2996667, 103.5285433], [16.2993917, 103.5283867], [16.29927, 103.5282783], [16.2992483, 103.52831], [16.2992417, 103.5283183], [16.29924, 103.5283333]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_tera_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/tera.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_starr_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/starr.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_iseki_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/iseki.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([16.290358, 103.533847], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/bike.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>カラシン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=16.290358,103.533847' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([16.289362, 103.533682], {icon: icon_tera_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/ctvFs4UauowboAhP9' target='_blank'><img src='https://lh4.googleusercontent.com/-X5sckbN0lFU/UrWNHeUlvKI/AAAAAAAAOqY/l84uzIZ29PE/s680/131221002.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Wat Pa Wiwek Tham</h3><div style='color:#666; font-size:1.1em;'>カラシン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=16.289362,103.533682' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[2] = L.marker([16.299957, 103.528976], {icon: icon_tera_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/ZVnaigXB3kQMzjdd7' target='_blank'><img src='https://lh4.googleusercontent.com/-6HU4vlXMbjI/UreVzGQsk4I/AAAAAAAAO-I/R9iebHBLiDY/s680/131221089.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Wat Phochai Song Yang</h3><div style='color:#666; font-size:1.1em;'>カラシン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=16.299957,103.528976' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[3] = L.marker([16.278825, 103.494902], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/nZJKrCnYjm45BATu6' target='_blank'><img src='https://lh4.googleusercontent.com/-eZNp2fGzkoA/UrV8Byfjo_I/AAAAAAAAOiQ/JOAxKZlTRdQ/s680/131221008.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Non Sao Ae Or Bot Rang</h3><div style='color:#666; font-size:1.1em;'>カラシン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=16.278825,103.494902' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[4] = L.marker([16.297383, 103.494204], {icon: icon_iseki_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/3BKwNXxpLuQmY8re7' target='_blank'><img src='https://lh6.googleusercontent.com/-SP2y8MYuSzk/UreVIQAhmfI/AAAAAAAAO8E/z_7Ze63hGc8/s680/131221024.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Wat Don Ku</h3><div style='color:#666; font-size:1.1em;'>カラシン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=16.297383,103.494204' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[5] = L.marker([16.319141, 103.52019], {icon: icon_iseki_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/cocjQRQSTSJwQU6V7' target='_blank'><img src='https://lh4.googleusercontent.com/-sWisd8a9LxI/UrWFkTPROoI/AAAAAAAAOk0/tTfXMEa3enQ/s680/131221060.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Phra That Yakhu</h3><div style='color:#666; font-size:1.1em;'>カラシン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=16.319141,103.52019' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[6] = L.marker([16.315063, 103.518698], {icon: icon_iseki_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/HvJJehPp8bnWzSAJ8' target='_blank'><img src='https://lh3.googleusercontent.com/-WuAPXhuWmP0/UrWO43sSwAI/AAAAAAAAOsQ/36QJ5p7rtx4/s680/131221043.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Wat Pho Chai Semaram</h3><div style='color:#666; font-size:1.1em;'>カラシン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=16.315063,103.518698' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>
