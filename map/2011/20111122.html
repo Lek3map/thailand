@@ -19,7 +19,7 @@
 </head>
 <body>
 <div id='map'></div>
-<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2011年11月22日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://assets.st-note.com/production/uploads/images/251944631/rectangle_large_type_2_d6b13b40bcf5d4853ca72fcd85d6c8f2.jpeg?width=1280' title='出発点'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2011年11月22日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' title='出発地'></div>
 <div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh3.googleusercontent.com/-uBbvk_THKas/Tst9m0rk6WI/AAAAAAAADRQ/ps8RHT3V6Jo/s680/111122004.jpg' title='シンガポール日本人墓地'></div>
 <div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lh3.googleusercontent.com/-Qct-CuJze8g/TsuD6pCmCwI/AAAAAAAADTs/mQnGeQiGM5I/s680/111122047.jpg' title='寺内寿一の墓'></div>
 </div>
@@ -46,15 +46,9 @@ var pathPoints = [[1.424575, 103.7617733], [1.4246433, 103.7618033], [1.4248317,
                     iconAnchor: [15, 30],
                     popupAnchor: [0, -30]
                 });
-                var icon_default_png = L.icon({
-                    iconUrl: 'https://lek3map.github.io/thailand/icon/default.png',
-                    iconSize: [30, 30],
-                    iconAnchor: [15, 30],
-                    popupAnchor: [0, -30]
-                });
-markers[0] = L.marker([1.424575, 103.761773], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://note.com/raplom/n/nc515ebf2eb3c' target='_blank'><img src='https://assets.st-note.com/production/uploads/images/251944631/rectangle_large_type_2_d6b13b40bcf5d4853ca72fcd85d6c8f2.jpeg?width=1280' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発点</h3><div style='color:#666; font-size:1.1em;'>ジョホール</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>ジョホールバル ⇔ シンガポール 徒歩、地下鉄での移動でGPSログが取れてません</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=1.424575,103.761773' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[0] = L.marker([1.424575, 103.761773], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/aruki.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>シンガポール</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=1.424575,103.761773' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
 markers[1] = L.marker([1.365394, 103.876729], {icon: icon_hakab_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/bVhBXhgp9ZadeLYH9' target='_blank'><img src='https://lh3.googleusercontent.com/-uBbvk_THKas/Tst9m0rk6WI/AAAAAAAADRQ/ps8RHT3V6Jo/s680/111122004.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>シンガポール日本人墓地</h3><div style='color:#666; font-size:1.1em;'>シンガポール</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=1.365394,103.876729' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
-markers[2] = L.marker([1.365617, 103.877566], {icon: icon_default_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/cFHYNYeBRWiRhjnv9' target='_blank'><img src='https://lh3.googleusercontent.com/-Qct-CuJze8g/TsuD6pCmCwI/AAAAAAAADTs/mQnGeQiGM5I/s680/111122047.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>寺内寿一の墓</h3><div style='color:#666; font-size:1.1em;'>シンガポール</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=1.365617,103.877566' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[2] = L.marker([1.365617, 103.877566], {icon: icon_hakab_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/cFHYNYeBRWiRhjnv9' target='_blank'><img src='https://lh3.googleusercontent.com/-Qct-CuJze8g/TsuD6pCmCwI/AAAAAAAADTs/mQnGeQiGM5I/s680/111122047.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>寺内寿一の墓</h3><div style='color:#666; font-size:1.1em;'>シンガポール</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=1.365617,103.877566' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
 
 
 if (pathPoints.length > 0) {

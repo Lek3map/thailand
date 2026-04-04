@@ -19,7 +19,8 @@
 </head>
 <body>
 <div id='map'></div>
-<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2011年11月14日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://assets.st-note.com/production/uploads/images/251893342/rectangle_large_type_2_cf86296a4ce6c8c15a380f5c6c71c351.jpeg?width=1280' title='出発点'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2011年11月14日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh3.googleusercontent.com/pw/AP1GczPYrkrzsoyI7fencr3cyAifFsIhw_GR9SWRULjwiV5Gg50FUE0nLA9dz3N85UpP8uaS0uWh8JuwJvqDp5TRrXt0YxMO5b4WMt2udYprAD2_Lk-02RhTj3WG6SvVjtd3aUnlU_LhETxUeMH0qSTg56ZKbw=w1164-h873-s-no-gm?authuser=0' title='出発です'></div>
 </div>
 <script>
 var map = L.map('map');
@@ -38,7 +39,14 @@ var pathPoints = [[7.5724017, 99.6127133], [7.5723667, 99.6127617], [7.572365, 9
                     iconAnchor: [15, 30],
                     popupAnchor: [0, -30]
                 });
-markers[0] = L.marker([7.572402, 99.612713], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://note.com/raplom/n/ne76372531121' target='_blank'><img src='https://assets.st-note.com/production/uploads/images/251893342/rectangle_large_type_2_cf86296a4ce6c8c15a380f5c6c71c351.jpeg?width=1280' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発点</h3><div style='color:#666; font-size:1.1em;'>トラン</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>タイ深南部には渡航注意が出ているので、苦肉の策としてマレーシアから入る事にしました、タイ全県走破はこの旅にかかっています。</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=7.572402,99.612713' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+                var icon_bikered_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/bikered.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([7.572402, 99.612713], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/bike.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>トラン</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>マレー半島日本人墓地巡りに出発です</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=7.572402,99.612713' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([7.572361, 99.612944], {icon: icon_bikered_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lh3.googleusercontent.com/pw/AP1GczPYrkrzsoyI7fencr3cyAifFsIhw_GR9SWRULjwiV5Gg50FUE0nLA9dz3N85UpP8uaS0uWh8JuwJvqDp5TRrXt0YxMO5b4WMt2udYprAD2_Lk-02RhTj3WG6SvVjtd3aUnlU_LhETxUeMH0qSTg56ZKbw=w1164-h873-s-no-gm?authuser=0' target='_blank'><img src='https://lh3.googleusercontent.com/pw/AP1GczPYrkrzsoyI7fencr3cyAifFsIhw_GR9SWRULjwiV5Gg50FUE0nLA9dz3N85UpP8uaS0uWh8JuwJvqDp5TRrXt0YxMO5b4WMt2udYprAD2_Lk-02RhTj3WG6SvVjtd3aUnlU_LhETxUeMH0qSTg56ZKbw=w1164-h873-s-no-gm?authuser=0' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発です</h3><div style='color:#666; font-size:1.1em;'>トラン</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>今日はハジャイ泊まり</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=7.572361,99.612944' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
 
 
 if (pathPoints.length > 0) {

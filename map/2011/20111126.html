@@ -19,7 +19,10 @@
 </head>
 <body>
 <div id='map'></div>
-<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2011年11月26日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://assets.st-note.com/production/uploads/images/251893342/rectangle_large_type_2_cf86296a4ce6c8c15a380f5c6c71c351.jpeg?width=1280' title='出発点'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2011年11月26日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/100ccmalay.jpg
+' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh3.googleusercontent.com/pw/AP1GczODdgql46kBWx_J3pDg14EWHEaiKzDHQ1qB2qvxsQhJe25BZ4Ra-ILV8styJvfnVQzZMyTQBJinMrcwXsEXE0hCASfuW-FJoR2Sk9HmW2I3zfgLPFObYwhhLM03FeAFIh1M_YXpct3hBREC0UNWK8VW1A=w1159-h869-s-no-gm?authuser=0' title='ベトン'></div>
+<div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' title='出発地'></div>
 </div>
 <script>
 var map = L.map('map');
@@ -38,7 +41,15 @@ var pathPoints = [[6.128001666666667, 102.24051833333333], [6.127953333333333, 1
                     iconAnchor: [15, 30],
                     popupAnchor: [0, -30]
                 });
-markers[0] = L.marker([6.128002, 102.240518], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://note.com/raplom/n/nab65529dcc72' target='_blank'><img src='https://assets.st-note.com/production/uploads/images/251893342/rectangle_large_type_2_cf86296a4ce6c8c15a380f5c6c71c351.jpeg?width=1280' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発点</h3><div style='color:#666; font-size:1.1em;'>コタバル</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>今日タイ、ベトンから一時タイ国領に入る為マレー半島を横断するのですが、洪水の為、大きく迂回をさせられました</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=6.128002,102.240518' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+                var icon_bikered_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/bikered.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([6.128002, 102.240518], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/bike.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>コタバル</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=6.128002,102.240518' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([5.747689, 101.028443], {icon: icon_bikered_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lh3.googleusercontent.com/pw/AP1GczODdgql46kBWx_J3pDg14EWHEaiKzDHQ1qB2qvxsQhJe25BZ4Ra-ILV8styJvfnVQzZMyTQBJinMrcwXsEXE0hCASfuW-FJoR2Sk9HmW2I3zfgLPFObYwhhLM03FeAFIh1M_YXpct3hBREC0UNWK8VW1A=w1159-h869-s-no-gm?authuser=0' target='_blank'><img src='https://lh3.googleusercontent.com/pw/AP1GczODdgql46kBWx_J3pDg14EWHEaiKzDHQ1qB2qvxsQhJe25BZ4Ra-ILV8styJvfnVQzZMyTQBJinMrcwXsEXE0hCASfuW-FJoR2Sk9HmW2I3zfgLPFObYwhhLM03FeAFIh1M_YXpct3hBREC0UNWK8VW1A=w1159-h869-s-no-gm?authuser=0' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>ベトン</h3><div style='color:#666; font-size:1.1em;'>ペラ</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>洪水の為大分迂回せざるを得なかったが、どうにかベトンに到着出来そう</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=5.747689,101.028443' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[2] = L.marker([5.747611, 101.028528], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/bike.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>ベトン</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>ベトンの街に向かいます</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=5.747611,101.028528' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
 
 
 if (pathPoints.length > 0) {
