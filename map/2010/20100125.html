@@ -20,7 +20,7 @@
 <body>
 <div id='map'></div>
 <div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2010年01月25日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' title='出発地'></div>
-<div class='photo-thumb' onclick='moveToMarker(1)'><img src='http://lh5.ggpht.com/_M674G_dhxK8/TADf59j9akI/AAAAAAAABeo/bWf9WtU7wL4/s680/100125005.jpg' title='Trang Station'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh3.googleusercontent.com/pw/AP1GczPLDmESjk4qzFO6idT6TJFWiPL8zsGH-INxbsxi4kr_DP0MDlHj5u34agmQAxG8eVwNqsS7Pt9CrjjF91paHpUZpDzXE7WZDA-5kLoRF0cxt0ZnHvRLO9acnEUG98os79ZpXLgtvnOFdGRPI5xIiHQLKQ=w1159-h869-s-no-gm?authuser=0' style='width:100%; border-radius:4px;' title='Trang Station'></div>
 </div>
 <script>
 var map = L.map('map');
@@ -46,7 +46,7 @@ var pathPoints = [[7.572326666666667, 99.61248166666667], [7.572328333333333, 99
                     popupAnchor: [0, -30]
                 });
 markers[0] = L.marker([7.572327, 99.612482], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/bike.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>トラン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=7.572327,99.612482' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
-markers[1] = L.marker([7.554513, 99.604846], {icon: icon_station_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='http://lh5.ggpht.com/_M674G_dhxK8/TADf59j9akI/AAAAAAAABeo/bWf9WtU7wL4/s1600/100125005.jpg' target='_blank'><img src='http://lh5.ggpht.com/_M674G_dhxK8/TADf59j9akI/AAAAAAAABeo/bWf9WtU7wL4/s680/100125005.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Trang Station</h3><div style='color:#666; font-size:1.1em;'>トラン</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>駅前には旅行代理店が並び、島へのアクセス、ホテル、交通機関などの手配が出来る。</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=7.554513,99.604846' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([7.554513, 99.604846], {icon: icon_station_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/uXvsyM29HriGdKUdA' target='_blank'><img src='https://lh3.googleusercontent.com/pw/AP1GczPLDmESjk4qzFO6idT6TJFWiPL8zsGH-INxbsxi4kr_DP0MDlHj5u34agmQAxG8eVwNqsS7Pt9CrjjF91paHpUZpDzXE7WZDA-5kLoRF0cxt0ZnHvRLO9acnEUG98os79ZpXLgtvnOFdGRPI5xIiHQLKQ=w1159-h869-s-no-gm?authuser=0' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Trang Station</h3><div style='color:#666; font-size:1.1em;'>トラン</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>駅前には旅行代理店が並び、島へのアクセス、ホテル、交通機関などの手配が出来る。</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=7.554513,99.604846' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
 
 
 if (pathPoints.length > 0) {
