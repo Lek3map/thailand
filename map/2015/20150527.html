@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2015年05月27日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2015年05月27日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2015年05月27日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://1.bp.blogspot.com/-Nc4gz-nr5JA/YMk55-EmEVI/AAAAAAAGqac/N4Igo-ezssAoh_bqer8MPnnIed0KvrgDwCLcBGAsYHQ/s680/150527009.jpg' title='ヴェルニー記念館'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://1.bp.blogspot.com/-hLZosodmvQs/YM6ExPpOH1I/AAAAAAAG8h4/IhgG4eyKLfwXZFxkyt781URuMum9IhoQACLcBGAsYHQ/s680/150527020.jpg' title='ヴェルニー像'></div>
+<div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://1.bp.blogspot.com/-A8wb2cZ7GMM/YU0xbweATcI/AAAAAAAIH8s/SSEHa7l9B5I9VNKeI6EiQHZkpY1ItbnCACLcBGAsYHQ/s680/150527019.jpg' title='小栗上野介忠順像'></div>
+<div class='photo-thumb' onclick='moveToMarker(3)'><img src='https://1.bp.blogspot.com/-aImXANMGv-w/YM6GEgmOMbI/AAAAAAAG8jo/Obe52t_u5WcjLma-6BboF7J0eWIs_9FCACLcBGAsYHQ/s680/150527021.jpg' title='記念石'></div>
+<div class='photo-thumb' onclick='moveToMarker(4)'><img src='https://lh3.googleusercontent.com/-E4xcvEs6xSU/VWWM9lciiRI/AAAAAAAAlRw/Tx9UpO5ZMoU/s680/150527023.jpg' title='開港碑'></div>
+<div class='photo-thumb' onclick='moveToMarker(5)'><img src='https://1.bp.blogspot.com/-PNlRVOazscI/YM6NLmWxnZI/AAAAAAAG8ss/N9H68tnZe3QwQVXZvIKcQQ_1z3c6SRnSQCLcBGAsYHQ/s680/150527030.jpg' title='軍艦山城の艦歴'></div>
+<div class='photo-thumb' onclick='moveToMarker(6)'><img src='https://1.bp.blogspot.com/-R2dvTtKArdg/YM6L71aZNeI/AAAAAAAG8rY/SdEbI630zSwAKMRAtjpgWekd4xHtI59uACLcBGAsYHQ/s680/150527032.jpg' title='国威顕彰'></div>
+<div class='photo-thumb' onclick='moveToMarker(7)'><img src='https://1.bp.blogspot.com/-CAKt_ZLwe_4/YM6L7z1BpUI/AAAAAAAG8rc/XpvbA6HFCRQJ-m7h_pktXiGC3I7tk88KgCLcBGAsYHQ/s680/150527033.jpg' title='軍艦長門碑'></div>
+<div class='photo-thumb' onclick='moveToMarker(8)'><img src='https://1.bp.blogspot.com/-vu_uYZJ7FSU/YM6NLrsSP8I/AAAAAAAG8sw/B0_qjKzJ5M4TmfRVdUKgmKCRhB3hXoitgCLcBGAsYHQ/s680/150527034.jpg' title='軍艦沖島の碑'></div>
+<div class='photo-thumb' onclick='moveToMarker(9)'><img src='https://1.bp.blogspot.com/-XBo8MK7f7ms/YM6OftsHxHI/AAAAAAAG8tc/qsHucrcXxUEQ4C7p75BMlKYTu3L23GtXACLcBGAsYHQ/s680/150527036.jpg' title='正岡子規の文学碑'></div>
+<div class='photo-thumb' onclick='moveToMarker(10)'><img src='https://lh3.googleusercontent.com/-BMicNBTp-Yw/VWWNYFN4qMI/AAAAAAAAlT0/WdH1-4XSHW4/s680/150527038.jpg' title='海軍の碑'></div>
+<div class='photo-thumb' onclick='moveToMarker(11)'><img src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjYDA1DNosGJM6J1p6jfZXRln6pP0CpsUrhRKJNXF7MAlbOxGXPKSKgdnJWEQT4HxDucULq1-BRxyNc560SBW_456hCs5N8aM_bg7WFEZjxXSGCZt9d8HcyRqp0oMJQlQB-JjsUqof8MUyDyUPEZEEGWLjNw_ZA6Q5XL8pdjP2XfZNftQiGTpmBIy3FZWXp/s680/150527050.jpg' title='めだかの学校歌碑'></div>
+<div class='photo-thumb' onclick='moveToMarker(12)'><img src='https://lh3.googleusercontent.com/-YQPRKA9e9bw/VWWMcRvEzjI/AAAAAAAAlPg/KFaIhUO0X58/s680/150527119.jpg' title='記念艦三笠'></div>
+<div class='photo-thumb' onclick='moveToMarker(13)'><img src='https://1.bp.blogspot.com/-nJ9U_lcq264/YL6YWmlFCJI/AAAAAAAGmM0/vEeu3ZeC6ewEZQUEkxPkmmadZEMZGooJwCLcBGAsYHQ/s680/150527057.jpg' title='東郷平八郎像'></div>
+<div class='photo-thumb' onclick='moveToMarker(14)'><img src='https://lh3.googleusercontent.com/-Lv1ax-UOOLU/VWWLSmrBxQI/AAAAAAAAlIg/qlSorTvE6JQ/s680/150527060.jpg' title='行進曲「軍艦」の碑'></div>
+<div class='photo-thumb' onclick='moveToMarker(15)'><img src='https://lh3.googleusercontent.com/-EGG25ZXjRvc/VWWLORB0OkI/AAAAAAAAlII/4Xn69XE3nyQ/s680/150527125.jpg' title='皇國興廃在此一戦'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [];
+
+
+                var icon_yakata_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/yakata.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_monument_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/monument.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_sekihi_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/sekihi.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([35.284684, 139.655964], {icon: icon_yakata_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://1.bp.blogspot.com/-Nc4gz-nr5JA/YMk55-EmEVI/AAAAAAAGqac/N4Igo-ezssAoh_bqer8MPnnIed0KvrgDwCLcBGAsYHQ/s2048/150527009.jpg' target='_blank'><img src='https://1.bp.blogspot.com/-Nc4gz-nr5JA/YMk55-EmEVI/AAAAAAAGqac/N4Igo-ezssAoh_bqer8MPnnIed0KvrgDwCLcBGAsYHQ/s680/150527009.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>ヴェルニー記念館</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市東逸見町１丁目</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.284684,139.655964' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([35.283625, 139.658166], {icon: icon_monument_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/oJ7dbhpXL35mUt8U6' target='_blank'><img src='https://1.bp.blogspot.com/-hLZosodmvQs/YM6ExPpOH1I/AAAAAAAG8h4/IhgG4eyKLfwXZFxkyt781URuMum9IhoQACLcBGAsYHQ/s680/150527020.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>ヴェルニー像</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市汐入町1丁目1-1</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.283625,139.658166' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[2] = L.marker([35.283675, 139.658118], {icon: icon_monument_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/PpFhYtmNwuycmnbk7' target='_blank'><img src='https://1.bp.blogspot.com/-A8wb2cZ7GMM/YU0xbweATcI/AAAAAAAIH8s/SSEHa7l9B5I9VNKeI6EiQHZkpY1ItbnCACLcBGAsYHQ/s680/150527019.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>小栗上野介忠順像</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市汐入町1丁目1-1</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.283675,139.658118' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[3] = L.marker([35.283545, 139.658325], {icon: icon_sekihi_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/wKj7uQZh34KHCCJ1A' target='_blank'><img src='https://1.bp.blogspot.com/-aImXANMGv-w/YM6GEgmOMbI/AAAAAAAG8jo/Obe52t_u5WcjLma-6BboF7J0eWIs_9FCACLcBGAsYHQ/s680/150527021.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>記念石</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市汐入町１丁目</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.283545,139.658325' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[4] = L.marker([35.283524, 139.658438], {icon: icon_sekihi_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/VvaeZvJZQ1767WT6A' target='_blank'><img src='https://lh3.googleusercontent.com/-E4xcvEs6xSU/VWWM9lciiRI/AAAAAAAAlRw/Tx9UpO5ZMoU/s680/150527023.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>開港碑</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市汐入町１丁目</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.283524,139.658438' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[5] = L.marker([35.282909, 139.660105], {icon: icon_sekihi_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://1.bp.blogspot.com/-PNlRVOazscI/YM6NLmWxnZI/AAAAAAAG8ss/N9H68tnZe3QwQVXZvIKcQQ_1z3c6SRnSQCLcBGAsYHQ/s2048/150527030.jpg' target='_blank'><img src='https://1.bp.blogspot.com/-PNlRVOazscI/YM6NLmWxnZI/AAAAAAAG8ss/N9H68tnZe3QwQVXZvIKcQQ_1z3c6SRnSQCLcBGAsYHQ/s680/150527030.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>軍艦山城の艦歴</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市汐入町１丁目</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.282909,139.660105' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[6] = L.marker([35.282955, 139.660092], {icon: icon_sekihi_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://1.bp.blogspot.com/-R2dvTtKArdg/YM6L71aZNeI/AAAAAAAG8rY/SdEbI630zSwAKMRAtjpgWekd4xHtI59uACLcBGAsYHQ/s2048/150527032.jpg' target='_blank'><img src='https://1.bp.blogspot.com/-R2dvTtKArdg/YM6L71aZNeI/AAAAAAAG8rY/SdEbI630zSwAKMRAtjpgWekd4xHtI59uACLcBGAsYHQ/s680/150527032.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>国威顕彰</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市汐入町１丁目</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.282955,139.660092' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[7] = L.marker([35.282959, 139.660102], {icon: icon_sekihi_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://1.bp.blogspot.com/-CAKt_ZLwe_4/YM6L7z1BpUI/AAAAAAAG8rc/XpvbA6HFCRQJ-m7h_pktXiGC3I7tk88KgCLcBGAsYHQ/s2048/150527033.jpg' target='_blank'><img src='https://1.bp.blogspot.com/-CAKt_ZLwe_4/YM6L7z1BpUI/AAAAAAAG8rc/XpvbA6HFCRQJ-m7h_pktXiGC3I7tk88KgCLcBGAsYHQ/s680/150527033.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>軍艦長門碑</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市汐入町１丁目</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.282959,139.660102' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[8] = L.marker([35.28289, 139.660099], {icon: icon_sekihi_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://1.bp.blogspot.com/-vu_uYZJ7FSU/YM6NLrsSP8I/AAAAAAAG8sw/B0_qjKzJ5M4TmfRVdUKgmKCRhB3hXoitgCLcBGAsYHQ/s1913/150527034.jpg' target='_blank'><img src='https://1.bp.blogspot.com/-vu_uYZJ7FSU/YM6NLrsSP8I/AAAAAAAG8sw/B0_qjKzJ5M4TmfRVdUKgmKCRhB3hXoitgCLcBGAsYHQ/s680/150527034.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>軍艦沖島の碑</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市汐入町１丁目</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.28289,139.660099' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[9] = L.marker([35.282815, 139.660107], {icon: icon_sekihi_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/vVn4xpYP3dmq5X3z6' target='_blank'><img src='https://1.bp.blogspot.com/-XBo8MK7f7ms/YM6OftsHxHI/AAAAAAAG8tc/qsHucrcXxUEQ4C7p75BMlKYTu3L23GtXACLcBGAsYHQ/s680/150527036.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>正岡子規の文学碑</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市汐入町１丁目</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.282815,139.660107' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[10] = L.marker([35.283183, 139.660131], {icon: icon_sekihi_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/YVMeVArD6QuqxuDx8' target='_blank'><img src='https://lh3.googleusercontent.com/-BMicNBTp-Yw/VWWNYFN4qMI/AAAAAAAAlT0/WdH1-4XSHW4/s680/150527038.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>海軍の碑</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市汐入町１丁目-１</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.283183,139.660131' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[11] = L.marker([35.284139, 139.672748], {icon: icon_sekihi_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/rAzFjVUAoCDAKYds9' target='_blank'><img src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjYDA1DNosGJM6J1p6jfZXRln6pP0CpsUrhRKJNXF7MAlbOxGXPKSKgdnJWEQT4HxDucULq1-BRxyNc560SBW_456hCs5N8aM_bg7WFEZjxXSGCZt9d8HcyRqp0oMJQlQB-JjsUqof8MUyDyUPEZEEGWLjNw_ZA6Q5XL8pdjP2XfZNftQiGTpmBIy3FZWXp/s680/150527050.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>めだかの学校歌碑</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市小川町２６−３</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.284139,139.672748' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[12] = L.marker([35.285162, 139.674346], {icon: icon_yakata_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/pMF8QQgUPQkPeFKLA' target='_blank'><img src='https://lh3.googleusercontent.com/-YQPRKA9e9bw/VWWMcRvEzjI/AAAAAAAAlPg/KFaIhUO0X58/s680/150527119.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>記念艦三笠</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市稲岡町82-19</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>横須賀風物百選</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.285162,139.674346' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[13] = L.marker([35.284627, 139.673812], {icon: icon_monument_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/JkG3yyW5QLahEtaaA' target='_blank'><img src='https://1.bp.blogspot.com/-nJ9U_lcq264/YL6YWmlFCJI/AAAAAAAGmM0/vEeu3ZeC6ewEZQUEkxPkmmadZEMZGooJwCLcBGAsYHQ/s680/150527057.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>東郷平八郎像</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市稲岡町82−１４</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.284627,139.673812' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[14] = L.marker([35.284567, 139.674181], {icon: icon_sekihi_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lh3.googleusercontent.com/-Lv1ax-UOOLU/VWWLSmrBxQI/AAAAAAAAlIg/qlSorTvE6JQ/s2048/150527060.jpg' target='_blank'><img src='https://lh3.googleusercontent.com/-Lv1ax-UOOLU/VWWLSmrBxQI/AAAAAAAAlIg/qlSorTvE6JQ/s680/150527060.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>行進曲「軍艦」の碑</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市稲岡町82−１４</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.284567,139.674181' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[15] = L.marker([35.284678, 139.673886], {icon: icon_sekihi_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lh3.googleusercontent.com/-EGG25ZXjRvc/VWWLORB0OkI/AAAAAAAAlII/4Xn69XE3nyQ/s2048/150527125.jpg' target='_blank'><img src='https://lh3.googleusercontent.com/-EGG25ZXjRvc/VWWLORB0OkI/AAAAAAAAlII/4Xn69XE3nyQ/s680/150527125.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>皇國興廃在此一戦</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市稲岡町82−１４</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.284678,139.673886' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>
