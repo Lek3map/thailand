@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2015年06月23日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2015年06月23日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2015年06月23日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/aruki.png' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://1.bp.blogspot.com/-VZWLNDTUMPQ/X_OK1JUhXDI/AAAAAAAFgCY/-630T3dn4w4P8HqosEBEC22UQTfMGNyugCLcBGAsYHQ/s680/150623001.jpg' title='ぺるり上陸の地'></div>
+<div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lh3.googleusercontent.com/-V5epoZWYKro/VYjS4efc7JI/AAAAAAAAp60/uVdzTCLsh0I/s680/150623003.jpg' title='久里浜庚申塔'></div>
+<div class='photo-thumb' onclick='moveToMarker(3)'><img src='https://1.bp.blogspot.com/-F6nCuSS_RPk/YMPhzOOHsXI/AAAAAAAGnUY/PqDl5tFgWewmKazSx8G-adEbHY0GndehQCLcBGAsYHQ/s680/150623012.jpg' title='千駄隧道'></div>
+<div class='photo-thumb' onclick='moveToMarker(4)'><img src='https://1.bp.blogspot.com/-gjkXreVaGsA/YMPkmV_0LYI/AAAAAAAGnU0/HVQI52oJCBk9NEGMya0cWPzho_gYyWJ-wCLcBGAsYHQ/s680/150623013.jpg' title='千駄ヶ崎隧道'></div>
+<div class='photo-thumb' onclick='moveToMarker(5)'><img src='https://lh3.googleusercontent.com/-aJ0L1hrGwAQ/VYjTM2erDVI/AAAAAAAAp8I/NfvfrCoUN3w/s680/150623018.jpg' title='横須賀火力発電所'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[35.22432333333333, 139.71116333333333], [35.224363333333336, 139.71118], [35.22450166666667, 139.71119666666667], [35.22453333333333, 139.71141833333334], [35.22461333333333, 139.71159666666668], [35.22472, 139.7117], [35.224806666666666, 139.71177666666668], [35.22508666666667, 139.71187166666667], [35.225053333333335, 139.71222], [35.225136666666664, 139.71235333333334], [35.22530666666667, 139.71253666666667], [35.22541666666667, 139.71261166666667], [35.225606666666664, 139.71272666666667], [35.225695, 139.71281833333333], [35.22580333333333, 139.71289166666668], [35.22595833333333, 139.712955], [35.22619, 139.713065], [35.22628, 139.71314333333333], [35.22645833333333, 139.71325166666668], [35.22656166666667, 139.71331833333332], [35.22672166666667, 139.71342333333334], [35.22682, 139.71349], [35.22691666666667, 139.713295], [35.22694333333333, 139.713145], [35.226996666666665, 139.71292], [35.227113333333335, 139.71279666666666], [35.22716166666667, 139.71274833333334], [35.226958333333336, 139.71286], [35.226848333333336, 139.712785], [35.226866666666666, 139.71281666666667], [35.22676, 139.71322], [35.226571666666665, 139.71341], [35.226463333333335, 139.713305], [35.226303333333334, 139.71322666666666], [35.22622333333333, 139.71310666666668], [35.22599, 139.71306666666666], [35.225766666666665, 139.71292833333334], [35.225605, 139.71284833333334], [35.225431666666665, 139.71275333333332], [35.22532833333333, 139.71258166666667], [35.225235, 139.71248833333334], [35.22504833333333, 139.71229333333332], [35.224988333333336, 139.71212666666668], [35.22486833333333, 139.71187333333333], [35.22479333333333, 139.71181166666668], [35.22461166666667, 139.71170666666666], [35.224556666666665, 139.71163333333334], [35.22450166666667, 139.71154166666668], [35.224415, 139.711295], [35.224401666666665, 139.71111333333334], [35.224273333333336, 139.71105833333334], [35.224046666666666, 139.71098166666667], [35.22384, 139.71083], [35.223775, 139.71077666666667], [35.223551666666665, 139.71061333333333], [35.223495, 139.71057166666668], [35.223283333333335, 139.7104], [35.223058333333334, 139.71025833333334], [35.223101666666665, 139.71009833333332], [35.22324, 139.70986333333335], [35.22323333333333, 139.7098], [35.223238333333335, 139.70979333333332], [35.22309833333333, 139.70971833333334], [35.223058333333334, 139.709685], [35.222926666666666, 139.70974666666666], [35.222773333333336, 139.70988166666666], [35.222611666666666, 139.70997833333334], [35.22251, 139.710035], [35.222305, 139.71010666666666], [35.22235666666667, 139.71017833333335], [35.22209, 139.710425], [35.22191333333333, 139.71058666666667], [35.22183666666667, 139.71067], [35.22161833333333, 139.71080333333333], [35.221493333333335, 139.71087166666666], [35.22130333333333, 139.71091833333332], [35.221151666666664, 139.710965], [35.221046666666666, 139.71097], [35.22079333333333, 139.710895], [35.22062833333333, 139.710865], [35.220456666666664, 139.71085333333335], [35.22028666666667, 139.71081833333332], [35.22017833333334, 139.71073166666667], [35.219941666666664, 139.710745], [35.21975833333333, 139.710735], [35.21957833333333, 139.71072833333332], [35.21948166666667, 139.710755], [35.21935166666667, 139.710755], [35.219185, 139.71089333333333], [35.21897833333333, 139.71103166666666], [35.218893333333334, 139.711085], [35.21879666666667, 139.711165], [35.21878666666667, 139.711215], [35.21868166666667, 139.71128333333334], [35.21850666666667, 139.71144666666666], [35.218405, 139.71157], [35.21823666666667, 139.71156666666667], [35.218151666666664, 139.711435], [35.21793666666667, 139.71134333333333], [35.21776333333333, 139.71110166666668], [35.21803166666667, 139.71069], [35.218048333333336, 139.71051333333332], [35.218015, 139.71032], [35.21805166666667, 139.71014166666666], [35.21806333333333, 139.709905], [35.21787666666667, 139.70982333333333], [35.21789833333333, 139.70985333333334], [35.217971666666664, 139.70986], [35.21810333333333, 139.709835], [35.218195, 139.709775], [35.218065, 139.70977333333335], [35.21814666666667, 139.70979333333332], [35.21806, 139.709805], [35.217951666666664, 139.70982666666666], [35.217933333333335, 139.709815], [35.218055, 139.709815], [35.218093333333336, 139.70980833333334], [35.21797, 139.70975166666668], [35.217885, 139.70967], [35.217681666666664, 139.70948333333334], [35.21762, 139.70935166666666], [35.21764, 139.70913], [35.217445, 139.7091], [35.217305, 139.70918833333334], [35.217146666666665, 139.70921166666668], [35.21689833333333, 139.70912166666668], [35.216923333333334, 139.70922166666668], [35.216966666666664, 139.70926833333334], [35.21698166666667, 139.70930666666666], [35.21595333333333, 139.70957666666666], [35.21585833333334, 139.710225], [35.215755, 139.71022833333333], [35.215665, 139.710165], [35.21550666666667, 139.710125], [35.215428333333335, 139.71010166666667], [35.21534833333333, 139.71003166666668], [35.21521333333333, 139.71], [35.21508166666667, 139.70994166666668], [35.21491, 139.71008333333333], [35.21474833333333, 139.71007833333334], [35.21465, 139.71017], [35.21454333333333, 139.71027166666667], [35.214438333333334, 139.71027333333333], [35.214166666666664, 139.71023166666666], [35.21411, 139.71028], [35.213845, 139.71033666666668], [35.21380166666667, 139.71037666666666], [35.21367, 139.710565], [35.21364333333333, 139.71067666666667], [35.21355, 139.71083], [35.213363333333334, 139.71094666666667], [35.213335, 139.710985], [35.21348833333333, 139.71105], [35.21358166666667, 139.711115], [35.21355, 139.71111333333334], [35.213606666666664, 139.71116], [35.21356166666666, 139.71115666666665], [35.21355333333333, 139.71110833333333], [35.21353, 139.71119333333334], [35.21526166666666, 139.71199333333334], [35.215055, 139.711855], [35.215203333333335, 139.711905], [35.21525333333334, 139.71194666666668], [35.215401666666665, 139.71200166666668], [35.215518333333335, 139.712065], [35.215736666666665, 139.71220333333332], [35.21583833333333, 139.712305], [35.21589, 139.71242166666667], [35.21590666666667, 139.71259666666666], [35.216141666666665, 139.71282333333335], [35.216206666666665, 139.71294], [35.21624166666667, 139.71305333333333], [35.216295, 139.71315666666666], [35.216316666666664, 139.71328], [35.21640333333333, 139.713485], [35.21648166666667, 139.71358833333332], [35.21655166666667, 139.71369166666668], [35.216585, 139.71375166666667], [35.216745, 139.713815], [35.21673166666667, 139.71376833333332], [35.216815, 139.71381333333332], [35.216895, 139.71385166666667], [35.217015, 139.71383166666666], [35.217145, 139.71385], [35.21736833333333, 139.71389166666665], [35.21746666666667, 139.71388666666667], [35.217615, 139.71392833333334], [35.217798333333334, 139.71392666666668], [35.218001666666666, 139.71389333333335], [35.218158333333335, 139.71390666666667], [35.218295, 139.71390666666667], [35.218356666666665, 139.71388666666667], [35.21847, 139.71378833333333], [35.218621666666664, 139.713705], [35.218781666666665, 139.71351166666668], [35.21885833333333, 139.71341166666667], [35.21893333333333, 139.713405], [35.21914, 139.71340666666666], [35.219275, 139.71342666666666], [35.21949, 139.71332833333332], [35.219735, 139.71326], [35.21988, 139.713125], [35.21987, 139.713365], [35.21983, 139.71356], [35.2199, 139.713375], [35.219856666666665, 139.713165], [35.219895, 139.71309833333333], [35.219863333333336, 139.713045], [35.21989666666666, 139.713065], [35.21987166666667, 139.71306666666666], [35.21977666666667, 139.71307833333333], [35.219685, 139.71307333333334], [35.21953166666667, 139.71306166666668], [35.21940166666667, 139.71299833333333], [35.21924333333333, 139.71320666666668], [35.21919833333333, 139.713295], [35.219031666666666, 139.71345166666666]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_sekihi_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/sekihi.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_koushintou_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/koushintou.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_starr_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/starr.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_zuidou_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/zuidou.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([35.224323, 139.711163], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/aruki.png' target='_blank'><img src='https://lek3map.github.io/thailand/picture/aruki.png' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>横須賀</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.224323,139.711163' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([35.224313, 139.711242], {icon: icon_sekihi_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/84bMxc1kHw8mLQhS7' target='_blank'><img src='https://1.bp.blogspot.com/-VZWLNDTUMPQ/X_OK1JUhXDI/AAAAAAAFgCY/-630T3dn4w4P8HqosEBEC22UQTfMGNyugCLcBGAsYHQ/s680/150623001.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>ぺるり上陸の地</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市久里浜７丁目１６−９</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.224313,139.711242' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[2] = L.marker([35.217968, 139.709918], {icon: icon_koushintou_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/pGAcdcRCeMBMMYPLA' target='_blank'><img src='https://lh3.googleusercontent.com/-V5epoZWYKro/VYjS4efc7JI/AAAAAAAAp60/uVdzTCLsh0I/s680/150623003.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>久里浜庚申塔</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市神明町１８２１</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.217968,139.709918' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[3] = L.marker([35.216404, 139.709577], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://1.bp.blogspot.com/-F6nCuSS_RPk/YMPhzOOHsXI/AAAAAAAGnUY/PqDl5tFgWewmKazSx8G-adEbHY0GndehQCLcBGAsYHQ/s2048/150623012.jpg' target='_blank'><img src='https://1.bp.blogspot.com/-F6nCuSS_RPk/YMPhzOOHsXI/AAAAAAAGnUY/PqDl5tFgWewmKazSx8G-adEbHY0GndehQCLcBGAsYHQ/s680/150623012.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>千駄隧道</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市野比５丁目１２</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>千駄ヶ崎台場跡隧道</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.216404,139.709577' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[4] = L.marker([35.214319, 139.711484], {icon: icon_zuidou_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://1.bp.blogspot.com/-gjkXreVaGsA/YMPkmV_0LYI/AAAAAAAGnU0/HVQI52oJCBk9NEGMya0cWPzho_gYyWJ-wCLcBGAsYHQ/s2048/150623013.jpg' target='_blank'><img src='https://1.bp.blogspot.com/-gjkXreVaGsA/YMPkmV_0LYI/AAAAAAAGnU0/HVQI52oJCBk9NEGMya0cWPzho_gYyWJ-wCLcBGAsYHQ/s680/150623013.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>千駄ヶ崎隧道</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市 千駄ヶ崎隧道</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.214319,139.711484' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[5] = L.marker([35.21639, 139.714268], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/wNvFvcbcLAQe4cgaA' target='_blank'><img src='https://lh3.googleusercontent.com/-aJ0L1hrGwAQ/VYjTM2erDVI/AAAAAAAAp8I/NfvfrCoUN3w/s680/150623018.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>横須賀火力発電所</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市久里浜９丁目２</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>横須賀風物百選</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.21639,139.714268' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>
