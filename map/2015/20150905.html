@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2015年09月05日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2015年09月05日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2015年09月05日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/aruki.png' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh3.googleusercontent.com/-xfNABOuMz4E/VeqmbP65-pI/AAAAAAAAy8E/2Dmzp9ZnVsc/s680-Ic42/150905003.jpg' title='諏訪大神社'></div>
+<div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lh3.googleusercontent.com/-lXs16RUMUwk/Veqmp1Bw7uI/AAAAAAAAzBg/oVKyrl2rY_8/s680-Ic42/150905010.jpg' title='大震災避難記念碑'></div>
+<div class='photo-thumb' onclick='moveToMarker(3)'><img src='https://lh3.googleusercontent.com/-cFhIkv7Xu2Y/Veqm8WQgKcI/AAAAAAAAzDw/BAIQlgc83y4/s680-Ic42/150905018.jpg' title='・・・満期記念'></div>
+<div class='photo-thumb' onclick='moveToMarker(4)'><img src='https://lh3.googleusercontent.com/-2ZGjM3qOav4/VeqnEt0FY3I/AAAAAAAAy-g/cFq96XySXsU/s680-Ic42/150905022.jpg' title='不明な鉄板'></div>
+<div class='photo-thumb' onclick='moveToMarker(5)'><img src='https://lh3.googleusercontent.com/-w2Kj-QJqKGQ/VeqnCf31GTI/AAAAAAAAzCE/-iIA9cdk1zE/s680-Ic42/150905021.jpg' title='動物愛護の碑'></div>
+<div class='photo-thumb' onclick='moveToMarker(6)'><img src='https://lh3.googleusercontent.com/-Cd6VbANq1Ok/VeqnKIVO_4I/AAAAAAAAy-w/_KXWxFp9ksE/s680-Ic42/150905024.jpg' title='記念植樹之碑'></div>
+<div class='photo-thumb' onclick='moveToMarker(7)'><img src='https://lh3.googleusercontent.com/-95r4bzYn2MY/VZE9SphmJ1I/AAAAAAAArE4/NqXp0vjxKIc/s680/150629034.jpg' title='ドブ板通り有名人手形'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[35.28142, 139.6635867], [35.2814183, 139.66362], [35.281455, 139.6635983], [35.28174, 139.6641683], [35.2817467, 139.664335], [35.281735, 139.6645033], [35.281705, 139.664685], [35.2817683, 139.6648433], [35.2817283, 139.66496], [35.28156, 139.6653933], [35.281575, 139.66538], [35.2817567, 139.66574], [35.28165, 139.6659883], [35.28168, 139.665315], [35.281475, 139.665785], [35.2815483, 139.666015], [35.28162, 139.6659617], [35.2817533, 139.6660233], [35.2817517, 139.66617], [35.2817567, 139.6661733], [35.28132, 139.6668783], [35.2813817, 139.66644], [35.2813267, 139.6662317], [35.2813517, 139.6664733], [35.2812967, 139.6665817], [35.2812967, 139.6661667], [35.2810833, 139.66646], [35.2811567, 139.6662733], [35.2810533, 139.6662567], [35.280985, 139.6660267], [35.2807683, 139.6659917], [35.2806467, 139.6660267], [35.2807017, 139.66602], [35.2807117, 139.6659617], [35.2807383, 139.6657633], [35.280765, 139.6657617], [35.280745, 139.6656583], [35.2808383, 139.66566], [35.2807583, 139.6657967], [35.2807767, 139.6657283], [35.280835, 139.6656], [35.2808233, 139.6655733], [35.2807983, 139.6655233], [35.280915, 139.665275], [35.2806733, 139.6654933], [35.28072, 139.6654583], [35.28075, 139.6654267], [35.28071, 139.6653467], [35.2808583, 139.6650783], [35.2808967, 139.665105], [35.2805217, 139.6652033], [35.2804733, 139.6652633], [35.280575, 139.6652483], [35.280425, 139.6655283], [35.2807083, 139.6654033], [35.2806383, 139.665425], [35.2807083, 139.6653083], [35.2807833, 139.66511], [35.2805633, 139.6654833], [35.2806833, 139.665405], [35.2806867, 139.6654233], [35.2807, 139.6656017], [35.2808567, 139.66559], [35.2809217, 139.6655317], [35.2808717, 139.66544], [35.2808517, 139.665295], [35.28094, 139.6651967], [35.280915, 139.66532], [35.28099, 139.6651833], [35.2810333, 139.6652383], [35.281175, 139.6650717], [35.2810033, 139.6652683], [35.2809783, 139.66522], [35.2809067, 139.66529], [35.2808567, 139.6653683], [35.2810733, 139.6652133], [35.281085, 139.6651067], [35.2811533, 139.664875], [35.28122, 139.6646217], [35.281235, 139.6645817], [35.2809833, 139.66507], [35.2809933, 139.6651567], [35.280995, 139.6653683], [35.2808617, 139.6653283], [35.2808467, 139.6651733], [35.2808217, 139.665], [35.2808883, 139.6649467], [35.2809767, 139.6650317], [35.281005, 139.6651133], [35.2809317, 139.6651933], [35.280845, 139.6652733], [35.2808917, 139.6650017], [35.2809233, 139.66482], [35.2807783, 139.6649067], [35.2808167, 139.664775], [35.28082, 139.6644717], [35.280705, 139.6647467], [35.2807333, 139.6649033], [35.280835, 139.664975], [35.28096, 139.6649217], [35.281065, 139.6650817], [35.280925, 139.665245], [35.2808467, 139.6653983], [35.28088, 139.6655017], [35.28097, 139.6655483], [35.2809267, 139.665605], [35.2806617, 139.6657617], [35.2806767, 139.6655483], [35.280625, 139.6656567], [35.280685, 139.66568], [35.2807583, 139.6657733], [35.2808317, 139.665735], [35.2808867, 139.66588], [35.28088, 139.6658433], [35.2807733, 139.6659667], [35.280745, 139.6660433], [35.2807333, 139.66606], [35.28085, 139.6660517], [35.2809933, 139.66615], [35.28101, 139.6662133], [35.2809933, 139.6663467], [35.28116, 139.66638], [35.2813467, 139.6663067], [35.2815067, 139.6661767], [35.2818717, 139.6663917], [35.282185, 139.66634], [35.2821867, 139.6663483], [35.2821967, 139.66624], [35.2822683, 139.666165], [35.2824517, 139.6658967], [35.2822367, 139.66582], [35.282195, 139.665755], [35.2821117, 139.6654833], [35.2821433, 139.6653583], [35.2821117, 139.665375], [35.2821217, 139.6653767], [35.2815633, 139.666755], [35.28158, 139.6665683], [35.2816117, 139.666495], [35.2816633, 139.6666833], [35.2816817, 139.6668517], [35.2817117, 139.6669717], [35.2816933, 139.6670833], [35.28165, 139.66712], [35.2816633, 139.6671817], [35.2815783, 139.6673033], [35.2813233, 139.6673833], [35.2814017, 139.6674233], [35.28149, 139.6675467], [35.2816767, 139.6677267], [35.2815617, 139.6678983], [35.2815317, 139.6680317], [35.2815017, 139.6681167], [35.2817167, 139.6683933], [35.2817567, 139.6684883], [35.2818217, 139.6685233], [35.28191, 139.6685033], [35.28196, 139.6684517], [35.28204, 139.6684383], [35.281905, 139.6684033], [35.281635, 139.66799], [35.281805, 139.66796], [35.28163, 139.6677983], [35.2813617, 139.6677717], [35.2815017, 139.6678], [35.2816667, 139.6676633], [35.2817367, 139.6676183], [35.2818133, 139.66762], [35.2818167, 139.667635], [35.2817883, 139.667795], [35.2816883, 139.6680167], [35.2818133, 139.6682467], [35.28188, 139.668385], [35.2820983, 139.66867], [35.282015, 139.6684633], [35.2821067, 139.668405], [35.2822017, 139.66836], [35.2821383, 139.66813], [35.2824633, 139.6682967], [35.2824083, 139.6682433], [35.2826283, 139.668395], [35.282525, 139.668135], [35.2822667, 139.667795], [35.2820033, 139.6676417], [35.281895, 139.667625], [35.281725, 139.6676567], [35.2818717, 139.6676083], [35.2822217, 139.6675417], [35.2822883, 139.6674233], [35.2820183, 139.6672433], [35.281645, 139.6672167], [35.28158, 139.6671333], [35.2817283, 139.6669583], [35.2817383, 139.666915], [35.28149, 139.6668133], [35.2816517, 139.6666783], [35.2817117, 139.6666383], [35.2818867, 139.6663983], [35.2820217, 139.6661267], [35.281975, 139.666025], [35.2818967, 139.6660183], [35.2817167, 139.6661517], [35.2817767, 139.666055], [35.281955, 139.665845], [35.2819683, 139.6657783], [35.2819167, 139.6658], [35.281825, 139.66569], [35.2818767, 139.6650833], [35.2818583, 139.6650083], [35.2818067, 139.664745], [35.281945, 139.664485], [35.2820233, 139.6645733], [35.2822283, 139.6644533], [35.2822233, 139.6642583], [35.28207, 139.6643333], [35.28166, 139.6641217], [35.2813817, 139.6640017], [35.2815233, 139.6638617], [35.2815633, 139.663865], [35.281405, 139.6638133], [35.2813933, 139.6638117], [35.2813333, 139.6638117], [35.28128, 139.663705], [35.2812183, 139.6636883], [35.2813133, 139.6637367], [35.281355, 139.6636667], [35.281505, 139.6635883], [35.2816067, 139.6634867], [35.2815583, 139.6634583], [35.28156, 139.663525], [35.2815433, 139.663395]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_jinjya_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/jinjya.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_sekihi_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/sekihi.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_other_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/other.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_starr_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/starr.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([35.28142, 139.663587], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/aruki.png' target='_blank'><img src='https://lek3map.github.io/thailand/picture/aruki.png' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>横須賀</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.28142,139.663587' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([35.280676, 139.66528], {icon: icon_jinjya_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/KHFCAP5xxWKCMe5N8' target='_blank'><img src='https://lh3.googleusercontent.com/-xfNABOuMz4E/VeqmbP65-pI/AAAAAAAAy8E/2Dmzp9ZnVsc/s680-Ic42/150905003.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>諏訪大神社</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市緑が丘３４</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>横須賀風物百選</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.280676,139.66528' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[2] = L.marker([35.280908, 139.665007], {icon: icon_sekihi_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/DZjW5khxybjDpEcN8' target='_blank'><img src='https://lh3.googleusercontent.com/-lXs16RUMUwk/Veqmp1Bw7uI/AAAAAAAAzBg/oVKyrl2rY_8/s680-Ic42/150905010.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>大震災避難記念碑</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市緑が丘３４</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.280908,139.665007' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[3] = L.marker([35.281013, 139.665229], {icon: icon_sekihi_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/Qx2eJ6Rnm6etseGP9' target='_blank'><img src='https://lh3.googleusercontent.com/-cFhIkv7Xu2Y/Veqm8WQgKcI/AAAAAAAAzDw/BAIQlgc83y4/s680-Ic42/150905018.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>・・・満期記念</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市緑が丘３４</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.281013,139.665229' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[4] = L.marker([35.281205, 139.664784], {icon: icon_other_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/QBP2STiUrKLgwe4R7' target='_blank'><img src='https://lh3.googleusercontent.com/-2ZGjM3qOav4/VeqnEt0FY3I/AAAAAAAAy-g/cFq96XySXsU/s680-Ic42/150905022.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>不明な鉄板</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市緑が丘３４</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.281205,139.664784' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[5] = L.marker([35.281131, 139.664854], {icon: icon_sekihi_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lh3.googleusercontent.com/-w2Kj-QJqKGQ/VeqnCf31GTI/AAAAAAAAzCE/-iIA9cdk1zE/s2048-Ic42/150905021.jpg' target='_blank'><img src='https://lh3.googleusercontent.com/-w2Kj-QJqKGQ/VeqnCf31GTI/AAAAAAAAzCE/-iIA9cdk1zE/s680-Ic42/150905021.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>動物愛護の碑</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市緑が丘３４</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.281131,139.664854' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[6] = L.marker([35.280996, 139.665071], {icon: icon_sekihi_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/DXecEKocjAEbAfjq6' target='_blank'><img src='https://lh3.googleusercontent.com/-Cd6VbANq1Ok/VeqnKIVO_4I/AAAAAAAAy-w/_KXWxFp9ksE/s680-Ic42/150905024.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>記念植樹之碑</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市緑が丘３４</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.280996,139.665071' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[7] = L.marker([35.281872, 139.664511], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/VpoHz9cmmNCTKpNz6' target='_blank'><img src='https://lh3.googleusercontent.com/-95r4bzYn2MY/VZE9SphmJ1I/AAAAAAAArE4/NqXp0vjxKIc/s680/150629034.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>ドブ板通り有名人手形</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市本町２丁目６</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.281872,139.664511' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>
