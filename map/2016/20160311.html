@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2016年03月11日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2016年03月11日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2016年03月11日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/aruki.png' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh3.googleusercontent.com/l_SKs1Z6YjdJMNauS8dTm-ICNQXpDgQdrPucNWo4v9WW9xYpx01yjwkoFq4ssa0pFhteC_RpVHfCwQ=w680-h510-k' title='日本丸＠久里浜'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[35.22009333333333, 139.71297333333334], [35.220205, 139.71282333333335], [35.22037666666667, 139.71253166666668], [35.22045, 139.71237833333333], [35.22047166666667, 139.71219], [35.22047, 139.71201166666665], [35.22036666666666, 139.71179166666667], [35.220375, 139.711685], [35.220533333333336, 139.711655], [35.22084666666667, 139.711575], [35.220995, 139.71149833333334], [35.221165, 139.71142333333333], [35.22132, 139.71136333333334], [35.221491666666665, 139.71120333333334], [35.22163333333334, 139.71108], [35.22176666666667, 139.71098166666667], [35.22185666666667, 139.71089166666667], [35.221916666666665, 139.710775], [35.222046666666664, 139.71065], [35.22217666666667, 139.71049833333333], [35.222343333333335, 139.71036166666667], [35.22244666666667, 139.71036666666666], [35.22249333333333, 139.71024166666666], [35.222523333333335, 139.71008833333335], [35.22259, 139.71004666666667], [35.222773333333336, 139.709815], [35.222865, 139.709745], [35.22304166666667, 139.70967833333333], [35.223305, 139.7094], [35.223375, 139.709275], [35.22340333333333, 139.70914333333334], [35.223506666666665, 139.70907333333332], [35.223576666666666, 139.708965], [35.22369333333334, 139.708745], [35.223835, 139.70857333333333], [35.22396666666667, 139.708415], [35.224105, 139.7082], [35.22422666666667, 139.70801], [35.22431666666667, 139.70785], [35.224376666666664, 139.70769333333334], [35.22448, 139.70757166666667], [35.22463, 139.70768166666667], [35.224673333333335, 139.70752666666667], [35.22488166666667, 139.70747333333333], [35.22499666666667, 139.70727666666667], [35.225168333333336, 139.70710166666666], [35.225296666666665, 139.706915], [35.225495, 139.70688], [35.22561666666667, 139.70682166666666], [35.22573, 139.70675333333332], [35.225773333333336, 139.70653333333334], [35.22588833333333, 139.706375], [35.22598833333333, 139.70628166666665], [35.22614166666666, 139.70615], [35.22627833333333, 139.706025], [35.226385, 139.70583666666667], [35.226436666666665, 139.70588666666666], [35.22642833333333, 139.705785], [35.22641333333333, 139.70576333333332], [35.226436666666665, 139.70566833333334], [35.226326666666665, 139.70591666666667], [35.22653, 139.70628833333333], [35.226616666666665, 139.706], [35.226456666666664, 139.70577], [35.22643, 139.70591333333334], [35.226505, 139.705715], [35.226573333333334, 139.70557666666667], [35.22662666666667, 139.70553666666666], [35.22663, 139.70549], [35.22678333333333, 139.70530666666667], [35.22696166666667, 139.70511], [35.22714166666667, 139.704945], [35.22725666666667, 139.70479], [35.22737166666667, 139.70465333333334], [35.22750166666667, 139.7045], [35.227705, 139.704335], [35.2279, 139.70424666666668], [35.22802333333333, 139.70416333333333], [35.22814833333333, 139.70409166666667], [35.22833166666667, 139.70384333333334], [35.228355, 139.703405], [35.22848, 139.70327], [35.228605, 139.70314], [35.22868833333333, 139.70307666666668], [35.228831666666665, 139.70308666666668], [35.22897, 139.70303833333332], [35.22902833333333, 139.70302166666667], [35.22899666666667, 139.70297166666666], [35.228995, 139.703035], [35.229, 139.70310333333333], [35.229171666666666, 139.70282333333333], [35.22928666666667, 139.702485], [35.22944833333333, 139.70231166666667], [35.229618333333335, 139.70216166666665], [35.22976, 139.702175], [35.22987333333333, 139.70228], [35.23002833333334, 139.70276833333332], [35.23016833333333, 139.70288166666666], [35.23038, 139.702675], [35.23041, 139.70263333333332], [35.230441666666664, 139.70324666666667], [35.23062, 139.70327333333333], [35.23069666666667, 139.70335166666666], [35.230795, 139.70328166666667], [35.23088, 139.7032], [35.230925, 139.7031], [35.2316, 139.70213]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_starr_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/starr.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([35.220093, 139.712973], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/aruki.png' target='_blank'><img src='https://lek3map.github.io/thailand/picture/aruki.png' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>横須賀</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.220093,139.712973' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([35.221451, 139.71691], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/f1mqHpgeprfaU7Fn7' target='_blank'><img src='https://lh3.googleusercontent.com/l_SKs1Z6YjdJMNauS8dTm-ICNQXpDgQdrPucNWo4v9WW9xYpx01yjwkoFq4ssa0pFhteC_RpVHfCwQ=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>日本丸＠久里浜</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市久里浜８丁目１７</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.221451,139.71691' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>
