@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2016年05月26日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2016年05月26日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2016年05月26日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/cyari.png' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh3.googleusercontent.com/kVi7u04cMgWDiMHpi1uKxd6bnnx9gLtEM_ZvRdRzkRfnI5sIlbnFOQfq1JRR7Z4gYGcRCmQHomnCig=w680-h510-k' title='鴨居港'></div>
+<div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lh3.googleusercontent.com/_5OWMd0FwYWoITHtfcOmdAJzVZia3f9DZ7wFmKAcEZz2UyGd_7SCvvAvK5vDiI1khhKzFmcI4OQ7oA=w680-h510-k' title='駆逐艦村雨慰霊碑'></div>
+<div class='photo-thumb' onclick='moveToMarker(3)'><img src='https://lh3.googleusercontent.com/2s1xDpYBxx5YqzLrT_-9uwxdngHrw50GWxi6J5m99taz99GK9GOL5_aaIQhzJORUepe9ebtUmyj0Kw=w680-h510-k' title='観音寺跡'></div>
+<div class='photo-thumb' onclick='moveToMarker(4)'><img src='https://lh3.googleusercontent.com/HZ3ZJKlE2Tzi4WIa4KydQ05Ge4WSewNfLFY_3PWcp8PZx0n3hYXAw0Dr0VWKXe1NUFAXDKKvNW6wXw=w680-h510-k' title='トーチカ'></div>
+<div class='photo-thumb' onclick='moveToMarker(5)'><img src='https://lh3.googleusercontent.com/msY8hvePUUPE5Eo93n_we6yso4hFMoEO40X9dAQr-DyZbj9Z64kEPXd1Dcb_CRNoxveXuclTSf07TQ=w680-h510-k' title='たたら浜'></div>
+<div class='photo-thumb' onclick='moveToMarker(6)'><img src='https://lh3.googleusercontent.com/b9KYJDWj9YLk0h4zBZauk5hNGgc3HuPlB5yD9OzSdcHEixPHAaAX7Jy-YhsUZR6ewNO0cK4Vi5p_iw=w680-h510-k' title='水中聴音所'></div>
+<div class='photo-thumb' onclick='moveToMarker(7)'><img src='https://lh3.googleusercontent.com/MwOMEYczLFhrvJqG_5Kf1qhyn5d8-2aQ44ZZSlz1VLN0Am_vdIgrruvB8AyLi2W3SMGWaAEWGWOjJw=w680-h510-k' title='展望園（砲台跡）'></div>
+<div class='photo-thumb' onclick='moveToMarker(8)'><img src='https://lh3.googleusercontent.com/BKK8EUPoS5L7IQKAb9O6y39qJZm_HQ-sPlmM0Z7niYXiU3MDwKXGefjY39ZEQHd5k6b0epUEHss7Pg=w680-h510-k' title='戦没船員の碑'></div>
+<div class='photo-thumb' onclick='moveToMarker(9)'><img src='https://lh3.googleusercontent.com/pQ9G2HQdVJlClka9An_Kb9jlwmMmhzS8v3WRK7fta17OX-ekAkxLV0GQCCWfuEM5-XpomQeQbgvuSg=w680-h510-k' title='北門第一砲台跡'></div>
+<div class='photo-thumb' onclick='moveToMarker(10)'><img src='https://lh3.googleusercontent.com/f4pZOcAWDslU_tPdWEEVLCmGHdrSLZjkxxg_hQUA3ivHMEUU86Nw26qUFt6yfPA-r8Fp-UdZYlWV3Q=w680-h510-k' title='観音埼灯台'></div>
+<div class='photo-thumb' onclick='moveToMarker(11)'><img src='https://lh3.googleusercontent.com/VWjDPRiRg4YHkrC1tmLYR2E_7M_e43uCzdj0rsKl9tKa37qvTGteDxaSaIZSTuac_xRFSpmOsFAw7Q=w680-h510-k' title='洞窟'></div>
+<div class='photo-thumb' onclick='moveToMarker(12)'><img src='https://lh3.googleusercontent.com/-I3JhGfkcTnCDe_q-ViiVcB8WYQBktGYVHk64QhVcLMt-HIGc0659JhLNktfjbg3FJb70L0dVxdgnA=w680-h510-k' title='寂光土'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[35.24894833333333, 139.73599166666668], [35.24896666666667, 139.736105], [35.24886333333333, 139.73627166666665], [35.24887, 139.736485], [35.24913166666666, 139.73664], [35.24894, 139.73676], [35.249001666666665, 139.73663], [35.24861333333333, 139.73700333333332], [35.24861666666666, 139.73724833333333], [35.248555, 139.73739], [35.248643333333334, 139.73743333333334], [35.24863166666667, 139.73746166666666], [35.24863, 139.73739166666667], [35.248623333333335, 139.73744333333335], [35.24858, 139.73745], [35.24856, 139.73742833333333], [35.24861666666666, 139.73738833333334], [35.24860833333334, 139.73733], [35.24852833333333, 139.73713333333333], [35.248576666666665, 139.736995], [35.24872833333333, 139.73687833333332], [35.24888, 139.73673333333332], [35.24899333333333, 139.73663], [35.249093333333334, 139.736655], [35.24930833333333, 139.73685166666667], [35.24946833333333, 139.73689333333334], [35.249408333333335, 139.73707666666667], [35.249431666666666, 139.73705], [35.24943666666667, 139.73715], [35.249431666666666, 139.73725], [35.24943666666667, 139.73754833333334], [35.24944166666667, 139.73761833333333], [35.24957833333333, 139.73774666666668], [35.24962333333333, 139.73785833333332], [35.24971333333333, 139.73806166666665], [35.24976, 139.73815833333333], [35.249871666666664, 139.73835333333332], [35.24997833333333, 139.738505], [35.25004166666667, 139.73863166666666], [35.25010833333333, 139.738835], [35.250141666666664, 139.738985], [35.2502, 139.739145], [35.25038166666667, 139.73932333333335], [35.250373333333336, 139.73943333333332], [35.250528333333335, 139.73965333333334], [35.250658333333334, 139.73973833333332], [35.25072, 139.73988166666666], [35.250843333333336, 139.739975], [35.25095666666667, 139.740075], [35.251075, 139.740155], [35.25116666666667, 139.740215], [35.251261666666664, 139.740245], [35.25133666666667, 139.74024333333332], [35.25143666666666, 139.74019833333332], [35.251603333333335, 139.74024833333334], [35.25158166666667, 139.74005333333332], [35.25161833333333, 139.74010333333334], [35.25163, 139.740445], [35.251693333333336, 139.74058833333333], [35.251778333333334, 139.74067], [35.25188833333333, 139.74084833333333], [35.252025, 139.74107], [35.25206, 139.74124166666667], [35.25208666666666, 139.74133166666667], [35.25203, 139.74144], [35.25204333333333, 139.74143], [35.25197166666667, 139.74134], [35.25183166666667, 139.74154], [35.251933333333334, 139.74149833333334], [35.25203166666667, 139.74156333333335], [35.2521, 139.74160166666667], [35.25210166666667, 139.74161166666667], [35.252113333333334, 139.74155833333333], [35.25211, 139.74150333333333], [35.252115, 139.74149333333332], [35.25208666666666, 139.74156833333333], [35.25205833333333, 139.74163333333334], [35.251905, 139.74167166666666], [35.251868333333334, 139.741805], [35.251821666666665, 139.742005], [35.251775, 139.74187666666666], [35.25177333333333, 139.74185], [35.251855, 139.74193333333332], [35.25185166666667, 139.74189666666666], [35.25180833333334, 139.74193833333334], [35.251655, 139.74205666666666], [35.251545, 139.74222166666667], [35.251398333333334, 139.742335], [35.25137, 139.74234], [35.25136833333333, 139.74252166666668], [35.251401666666666, 139.742625], [35.251403333333336, 139.742775], [35.25152166666667, 139.74295], [35.251623333333335, 139.74312166666667], [35.25168166666667, 139.74326666666667], [35.251705, 139.74324], [35.251686666666664, 139.74323833333332], [35.25168, 139.743165], [35.251815, 139.743175], [35.251936666666666, 139.74326666666667], [35.25201666666667, 139.74343333333334], [35.25219, 139.74347], [35.25218666666667, 139.74345833333334], [35.252203333333334, 139.743425], [35.2522, 139.74336666666667], [35.25227, 139.743405], [35.25232333333334, 139.74343], [35.25226, 139.74329], [35.25225666666667, 139.74330833333335], [35.25235, 139.74325], [35.25243, 139.74329666666668], [35.25246166666667, 139.74328166666666], [35.252496666666666, 139.74324666666666], [35.25250166666667, 139.74329666666668], [35.2525, 139.74328], [35.25251166666666, 139.74332666666666], [35.25245, 139.74339166666667], [35.252451666666666, 139.74327], [35.252343333333336, 139.74309666666667], [35.252226666666665, 139.743005], [35.252176666666664, 139.74305], [35.25214833333333, 139.74318166666666], [35.25219333333333, 139.74322], [35.252291666666665, 139.743215], [35.25230666666667, 139.74315], [35.25232833333333, 139.74321], [35.25246666666666, 139.74328333333332], [35.25256666666667, 139.74338], [35.252595, 139.74336666666667], [35.252581666666664, 139.74336833333334], [35.25250166666667, 139.7433], [35.252316666666665, 139.74324166666668], [35.25216666666667, 139.74315666666666], [35.25216666666667, 139.743095], [35.25230833333333, 139.74312833333335], [35.25235833333333, 139.743055], [35.25230333333333, 139.74290333333335], [35.25216833333333, 139.74277666666666], [35.252053333333336, 139.74271333333334], [35.25192833333333, 139.74258333333333], [35.251961666666666, 139.74253833333333], [35.251985, 139.74238166666666], [35.25208333333333, 139.74228833333333], [35.25203333333333, 139.74218166666665], [35.25203833333333, 139.742145], [35.25225, 139.74211333333332], [35.252318333333335, 139.74225], [35.25237, 139.74237833333333], [35.25239666666667, 139.74249833333334], [35.252485, 139.74261], [35.25255, 139.74272], [35.252671666666664, 139.74298166666668], [35.252766666666666, 139.74279666666666], [35.25286166666667, 139.74265], [35.252988333333334, 139.742555], [35.25309, 139.74242666666666], [35.25313833333333, 139.74237833333333], [35.25326, 139.74216333333334], [35.25333166666667, 139.74209333333334], [35.25337666666667, 139.74206833333332], [35.25348, 139.74199666666667], [35.25359, 139.74188333333333], [35.253681666666665, 139.74177], [35.253791666666665, 139.74162333333334], [35.253816666666665, 139.741615], [35.253903333333334, 139.741535], [35.25400666666667, 139.74151666666666], [35.254155, 139.74149166666666], [35.254218333333334, 139.74142833333335], [35.25429833333333, 139.74139166666666], [35.25439166666666, 139.74152166666667], [35.25442, 139.741555], [35.254425, 139.74142166666667], [35.254421666666666, 139.74130166666666], [35.254353333333334, 139.741165], [35.25423333333333, 139.74120666666667], [35.254173333333334, 139.74122166666666], [35.254133333333336, 139.74117999999999], [35.25426, 139.74112333333332], [35.25439, 139.74101833333333], [35.254531666666665, 139.74111], [35.25465166666667, 139.74104666666668], [35.25465, 139.74089333333333], [35.254635, 139.740795], [35.254625, 139.74073333333334], [35.254576666666665, 139.740755], [35.25458166666667, 139.740765], [35.25457166666666, 139.7407], [35.25454, 139.740645], [35.25451833333333, 139.740635], [35.254525, 139.74091833333333], [35.25453, 139.74093166666665], [35.25443333333333, 139.740845], [35.25439333333333, 139.74076], [35.254378333333335, 139.74076], [35.254358333333336, 139.740785], [35.254195, 139.74098333333333], [35.25419, 139.74088833333334], [35.254195, 139.74091], [35.254198333333335, 139.74075], [35.25418166666667, 139.74064833333333], [35.25420833333333, 139.74060166666666], [35.254236666666664, 139.74075], [35.25440833333333, 139.740745], [35.25450166666667, 139.7407], [35.25449, 139.74062833333332], [35.25457166666666, 139.74069333333333], [35.254641666666664, 139.74079666666665], [35.25468, 139.740845], [35.25471666666667, 139.740955], [35.254665, 139.74090166666667], [35.254655, 139.74081833333332], [35.25466, 139.74082333333334], [35.254625, 139.74078833333334], [35.25456166666667, 139.74077666666668], [35.25457166666666, 139.74078833333334], [35.25459166666667, 139.74082], [35.25458166666667, 139.74080166666667], [35.25459333333333, 139.74079833333334], [35.25461333333333, 139.74082166666668], [35.254625, 139.74082], [35.25472833333333, 139.74102833333333], [35.254803333333335, 139.74124666666665], [35.254955, 139.741375], [35.25483, 139.74161333333333], [35.254933333333334, 139.74167], [35.25510833333333, 139.74184833333334], [35.255185, 139.741785]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_fune_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/fune.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_irei_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/irei.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_sekihi_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/sekihi.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_starr_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/starr.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_beach_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/beach.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_toudai_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/toudai.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_tam_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/tam.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_hakab_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/hakab.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([35.248948, 139.735992], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/cyari.png' target='_blank'><img src='https://lek3map.github.io/thailand/picture/cyari.png' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>横須賀</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.248948,139.735992' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([35.249082, 139.737459], {icon: icon_fune_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/ybMa8i6xwuWakepW6' target='_blank'><img src='https://lh3.googleusercontent.com/kVi7u04cMgWDiMHpi1uKxd6bnnx9gLtEM_ZvRdRzkRfnI5sIlbnFOQfq1JRR7Z4gYGcRCmQHomnCig=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>鴨居港</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市鴨居３丁目１５−１１</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>横須賀風物百選</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.249082,139.737459' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[2] = L.marker([35.248629, 139.73746], {icon: icon_irei_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/FpLtu4Rj1UhQG1SH9' target='_blank'><img src='https://lh3.googleusercontent.com/_5OWMd0FwYWoITHtfcOmdAJzVZia3f9DZ7wFmKAcEZz2UyGd_7SCvvAvK5vDiI1khhKzFmcI4OQ7oA=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>駆逐艦村雨慰霊碑</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市鴨居３丁目１５</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.248629,139.73746' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[3] = L.marker([35.24859, 139.737419], {icon: icon_sekihi_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/Bv8Kh2jEJVXxqF5W9' target='_blank'><img src='https://lh3.googleusercontent.com/2s1xDpYBxx5YqzLrT_-9uwxdngHrw50GWxi6J5m99taz99GK9GOL5_aaIQhzJORUepe9ebtUmyj0Kw=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>観音寺跡</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市鴨居３丁目１５−２</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>三浦第十四番札所</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.24859,139.737419' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[4] = L.marker([35.251383, 139.740171], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/57qmXqiUUWgrfzt86' target='_blank'><img src='https://lh3.googleusercontent.com/HZ3ZJKlE2Tzi4WIa4KydQ05Ge4WSewNfLFY_3PWcp8PZx0n3hYXAw0Dr0VWKXe1NUFAXDKKvNW6wXw=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>トーチカ</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市鴨居３丁目</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.251383,139.740171' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[5] = L.marker([35.251563, 139.740932], {icon: icon_beach_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/vqQ9JNufW1sY1UAo8' target='_blank'><img src='https://lh3.googleusercontent.com/msY8hvePUUPE5Eo93n_we6yso4hFMoEO40X9dAQr-DyZbj9Z64kEPXd1Dcb_CRNoxveXuclTSf07TQ=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>たたら浜</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市鴨居４丁目１１２０</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.251563,139.740932' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[6] = L.marker([35.253452, 139.747232], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/TXHft7b7FVwpM8Lp7' target='_blank'><img src='https://lh3.googleusercontent.com/b9KYJDWj9YLk0h4zBZauk5hNGgc3HuPlB5yD9OzSdcHEixPHAaAX7Jy-YhsUZR6ewNO0cK4Vi5p_iw=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>水中聴音所</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市鴨居４丁目</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.253452,139.747232' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[7] = L.marker([35.252297, 139.743279], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/WH8xGhageT41yVVT9' target='_blank'><img src='https://lh3.googleusercontent.com/MwOMEYczLFhrvJqG_5Kf1qhyn5d8-2aQ44ZZSlz1VLN0Am_vdIgrruvB8AyLi2W3SMGWaAEWGWOjJw=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>展望園（砲台跡）</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市鴨居４丁目１１２０</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.252297,139.743279' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[8] = L.marker([35.254286, 139.740766], {icon: icon_sekihi_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/mLTCZsVakREFFvFU8' target='_blank'><img src='https://lh3.googleusercontent.com/BKK8EUPoS5L7IQKAb9O6y39qJZm_HQ-sPlmM0Z7niYXiU3MDwKXGefjY39ZEQHd5k6b0epUEHss7Pg=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>戦没船員の碑</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市鴨居３丁目</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>観音崎公園</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.254286,139.740766' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[9] = L.marker([35.255168, 139.744582], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/9CZKvq5DwBUsh7cQ7' target='_blank'><img src='https://lh3.googleusercontent.com/pQ9G2HQdVJlClka9An_Kb9jlwmMmhzS8v3WRK7fta17OX-ekAkxLV0GQCCWfuEM5-XpomQeQbgvuSg=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>北門第一砲台跡</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市鴨居４丁目１１８７</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.255168,139.744582' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[10] = L.marker([35.256138, 139.745261], {icon: icon_toudai_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/V98Ug5pYa6FzFcy79' target='_blank'><img src='https://lh3.googleusercontent.com/f4pZOcAWDslU_tPdWEEVLCmGHdrSLZjkxxg_hQUA3ivHMEUU86Nw26qUFt6yfPA-r8Fp-UdZYlWV3Q=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>観音埼灯台</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市鴨居４丁目１１８７</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>日本最古の洋式灯台、灯台五十選、横須賀風物百選</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.256138,139.745261' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[11] = L.marker([35.257481, 139.744689], {icon: icon_tam_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/tCjVJtMGSkVTMQfVA' target='_blank'><img src='https://lh3.googleusercontent.com/VWjDPRiRg4YHkrC1tmLYR2E_7M_e43uCzdj0rsKl9tKa37qvTGteDxaSaIZSTuac_xRFSpmOsFAw7Q=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>洞窟</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市鴨居４丁目１１９５</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.257481,139.744689' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[12] = L.marker([35.258203, 139.744051], {icon: icon_hakab_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/jikxkfckdgVZj2RV9' target='_blank'><img src='https://lh3.googleusercontent.com/-I3JhGfkcTnCDe_q-ViiVcB8WYQBktGYVHk64QhVcLMt-HIGc0659JhLNktfjbg3FJb70L0dVxdgnA=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>寂光土</h3><div style='color:#666; font-size:1.1em;'>神奈川県横須賀市鴨居４丁目１１９５</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=35.258203,139.744051' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>
