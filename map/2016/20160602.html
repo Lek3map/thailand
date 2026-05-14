@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2016年06月02日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2016年06月02日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2016年06月02日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' title='出発地'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[16.22416695, 103.27492279], [16.22291599, 103.2746668], [16.22349674, 103.27476388], [16.22343609, 103.27383309], [16.2234473, 103.27271564], [16.22335817, 103.27201732], [16.22913433, 103.27100389], [16.23165163, 103.27085182], [16.23285616, 103.27069166], [16.23331401, 103.2706208], [16.23372046, 103.27021374], [16.23432324, 103.2695045], [16.23485799, 103.26894009], [16.23579842, 103.26790499], [16.23622168, 103.26701443], [16.2364519, 103.26636331], [16.23657123, 103.26558471], [16.23656653, 103.26519698], [16.23647975, 103.26479178], [16.23636856, 103.26429124], [16.23609794, 103.26387615], [16.23589331, 103.26343731], [16.2357786, 103.26329256], [16.23601075, 103.26275169], [16.23633013, 103.26205411], [16.23668288, 103.26143408], [16.23715228, 103.26069251], [16.23786853, 103.25937054], [16.23827243, 103.25854246], [16.23823002, 103.25844913], [16.23821026, 103.2584199], [16.2381768, 103.25838522], [16.23811182, 103.2583979], [16.23778666, 103.25824454], [16.23743653, 103.25835664], [16.23694535, 103.25846855], [16.2364571, 103.25860902], [16.2360137, 103.25864912], [16.23557539, 103.25886888], [16.23534392, 103.25902337], [16.23524875, 103.25905889], [16.23526179, 103.25887615], [16.2353021, 103.25874916], [16.23529283, 103.25875125], [16.23528402, 103.25875685], [16.23524424, 103.25874534]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([16.224167, 103.274923], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/aruki.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>マハサラカム</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=16.224167,103.274923' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>
