@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2016年07月27日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2016年07月27日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2016年07月27日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh3.googleusercontent.com/Yap8OKnYMSO0WAxbXu74DE52So7wSFuA9HtZjTlrAWXAwaNa4yqanEe-qNXuMtCi05MmRq8PpIXI-g=w680-h510-k' title='抗日碑＠サンダカン'></div>
+<div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lh3.googleusercontent.com/BeWyJfZmu3W8KfmnU7YvufIpl0k_TeysgS4bVs_HdVmk3oFDZfzi1d8hr8hMKfvHa_p9vGDBCTNsAw=w680-h510-k' title='サンダカン日本人墓地'></div>
+<div class='photo-thumb' onclick='moveToMarker(3)'><img src='https://lh3.googleusercontent.com/qpRgSxMd6Xdg-AzEMSG2sQpek7vtyt_QSSUIKamUBiCsDh0WMsZQ1kZIumtTlRuieiSdrCA1yxODNQ=w680-h510-k' title='サンダカン博物館周辺'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[5.841071, 118.118347], [5.840662, 118.118141], [5.840231, 118.118011], [5.840075, 118.117592], [5.840327, 118.117233], [5.840537, 118.116837], [5.840581, 118.116386], [5.840714, 118.115952], [5.841165, 118.115997], [5.841361, 118.116409], [5.841556, 118.116821], [5.841841, 118.117172], [5.842037, 118.117569], [5.842484, 118.1175], [5.842524, 118.117935], [5.842748, 118.11834], [5.842813, 118.11879], [5.842957, 118.119225], [5.842834, 118.119659], [5.842631, 118.120079], [5.842658, 118.120529], [5.842371, 118.120895], [5.842706, 118.121201], [5.842912, 118.121605], [5.842865, 118.122055], [5.842992, 118.122498], [5.843204, 118.12291], [5.843468, 118.123283], [5.843597, 118.123726], [5.843695, 118.124161], [5.843467, 118.12455], [5.843721, 118.124184], [5.843703, 118.123726], [5.843584, 118.123283], [5.843265, 118.122948], [5.843075, 118.122536], [5.842882, 118.122131], [5.842893, 118.121674], [5.842898, 118.121223], [5.842468, 118.121086], [5.842593, 118.120651], [5.842648, 118.120186], [5.842816, 118.119766], [5.843092, 118.119408], [5.842851, 118.119019], [5.842855, 118.118561], [5.842703, 118.118134], [5.842674, 118.117683], [5.842224, 118.117607], [5.841849, 118.117355], [5.841581, 118.116989], [5.841404, 118.116562], [5.841219, 118.11615], [5.840838, 118.115891], [5.840485, 118.116135], [5.840297, 118.116562], [5.839996, 118.116203], [5.840424, 118.115929], [5.839911, 118.116066], [5.839785, 118.115639], [5.839616, 118.115074], [5.839942, 118.11541], [5.840184, 118.116066], [5.839903, 118.115707], [5.839452, 118.115746], [5.839276, 118.116173], [5.838832, 118.116234], [5.838414, 118.116394], [5.838105, 118.116058], [5.837717, 118.115814], [5.838043, 118.116135], [5.838362, 118.116463], [5.838225, 118.116898], [5.838331, 118.11734], [5.838605, 118.117706], [5.838906, 118.118034], [5.839015, 118.118477], [5.839231, 118.118919], [5.839678, 118.118874], [5.839722, 118.118423], [5.839518, 118.118004]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_sekihi_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/sekihi.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_hakab_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/hakab.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_yakata_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/yakata.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([5.841071, 118.118347], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/aruki.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>サンダカン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=5.841071,118.118347' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([5.842722, 118.121183], {icon: icon_sekihi_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/UjRGBReNKztsvmir6' target='_blank'><img src='https://lh3.googleusercontent.com/Yap8OKnYMSO0WAxbXu74DE52So7wSFuA9HtZjTlrAWXAwaNa4yqanEe-qNXuMtCi05MmRq8PpIXI-g=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>抗日碑＠サンダカン</h3><div style='color:#666; font-size:1.1em;'>サンダカン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=5.842722,118.121183' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[2] = L.marker([5.843596, 118.124775], {icon: icon_hakab_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/4rhqejbN9EMiGhJz8' target='_blank'><img src='https://lh3.googleusercontent.com/BeWyJfZmu3W8KfmnU7YvufIpl0k_TeysgS4bVs_HdVmk3oFDZfzi1d8hr8hMKfvHa_p9vGDBCTNsAw=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>サンダカン日本人墓地</h3><div style='color:#666; font-size:1.1em;'>サンダカン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=5.843596,118.124775' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[3] = L.marker([5.839876, 118.11625], {icon: icon_yakata_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/b2uFSqBkEqanmbYf9' target='_blank'><img src='https://lh3.googleusercontent.com/qpRgSxMd6Xdg-AzEMSG2sQpek7vtyt_QSSUIKamUBiCsDh0WMsZQ1kZIumtTlRuieiSdrCA1yxODNQ=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>サンダカン博物館周辺</h3><div style='color:#666; font-size:1.1em;'>サンダカン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=5.839876,118.11625' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>

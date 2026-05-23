@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2016年07月26日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2016年07月26日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2016年07月26日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh3.googleusercontent.com/-zz7nRFgAKMA/V5xrY6a3XQI/AAAAAAAAoRw/YqVsb94lfnYixIuoSFcfdouELFQ6nYnEgCCo/s680/160726003.jpg' title='サンダカンミニバスターミナル'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[5.838834, 118.117096], [5.83874, 118.116661], [5.838372, 118.116379], [5.838135, 118.115982], [5.83795, 118.115562], [5.837519, 118.115715], [5.837914, 118.115692], [5.838291, 118.115944], [5.838515, 118.116333], [5.838355, 118.116753], [5.838438, 118.11721], [5.83854, 118.117653], [5.839103, 118.117722], [5.838677, 118.117981], [5.839051, 118.118233], [5.839144, 118.118675], [5.839144, 118.11908], [5.838733, 118.118965], [5.838285, 118.118797], [5.838515, 118.119164], [5.838861, 118.119453], [5.839327, 118.119614], [5.839312, 118.120071], [5.839709, 118.119858], [5.840179, 118.119743], [5.840073, 118.119301], [5.839966, 118.118858], [5.840322, 118.118576], [5.840721, 118.118355], [5.840947, 118.118752], [5.841162, 118.119148], [5.840745, 118.11898], [5.841067, 118.118874], [5.841065, 118.118431], [5.840737, 118.118156], [5.840785, 118.117699], [5.840862, 118.118141], [5.840559, 118.118294], [5.840188, 118.118042], [5.839898, 118.117691], [5.839433, 118.117699], [5.839871, 118.117714], [5.839868, 118.118088], [5.840129, 118.118462]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_bus_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/bus.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([5.838834, 118.117096], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/aruki.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>サンダカン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=5.838834,118.117096' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([5.837603, 118.115759], {icon: icon_bus_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/88ZNmTe6K9KSxr1W6' target='_blank'><img src='https://lh3.googleusercontent.com/-zz7nRFgAKMA/V5xrY6a3XQI/AAAAAAAAoRw/YqVsb94lfnYixIuoSFcfdouELFQ6nYnEgCCo/s680/160726003.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>サンダカンミニバスターミナル</h3><div style='color:#666; font-size:1.1em;'>サンダカン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=5.837603,118.115759' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2016年07月31日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2016年07月31日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2016年07月31日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh3.googleusercontent.com/4_5ouk8Bs5oSfcFEoNDmQeRj9Mwbxj7vmLFDEECCkZwATJPXbgyJedFkWhC9WP_Dd4ViVc6rvV7vyg=w680-h510-k' title='タワウ魚市場'></div>
+<div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lh3.googleusercontent.com/-mkW-SDqXGtM/V52-6u9nzLI/AAAAAAAAoZQ/3NWjd2COLyYPrpb40KAQwpoFuEVHMIJ0QCCo/s680/160731014.jpg' title='0 Km'></div>
+<div class='photo-thumb' onclick='moveToMarker(3)'><img src='https://lh3.googleusercontent.com/nefvd26H1Upf1DVpyQkJpyLjkZCGJ8RYJlbkcHxWN1n3pKnW01PDVpIfhttbs4BY4q-ZcGDa69MDZA=w680-h510-k' title='Bell Tower'></div>
+<div class='photo-thumb' onclick='moveToMarker(4)'><img src='https://lh3.googleusercontent.com/s6bOxlJn2-h0hXzWnhHmeH3Z6zkBdA3w2oj7pmaLbtBPwhPnMJqHEVEDPFuWB49yow8A5yAKR1UeMg=w680-h510-k' title='タワウフェリーターミナル'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[4.242933, 117.886826], [4.24267, 117.88681], [4.242337, 117.886902], [4.241913, 117.886879], [4.241462, 117.886925], [4.241009, 117.886986], [4.240799, 117.886612], [4.24075, 117.886169], [4.240997, 117.885796], [4.241396, 117.885582], [4.241743, 117.885284], [4.241999, 117.884918], [4.242072, 117.88446], [4.242414, 117.884163], [4.242826, 117.88398], [4.243276, 117.883934], [4.243561, 117.883583], [4.243709, 117.883148], [4.243915, 117.882729], [4.244095, 117.882317], [4.244346, 117.881935], [4.244772, 117.881783], [4.24521, 117.881897], [4.245567, 117.882202], [4.245178, 117.882446], [4.244724, 117.882462], [4.244419, 117.88279], [4.243961, 117.882813], [4.243875, 117.883263], [4.243664, 117.883659], [4.243199, 117.883675], [4.242762, 117.883797], [4.242453, 117.88414], [4.24228, 117.884567], [4.241901, 117.884804], [4.241892, 117.885262], [4.241929, 117.885704], [4.242365, 117.885857], [4.242769, 117.886101], [4.242911, 117.886528], [4.24333, 117.886703], [4.243779, 117.886612], [4.244232, 117.886681], [4.244697, 117.886696], [4.245267, 117.886635], [4.244819, 117.886803], [4.244997, 117.886406], [4.244585, 117.886559], [4.24474, 117.886993], [4.244795, 117.887436], [4.244599, 117.887856], [4.244506, 117.887413], [4.24447, 117.886955], [4.244699, 117.886559], [4.245159, 117.886536], [4.244947, 117.886253], [4.244709, 117.886635], [4.244576, 117.888145], [4.244136, 117.888008], [4.244029, 117.888458], [4.243871, 117.888885], [4.243828, 117.889343], [4.243513, 117.889671], [4.243398, 117.890106], [4.243406, 117.890564], [4.243669, 117.89093], [4.243706, 117.891388], [4.244071, 117.891678], [4.244095, 117.891212], [4.244125, 117.890762], [4.244017, 117.890327], [4.243915, 117.889893], [4.24379, 117.88945], [4.243649, 117.889], [4.243742, 117.888565], [4.243715, 117.8881], [4.243452, 117.887733], [4.243143, 117.887383], [4.24291, 117.886993], [4.242466, 117.887077], [4.242848, 117.886833], [4.243303, 117.886757], [4.243729, 117.886604], [4.244199, 117.886581], [4.244655, 117.886497], [4.244803, 117.886925]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_market_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/market.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_other_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/other.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_starr_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/starr.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_fune_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/fune.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([4.242933, 117.886826], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/aruki.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>タワウ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=4.242933,117.886826' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([4.242294, 117.883805], {icon: icon_market_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/wdHeSvLmYf8JDhBt6' target='_blank'><img src='https://lh3.googleusercontent.com/4_5ouk8Bs5oSfcFEoNDmQeRj9Mwbxj7vmLFDEECCkZwATJPXbgyJedFkWhC9WP_Dd4ViVc6rvV7vyg=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>タワウ魚市場</h3><div style='color:#666; font-size:1.1em;'>タワウ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=4.242294,117.883805' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[2] = L.marker([4.244763, 117.88181], {icon: icon_other_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/ZXBVf9nmBU4kFpo58' target='_blank'><img src='https://lh3.googleusercontent.com/-mkW-SDqXGtM/V52-6u9nzLI/AAAAAAAAoZQ/3NWjd2COLyYPrpb40KAQwpoFuEVHMIJ0QCCo/s680/160731014.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>0 Km</h3><div style='color:#666; font-size:1.1em;'>タワウ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=4.244763,117.88181' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[3] = L.marker([4.244904, 117.881709], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/vYLxfng2Dbv64cNW8' target='_blank'><img src='https://lh3.googleusercontent.com/nefvd26H1Upf1DVpyQkJpyLjkZCGJ8RYJlbkcHxWN1n3pKnW01PDVpIfhttbs4BY4q-ZcGDa69MDZA=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Bell Tower</h3><div style='color:#666; font-size:1.1em;'>タワウ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=4.244904,117.881709' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[4] = L.marker([4.242252, 117.882985], {icon: icon_fune_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/yPYGtPusqqBwgUfe7' target='_blank'><img src='https://lh3.googleusercontent.com/s6bOxlJn2-h0hXzWnhHmeH3Z6zkBdA3w2oj7pmaLbtBPwhPnMJqHEVEDPFuWB49yow8A5yAKR1UeMg=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>タワウフェリーターミナル</h3><div style='color:#666; font-size:1.1em;'>タワウ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=4.242252,117.882985' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2016年07月29日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2016年07月29日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2016年07月29日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh3.googleusercontent.com/EEyyO7I9FwFyqKyBMOaZeqcyMejRYjw_BMOKlbbk2QkQKkjDle9skTHB52anqx-ckytDTplEMyy73g=w680-h510-k' title='タワウバスターミナル'></div>
+<div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lh3.googleusercontent.com/Vla8txHcPotMqQCbOekHLFl84KC3dVvIBRbNu7oTra03AR4mErd_rBQRxmMDi9C_kVLBlubLGAKn7UQ=w680-h510-rw' title='モニュメント＠タワウ'></div>
+<div class='photo-thumb' onclick='moveToMarker(3)'><img src='https://lh3.googleusercontent.com/-FjjtMZpeZqU/V5xwnlGka2I/AAAAAAAAoTI/B5LU0ZVpmjYv5OGg3vNbHGjQaCMXyWWkwCCo/s680/160729015.jpg' title='イクスプレスバスターミナル'></div>
+<div class='photo-thumb' onclick='moveToMarker(4)'><img src='https://lh3.googleusercontent.com/HP3-cwPy0T0JoKW3qTG432A8tImiMTB5FyGFw2QAOwARllnjkD5hu6DmwqZleuU-rgpx8rOORN9S6Q=w680-h510-k' title='Al-khauthar Mosque'></div>
+<div class='photo-thumb' onclick='moveToMarker(5)'><img src='https://lh3.googleusercontent.com/TOFmsp1AleFl8m-HR6Bn05OlLS3GvpVTnSUT0LopprgPEV0Oe9YYFerQCY4t0ZyhM2JNWQMdrTRiuQ=w680-h510-k' title='時計台＠タワウ'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[4.245512, 117.886436], [4.245457, 117.886002], [4.245163, 117.885658], [4.244868, 117.885323], [4.244417, 117.885361], [4.243969, 117.885284], [4.243519, 117.885368], [4.243078, 117.885513], [4.242628, 117.885567], [4.242175, 117.885628], [4.241726, 117.885712], [4.241279, 117.885635], [4.240957, 117.885963], [4.240825, 117.886398], [4.240917, 117.886833], [4.241339, 117.887009], [4.241801, 117.887054], [4.242239, 117.886909], [4.242396, 117.887344], [4.242499, 117.887787], [4.242542, 117.888237], [4.242595, 117.888687], [4.242702, 117.88913], [4.242651, 117.889587], [4.242793, 117.890015], [4.242904, 117.890465], [4.242877, 117.890915], [4.242822, 117.891365], [4.243101, 117.891724], [4.243256, 117.892159], [4.243289, 117.892601], [4.243309, 117.893059], [4.243452, 117.893494], [4.243892, 117.8936], [4.244054, 117.894028], [4.243657, 117.894295], [4.243601, 117.894753], [4.243177, 117.894913], [4.242726, 117.894814], [4.242274, 117.894821], [4.242297, 117.895279], [4.242755, 117.895317], [4.243199, 117.895393], [4.243651, 117.895271], [4.244102, 117.895203], [4.244538, 117.895332], [4.244933, 117.895103], [4.244732, 117.894699], [4.244689, 117.894234], [4.244664, 117.893784], [4.244453, 117.893379], [4.244236, 117.892967], [4.244517, 117.892616], [4.244494, 117.892151], [4.244042, 117.892143], [4.244006, 117.892601], [4.244119, 117.893051], [4.243737, 117.89286], [4.243563, 117.892426], [4.243226, 117.892143], [4.243555, 117.891846], [4.244008, 117.891891], [4.244452, 117.891769], [4.244402, 117.891327], [4.244091, 117.890968], [4.243956, 117.890541], [4.243826, 117.890099], [4.243778, 117.889648], [4.243815, 117.889191], [4.243744, 117.888756], [4.24391, 117.888344], [4.244332, 117.888153], [4.24444, 117.887726]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_bus_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/bus.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_monument_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/monument.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_mosk_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/mosk.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_clock_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/clock.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([4.245512, 117.886436], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/aruki.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>タワウ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=4.245512,117.886436' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([4.24478, 117.885108], {icon: icon_bus_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/uvYkc5NVjpLkWSax8' target='_blank'><img src='https://lh3.googleusercontent.com/EEyyO7I9FwFyqKyBMOaZeqcyMejRYjw_BMOKlbbk2QkQKkjDle9skTHB52anqx-ckytDTplEMyy73g=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>タワウバスターミナル</h3><div style='color:#666; font-size:1.1em;'>タワウ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=4.24478,117.885108' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[2] = L.marker([4.246313, 117.880328], {icon: icon_monument_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/AdCSbNwgtQfhY26R9' target='_blank'><img src='https://lh3.googleusercontent.com/Vla8txHcPotMqQCbOekHLFl84KC3dVvIBRbNu7oTra03AR4mErd_rBQRxmMDi9C_kVLBlubLGAKn7UQ=w680-h510-rw' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>モニュメント＠タワウ</h3><div style='color:#666; font-size:1.1em;'>タワウ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=4.246313,117.880328' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[3] = L.marker([4.242785, 117.891108], {icon: icon_bus_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/uY9GP8dj8Kj2Skha8' target='_blank'><img src='https://lh3.googleusercontent.com/-FjjtMZpeZqU/V5xwnlGka2I/AAAAAAAAoTI/B5LU0ZVpmjYv5OGg3vNbHGjQaCMXyWWkwCCo/s680/160729015.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>イクスプレスバスターミナル</h3><div style='color:#666; font-size:1.1em;'>タワウ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=4.242785,117.891108' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[4] = L.marker([4.243316, 117.894304], {icon: icon_mosk_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/iWjhJR9TkNr5ocRj6' target='_blank'><img src='https://lh3.googleusercontent.com/HP3-cwPy0T0JoKW3qTG432A8tImiMTB5FyGFw2QAOwARllnjkD5hu6DmwqZleuU-rgpx8rOORN9S6Q=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Al-khauthar Mosque</h3><div style='color:#666; font-size:1.1em;'>タワウ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=4.243316,117.894304' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[5] = L.marker([4.244649, 117.895138], {icon: icon_clock_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/81Br2pHcu1PM8F8T8' target='_blank'><img src='https://lh3.googleusercontent.com/TOFmsp1AleFl8m-HR6Bn05OlLS3GvpVTnSUT0LopprgPEV0Oe9YYFerQCY4t0ZyhM2JNWQMdrTRiuQ=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>時計台＠タワウ</h3><div style='color:#666; font-size:1.1em;'>タワウ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=4.244649,117.895138' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>

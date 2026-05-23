@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2016年07月30日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2016年07月30日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2016年07月30日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh3.googleusercontent.com/-4ASrHX-V9Bc/V5xlUit7UbI/AAAAAAAAoQo/jwwC0wmuAkYKegrFCOMmkuSephkaezITgCCo/s680/160730006.jpg' title='Al Aman Mosque'></div>
+<div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lh3.googleusercontent.com/7L_XYB1fqx5hjreC7ON9MxIiaRqUmIJjaYBkJMgziJp0XdAyqZaKt_zD7SZY5ZFHac2uc84zOmBcTw=w680-h510-k' title='タワウ日本人墓地'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[4.244365, 117.885094], [4.244483, 117.885468], [4.244583, 117.885231], [4.24479, 117.884842], [4.245002, 117.884445], [4.245245, 117.884048], [4.245381, 117.883621], [4.245499, 117.883186], [4.245614, 117.882744], [4.245707, 117.882301], [4.24577, 117.881844], [4.245946, 117.881424], [4.246241, 117.881081], [4.24647, 117.880692], [4.246221, 117.880318], [4.246662, 117.880432], [4.247045, 117.880203], [4.247417, 117.879936], [4.247804, 117.879684], [4.248184, 117.879425], [4.248572, 117.879196], [4.249008, 117.879051], [4.24945, 117.878952], [4.249884, 117.878838], [4.250329, 117.878716], [4.250765, 117.878578], [4.251168, 117.878372], [4.251611, 117.87825], [4.252037, 117.878082], [4.25246, 117.877907], [4.252902, 117.877861], [4.253328, 117.877693], [4.253771, 117.877594], [4.254227, 117.877586], [4.254672, 117.87767], [4.255098, 117.877823], [4.255426, 117.878143], [4.255796, 117.878387], [4.256226, 117.878548], [4.25669, 117.878593], [4.257138, 117.878517], [4.257594, 117.878456], [4.258052, 117.87841], [4.258499, 117.878326], [4.258963, 117.878288], [4.259419, 117.878319], [4.259878, 117.87838], [4.260319, 117.878487], [4.260762, 117.878578], [4.261206, 117.878532], [4.261652, 117.878601], [4.262104, 117.878525], [4.262529, 117.878365], [4.262953, 117.878197], [4.263402, 117.878082], [4.263858, 117.878067], [4.264321, 117.878059], [4.264764, 117.878151], [4.265207, 117.87825], [4.265527, 117.878578], [4.265981, 117.878548], [4.266431, 117.878525], [4.266888, 117.878517], [4.267203, 117.878189], [4.2671, 117.877747], [4.26685, 117.87812], [4.266512, 117.877808], [4.266893, 117.877556], [4.267112, 117.87796], [4.267229, 117.878395], [4.2668, 117.878548], [4.266343, 117.878609], [4.265883, 117.878639], [4.265439, 117.878555], [4.265068, 117.878281], [4.264625, 117.878166], [4.264166, 117.878136], [4.263705, 117.878113], [4.263248, 117.878128], [4.262821, 117.878288], [4.262404, 117.878471], [4.261965, 117.878593], [4.261511, 117.878677], [4.261063, 117.878769], [4.260636, 117.878624], [4.260185, 117.878517], [4.259734, 117.878464], [4.259273, 117.878426], [4.258821, 117.87841], [4.258376, 117.878487], [4.257926, 117.878571], [4.257472, 117.878616], [4.257013, 117.878639], [4.256561, 117.878662], [4.256103, 117.878662], [4.255684, 117.878471], [4.255354, 117.878174], [4.255016, 117.877869], [4.254604, 117.877663], [4.254152, 117.877632], [4.253707, 117.877739], [4.253267, 117.877846], [4.252832, 117.877975], [4.252395, 117.878105], [4.251945, 117.878189], [4.25154, 117.878387], [4.251124, 117.878586], [4.250696, 117.878731], [4.250266, 117.878891], [4.249816, 117.878975], [4.249386, 117.87912], [4.24895, 117.879227], [4.248507, 117.879356], [4.248132, 117.879608], [4.247755, 117.87986], [4.247386, 117.880127], [4.247016, 117.880394], [4.246643, 117.880653], [4.246346, 117.880997], [4.246008, 117.881294], [4.245803, 117.881699], [4.245746, 117.882149], [4.245843, 117.882591], [4.245747, 117.883026], [4.245549, 117.883446], [4.245428, 117.883904], [4.245085, 117.884232], [4.244918, 117.884659], [4.245149, 117.88427], [4.24489, 117.884636], [4.244838, 117.885101]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_inori_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/inori.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_hakab_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/hakab.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([4.244365, 117.885094], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/aruki.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>タワウ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=4.244365,117.885094' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([4.261725, 117.87831], {icon: icon_inori_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/6krTuJkrS877V46c7' target='_blank'><img src='https://lh3.googleusercontent.com/-4ASrHX-V9Bc/V5xlUit7UbI/AAAAAAAAoQo/jwwC0wmuAkYKegrFCOMmkuSephkaezITgCCo/s680/160730006.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Al Aman Mosque</h3><div style='color:#666; font-size:1.1em;'>タワウ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=4.261725,117.87831' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[2] = L.marker([4.267159, 117.878299], {icon: icon_hakab_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/pRwrtKLf2K58Hy2d7' target='_blank'><img src='https://lh3.googleusercontent.com/7L_XYB1fqx5hjreC7ON9MxIiaRqUmIJjaYBkJMgziJp0XdAyqZaKt_zD7SZY5ZFHac2uc84zOmBcTw=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>タワウ日本人墓地</h3><div style='color:#666; font-size:1.1em;'>タワウ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=4.267159,117.878299' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>
