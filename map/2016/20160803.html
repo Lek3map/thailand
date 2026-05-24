@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2016年08月03日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2016年08月03日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2016年08月03日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh3.googleusercontent.com/lYR25z0xKj1plkJqzaedsBhlkFG_XuriKSKZ540IaSY059kxmHbEUFkH5p6RtW9oIg4b88OIVxS10w=w680-h510-k' title='白頭鷲とコイ'></div>
+<div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lh3.googleusercontent.com/PVKIprtrNGqF1Mw0WNYajSbub7hld2cw6kY-l39Ghau2kcj623SdFS8T-5Ap0_MrTYH-S-aSB2Uraw=w680-h510-k' title='タワウ生鮮市場'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[4.24435, 117.885361], [4.24435, 117.885361], [4.243975, 117.885109], [4.243975, 117.885109], [4.243545, 117.885239], [4.243545, 117.885239], [4.242733, 117.884392], [4.242733, 117.884392], [4.242928, 117.884018], [4.242928, 117.884018], [4.24346, 117.884682], [4.24346, 117.884682], [4.241562, 117.884247], [4.241562, 117.884247], [4.24164, 117.884308], [4.24164, 117.884308], [4.242045, 117.88446], [4.242045, 117.88446], [4.242369, 117.884773], [4.242369, 117.884773], [4.242399, 117.885231], [4.242399, 117.885231], [4.242805, 117.885422], [4.242805, 117.885422], [4.243268, 117.885414], [4.243268, 117.885414], [4.243706, 117.885483], [4.243706, 117.885483], [4.244154, 117.885574], [4.244154, 117.885574], [4.244609, 117.885612], [4.244609, 117.885612], [4.244563, 117.88607], [4.244563, 117.88607], [4.244744, 117.886482], [4.244744, 117.886482], [4.244768, 117.886948], [4.244768, 117.886948]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_monument_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/monument.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_market_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/market.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([4.24435, 117.885361], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/aruki.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>タワウ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=4.24435,117.885361' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([4.243461, 117.88535], {icon: icon_monument_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/Z6kvWTAwdEqKcvZC8' target='_blank'><img src='https://lh3.googleusercontent.com/lYR25z0xKj1plkJqzaedsBhlkFG_XuriKSKZ540IaSY059kxmHbEUFkH5p6RtW9oIg4b88OIVxS10w=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>白頭鷲とコイ</h3><div style='color:#666; font-size:1.1em;'>タワウ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=4.243461,117.88535' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[2] = L.marker([4.243143, 117.884669], {icon: icon_market_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/GL7p4Cz5fKxHYpNP6' target='_blank'><img src='https://lh3.googleusercontent.com/PVKIprtrNGqF1Mw0WNYajSbub7hld2cw6kY-l39Ghau2kcj623SdFS8T-5Ap0_MrTYH-S-aSB2Uraw=w680-h510-k' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>タワウ生鮮市場</h3><div style='color:#666; font-size:1.1em;'>タワウ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=4.243143,117.884669' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>

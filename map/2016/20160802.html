@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2016年08月02日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2016年08月02日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2016年08月02日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh3.googleusercontent.com/-r_A6Phfhpk0/V6B_coLCSII/AAAAAAAAosk/6_GBQypVrW4aRAAFCvb2U21edkFkc6DiACCo/s680/160802025.jpg' title='マタバ'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[4.242455, 117.886772], [4.242455, 117.886772], [4.242845, 117.886665], [4.242845, 117.886665], [4.242826, 117.886246], [4.242826, 117.886246], [4.242688, 117.885841], [4.242688, 117.885841], [4.242297, 117.88562], [4.242297, 117.88562], [4.24184, 117.885544], [4.24184, 117.885544], [4.241338, 117.885643], [4.241338, 117.885643], [4.240932, 117.885811], [4.240932, 117.885811], [4.241265, 117.885498], [4.241265, 117.885498], [4.24169, 117.885338], [4.24169, 117.885338], [4.24188, 117.884926], [4.24188, 117.884926], [4.242083, 117.884521], [4.242083, 117.884521], [4.242265, 117.884102], [4.242265, 117.884102], [4.242465, 117.883682], [4.242465, 117.883682], [4.242012, 117.883629], [4.242012, 117.883629], [4.242257, 117.884003], [4.242257, 117.884003], [4.242538, 117.883644], [4.242538, 117.883644], [4.24294, 117.883835], [4.24294, 117.883835], [4.243112, 117.88427], [4.243112, 117.88427], [4.242667, 117.884377], [4.242667, 117.884377], [4.24297, 117.884827], [4.24297, 117.884827], [4.243584, 117.884895], [4.243584, 117.884895], [4.243802, 117.885292], [4.243802, 117.885292], [4.244251, 117.885223], [4.244251, 117.885223], [4.244345, 117.884789], [4.244345, 117.884789], [4.244517, 117.884377], [4.244517, 117.884377], [4.244957, 117.884483], [4.244957, 117.884483], [4.244732, 117.884872], [4.244732, 117.884872], [4.244866, 117.88533], [4.244866, 117.88533], [4.244628, 117.885757], [4.244628, 117.885757], [4.244524, 117.886192], [4.244524, 117.886192], [4.244736, 117.886589], [4.244736, 117.886589], [4.244804, 117.887039], [4.244804, 117.887039], [4.244748, 117.886589], [4.244748, 117.886589], [4.24458, 117.886925], [4.24458, 117.886925], [4.244666, 117.886185], [4.244666, 117.886185], [4.244598, 117.885994], [4.244598, 117.885994], [4.244466, 117.885567], [4.244466, 117.885567], [4.244217, 117.885193], [4.244217, 117.885193], [4.244073, 117.88475], [4.244073, 117.88475], [4.243659, 117.884567], [4.243659, 117.884567], [4.243365, 117.884209], [4.243365, 117.884209], [4.242919, 117.884079], [4.242919, 117.884079], [4.242465, 117.884056], [4.242465, 117.884056], [4.242107, 117.883766], [4.242107, 117.883766], [4.241824, 117.883423], [4.241824, 117.883423], [4.241802, 117.883217], [4.241802, 117.883217], [4.241923, 117.883553], [4.241923, 117.883553], [4.242315, 117.883781], [4.242315, 117.883781], [4.242761, 117.883873], [4.242761, 117.883873], [4.243178, 117.884056], [4.243178, 117.884056], [4.243622, 117.88414], [4.243622, 117.88414], [4.24404, 117.884323], [4.24404, 117.884323], [4.24445, 117.884521], [4.24445, 117.884521], [4.244431, 117.884979], [4.244431, 117.884979], [4.244349, 117.885422], [4.244349, 117.885422], [4.244459, 117.88588], [4.244459, 117.88588], [4.244582, 117.886314], [4.244582, 117.886314], [4.244788, 117.886711], [4.244788, 117.886711]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_other_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/other.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([4.242455, 117.886772], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/aruki.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>タワウ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=4.242455,117.886772' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([4.244007, 117.883589], {icon: icon_other_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/NQak3opQB5YqdQXz7' target='_blank'><img src='https://lh3.googleusercontent.com/-r_A6Phfhpk0/V6B_coLCSII/AAAAAAAAosk/6_GBQypVrW4aRAAFCvb2U21edkFkc6DiACCo/s680/160802025.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>マタバ</h3><div style='color:#666; font-size:1.1em;'>タワウ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=4.244007,117.883589' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>
