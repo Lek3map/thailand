@@ -20,6 +20,8 @@
 <body>
 <div id='map'></div>
 <div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2010年02月16日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh3.googleusercontent.com/pw/AP1GczM525T2S90oP2udjgslLF7lAWJbuAkQxtOSRFPnkzEPKyhxAnaRaoApg1qzSWlYR9MBhfcxVRsgFQb7iMd_22vFaoA2gWnHAtKkMqbA6z5IHyFynF2FtqUISGakSjnXeunWaXFwKoKPGBei52pxa5QprA=w1159-h869-s-no-gm?authuser=0' title='Wat Khiri wihan'></div>
+<div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lh3.googleusercontent.com/pw/AP1GczM-Jc2dL-JpfR5NPPVqeVW8_3-8r879gMxSwTDqMjt-3MW0zwf7aJJBJfDHN97veXXo6KaRnnd_YlR_EkNjRTtbAz_mnau8QFNBUoBSJW0QS2mjS_0E51ATJI6a6uNpvy5yA8u-i0LLs1gO4jZYckZKxA=w1159-h869-s-no-gm?authuser=0' title='Thale Song Hong'></div>
 </div>
 <script>
 var map = L.map('map');
@@ -38,7 +40,21 @@ var pathPoints = [[7.572228333333333, 99.61265833333333], [7.572236666666667, 99
                     iconAnchor: [15, 30],
                     popupAnchor: [0, -30]
                 });
-markers[0] = L.marker([7.572228, 99.612658], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/bike.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>トラン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=7.572228,99.612658' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+                var icon_tera_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/tera.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_starr_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/starr.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([7.572228, 99.612658], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/bike.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/bike.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=7.572228,99.612658' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([7.800361, 99.548861], {icon: icon_tera_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://goo.gl/photos/HXrV6fWbb5eDrTeJ9' target='_blank'><img src='https://lh3.googleusercontent.com/pw/AP1GczM525T2S90oP2udjgslLF7lAWJbuAkQxtOSRFPnkzEPKyhxAnaRaoApg1qzSWlYR9MBhfcxVRsgFQb7iMd_22vFaoA2gWnHAtKkMqbA6z5IHyFynF2FtqUISGakSjnXeunWaXFwKoKPGBei52pxa5QprA=w1159-h869-s-no-gm?authuser=0' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Wat Khiri wihan</h3><div style='color:#666; font-size:1.1em;'>トラン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=7.800361,99.548861' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[2] = L.marker([7.857306, 99.476417], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/xWWnTXLtj5sMUP3s9' target='_blank'><img src='https://lh3.googleusercontent.com/pw/AP1GczM-Jc2dL-JpfR5NPPVqeVW8_3-8r879gMxSwTDqMjt-3MW0zwf7aJJBJfDHN97veXXo6KaRnnd_YlR_EkNjRTtbAz_mnau8QFNBUoBSJW0QS2mjS_0E51ATJI6a6uNpvy5yA8u-i0LLs1gO4jZYckZKxA=w1159-h869-s-no-gm?authuser=0' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Thale Song Hong</h3><div style='color:#666; font-size:1.1em;'>トラン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=7.857306,99.476417' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
 
 
 if (pathPoints.length > 0) {
