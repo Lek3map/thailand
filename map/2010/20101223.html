@@ -20,6 +20,7 @@
 <body>
 <div id='map'></div>
 <div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2010年12月23日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/kuruma.jpg' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh3.googleusercontent.com/pw/AP1GczP64u6UuUM1AlWCa_RxJoRka1Lw4LDsUgPRlR55EsFkGpylIexglfM-qsEDl9eONH1iXWA1P-fXMQv2W95G2JANzEQwWTmOLbsvEGBfs_IZpmYJV7BNUzM0MivfFOlQELyfDvO4X5SJF2N-ZtxXEFFGMA=w1301-h869-s-no-gm?authuser=0' title='Wat Kaeo Manee Si Mahathat'></div>
 </div>
 <script>
 var map = L.map('map');
@@ -38,7 +39,14 @@ var pathPoints = [[7.879465, 98.38865], [7.878008333333334, 98.38922166666667], 
                     iconAnchor: [15, 30],
                     popupAnchor: [0, -30]
                 });
+                var icon_tera_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/tera.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
 markers[0] = L.marker([7.879465, 98.38865], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/kuruma.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/kuruma.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>プーケット</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=7.879465,98.38865' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([8.334738, 98.426313], {icon: icon_tera_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/mUjWhhpa63QaniTZ7' target='_blank'><img src='https://lh3.googleusercontent.com/pw/AP1GczP64u6UuUM1AlWCa_RxJoRka1Lw4LDsUgPRlR55EsFkGpylIexglfM-qsEDl9eONH1iXWA1P-fXMQv2W95G2JANzEQwWTmOLbsvEGBfs_IZpmYJV7BNUzM0MivfFOlQELyfDvO4X5SJF2N-ZtxXEFFGMA=w1301-h869-s-no-gm?authuser=0' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Wat Kaeo Manee Si Mahathat</h3><div style='color:#666; font-size:1.1em;'>パンガー</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=8.334738,98.426313' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
 
 
 if (pathPoints.length > 0) {
