@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2017年07月21日の地図日記">
+<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:type" content="website">
+<title>2017年07月21日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2017年07月21日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/aruki.png' title='出発地'></div>
+<div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lh3.googleusercontent.com/jQhMc7cMYUphKseV-vxhwu0636r-nXCp0F-Z8uqCCV0htfxA-_Q7UXnigzXfIefJtKtV8sND1Tpczd31Mx8W9r8dWZAPEJNd_1j5kL3lnvO0FGgXvjCpBxoTaEEDxj-b1tFRyEDrGr0' title='カルガリー ⇒ バンクーバー'></div>
+<div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lh3.googleusercontent.com/y1Lz0EL7kRUvU0RtwX13ZZhg6nLIS71R_0b1Uc7CZyvvk9gTqJCgYXIqxqo3-hn7IOwpaUkW81XGMRjcGmlvm8r-dGVHRXMqt_JiwX5U0RWQCZhyJGAOP9VZcD4Y-lJPaw6PyK4y3lc' title='バンクーバー空港'></div>
+<div class='photo-thumb' onclick='moveToMarker(4)'><img src='https://lh3.googleusercontent.com/gnObejzcXTKPIAw5X3LbkEnWhzHdIBZp308HmDONgGvzMG50OuHvWHWTnWT1taDejNty_8ZDuI2Ets0O3Uogn4DnlC3eo_9nJQKfCAcIiIdw2R3mY1mBlVkpYlhisWkVOawRmXDCTgg' title='バンクーバー ⇒ 羽田'></div>
+<div class='photo-thumb' onclick='moveToMarker(5)'><img src='https://lek3map.github.io/thailand/picture/hyoushi_note.png' title='日付変更線'></div>
+</div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[51.1315, -114.0106], [50.822963, -116.101799], [50.152156, -119.386368], [49.263254, -122.728937], [49.235891, -122.948454], [49.269135, -123.273833], [49.265564, -123.279884], [49.213448, -123.281879], [49.211205, -123.230381], [49.1947, -123.1792], [49.1967, -123.1815], [52.0, -140.0], [54.0, -160.0], [53.0, -179.9999999]];
+
+
+                var icon_start_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_starr_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/starr.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_plane_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/plane.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+                var icon_end_png = L.icon({
+                    iconUrl: 'https://lek3map.github.io/thailand/icon/end.png',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30],
+                    popupAnchor: [0, -30]
+                });
+markers[0] = L.marker([51.1315, -114.0106], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://lek3map.github.io/thailand/picture/aruki.png' target='_blank'><img src='https://lek3map.github.io/thailand/picture/aruki.png' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>出発地</h3><div style='color:#666; font-size:1.1em;'>カルガリー, カナダ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=51.1315,-114.0106' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[1] = L.marker([51.118066, -114.021543], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/IbvZi8IDn5BB3IMl2' target='_blank'><img src='https://lh3.googleusercontent.com/jQhMc7cMYUphKseV-vxhwu0636r-nXCp0F-Z8uqCCV0htfxA-_Q7UXnigzXfIefJtKtV8sND1Tpczd31Mx8W9r8dWZAPEJNd_1j5kL3lnvO0FGgXvjCpBxoTaEEDxj-b1tFRyEDrGr0' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>カルガリー ⇒ バンクーバー</h3><div style='color:#666; font-size:1.1em;'>カルガリー</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=51.118066,-114.021543' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[2] = L.marker([49.193705, -123.176566], {icon: icon_plane_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/bNOq8BcD1mVvklGZ2' target='_blank'><img src='https://lh3.googleusercontent.com/y1Lz0EL7kRUvU0RtwX13ZZhg6nLIS71R_0b1Uc7CZyvvk9gTqJCgYXIqxqo3-hn7IOwpaUkW81XGMRjcGmlvm8r-dGVHRXMqt_JiwX5U0RWQCZhyJGAOP9VZcD4Y-lJPaw6PyK4y3lc' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>バンクーバー空港</h3><div style='color:#666; font-size:1.1em;'>バンクーバー</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=49.193705,-123.176566' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[4] = L.marker([52.0, -140.0], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='https://photos.app.goo.gl/Rq0CLmArrffF1cFn2' target='_blank'><img src='https://lh3.googleusercontent.com/gnObejzcXTKPIAw5X3LbkEnWhzHdIBZp308HmDONgGvzMG50OuHvWHWTnWT1taDejNty_8ZDuI2Ets0O3Uogn4DnlC3eo_9nJQKfCAcIiIdw2R3mY1mBlVkpYlhisWkVOawRmXDCTgg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>バンクーバー ⇒ 羽田</h3><div style='color:#666; font-size:1.1em;'>バンクーバー</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=52.0,-140.0' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+markers[5] = L.marker([53.0, -179.9999999], {icon: icon_end_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='#' target='_blank'><img src='https://lek3map.github.io/thailand/picture/hyoushi_note.png' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>日付変更線</h3><div style='font-size:1.1em; color:#333; margin:10px 0;'>太平洋上 NH115</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=53.0,-179.9999999' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
+
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>
