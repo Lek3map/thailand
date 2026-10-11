@@ -4,22 +4,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+  select {
+  font-size: 20px; 
+}
+  </style>
 
 <title>南部</title>
-  <style type="text/css">
-  .auto-style1 {
-	  vertical-align: middle;
-  }
-  .auto-style2 {
-	  text-align: center;
-  }
-  </style>
 </head>
+<body style="background-image: url('thaimap.png'); background-size: 380px 635px; background-repeat: no-repeat; background-position: center; min-height: 100vh; margin: 0;">
+<center>
+<div class="auto-style1">
+見たい県を選択してください<br>
+<select onchange="if(this.value) location.href=this.value;">
+			<option value="album/mKrabi.htm">クラビ</option>
+			<option value="album/mSatun.htm">サトゥン</option>
+			<option value="album/mSuratThani.htm">スラタニ</option>
+			<option value="album/mSongkhla.htm">ソンクラー</option>
+			<option value="album/mChumphon.htm">チュンポン</option>
+			<option value="album/mTrang.htm">トラン</option>
+			<option value="album/mNakhonSiThammarat.htm">ナコンシｰタマラｰト</option>
+			<option value="album/mNarathiwat.htm">ナラチワート</option>
+			<option value="album/mPattani.htm">パタニー</option>
+			<option value="album/mPhatthalung.htm">パタルン</option>
+			<option value="album/mPhangNga.htm">パンガー</option>
+			<option value="album/mPhuket.htm">プーケット</option>
+			<option value="album/mYala.htm">ヤラー</option>
+			<option value="album/mRanong.htm">ラノン</option></select></center>
 
-<body>
-
-<p class="auto-style2">
-<img class="auto-style1" height="635" src="file:///C:/GitHub/thailand/google%20photo/thaimap.png" width="380" /></p>
+</div>
 
 </body>
 

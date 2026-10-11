@@ -4,22 +4,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+  select {
+  font-size: 20px; 
+}
+  </style>
 
 <title>西部</title>
-  <style type="text/css">
-  .auto-style1 {
-	  vertical-align: middle;
-  }
-  .auto-style2 {
-	  text-align: center;
-  }
-  </style>
 </head>
+<body style="background-image: url('thaimap.png'); background-size: 380px 635px; background-repeat: no-repeat; background-position: center; min-height: 100vh; margin: 0;">
+<center>
+<div class="auto-style1">
+見たい県を選択してください<br>
+<select onchange="if(this.value) location.href=this.value;">
+			<option value="album/mKanchanaburi.htm">カンチャナブリ</option>
+			<option value="album/mTak.htm">ターク</option>
+			<option value="album/mPrachuapKhiriKhan.htm">パチｭアｯプキリカン</option>
+			<option value="album/mPhetchaburi.htm">ペチャブリ</option>
+			<option value="album/mRatchaburi.htm">ラチャブリ</option></select></center>
 
-<body>
-
-<p class="auto-style2">
-<img class="auto-style1" height="635" src="file:///C:/GitHub/thailand/google%20photo/thaimap.png" width="380" /></p>
+</div>
 
 </body>
 

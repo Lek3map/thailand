@@ -4,22 +4,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+  select {
+  font-size: 20px; 
+}
+  </style>
 
 <title>中央部</title>
-  <style type="text/css">
-  .auto-style1 {
-	  vertical-align: middle;
-  }
-  .auto-style2 {
-	  text-align: center;
-  }
-  </style>
 </head>
+<body style="background-image: url('thaimap.png'); background-size: 380px 635px; background-repeat: no-repeat; background-position: center; min-height: 100vh; margin: 0;">
+<center>
+<div class="auto-style1">
+見たい県を選択してください<br>
+<select onchange="if(this.value) location.href=this.value;">
+			<option value="album/mAyutthaya.htm">アユタヤ</option>
+			<option value="album/mAngThong.htm">アントン</option>
+			<option value="album/mUthaiThani.htm">ウタイタニ</option>
+			<option value="album/mKamphaengPhet.htm">カムペンペット</option>
+			<option value="album/mSamutSakhon.htm">サムットサコン</option>
+			<option value="album/mSamutSongkhram.htm">サムットソンクラム</option>
+			<option value="album/mSamutPrakan.htm">サムットプラカン</option>
+			<option value="album/mSaraburi.htm">サラブリ</option>
+			<option value="album/mSingBuri.htm">シンブリ</option>
+			<option value="album/mSukhothai.htm">スコータイ</option>
+			<option value="album/mSuphanBuri.htm">スパンブリ</option>
+			<option value="album/mChaiNat.htm">チャイナート</option>
+			<option value="album/mNakhonSawan.htm">ナコンサワン</option>
+			<option value="album/mNakhonNayok.htm">ナコンナヨック</option>
+			<option value="album/mNakhonPathom.htm">ナコンパトム</option>
+			<option value="album/mNonthaburi.htm">ノンタブリ</option>
+			<option value="album/mPathumThani.htm">パトゥムタニ</option>
+			<option value="album/mBangkok.htm">バンコク</option>
+			<option value="album/mPhitsanulok.htm">ピサヌローク</option>
+			<option value="album/mPhichit.htm">ピチット</option>
+			<option value="album/mPhetchabun.htm">ペチャブン</option>
+			<option value="album/mLopburi.htm">ロブリ</option></select></center>
 
-<body>
-
-<p class="auto-style2">
-<img class="auto-style1" height="635" src="file:///C:/GitHub/thailand/google%20photo/thaimap.png" width="380" /></p>
+</div>
 
 </body>
 
