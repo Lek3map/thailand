@@ -11,12 +11,13 @@
   </style>
 
 <title>南部</title>
+  <base target="_self" />
 </head>
 <body style="background-size: 380px 635px; background-repeat: no-repeat; background-position: center; min-height: 100vh; margin: 0;">
 <center>
 <div class="auto-style1">
 
-<select onchange="if(this.value) location.href=this.value;">
+	<select onchange="if(this.value) window.open(this.value, '_blank')">
 			<option value="">南部:県を選択してください</option>
 			<option value="album/mKrabi.htm">クラビ</option>
 			<option value="album/mSatun.htm">サトゥン</option>
@@ -31,7 +32,8 @@
 			<option value="album/mPhangNga.htm">パンガー</option>
 			<option value="album/mPhuket.htm">プーケット</option>
 			<option value="album/mYala.htm">ヤラー</option>
-			<option value="album/mRanong.htm">ラノン</option></select></center>
+			<option value="album/mRanong.htm">ラノン</option>
+	</select></center>
 
 </div>
 
