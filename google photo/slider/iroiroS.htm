@@ -1,119 +1,157 @@
-<html>
+﻿<!DOCTYPE html>
+<html lang="ja">
 
 <head>
+<!-- 文字コード。元はshift_jisでしたが、今回はUTF-8で保存し直したので合わせています -->
+<meta charset="utf-8">
 <meta http-equiv="Content-Language" content="ja">
-<meta name="GENERATOR" content="Microsoft FrontPage 12.0">
-<meta name="ProgId" content="FrontPage.Editor.Document">
-<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
-<link rel="shortcut icon" href="../../images/kamon.gif" >
-<title>�F�X�ȑ�</title>
-</head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<link rel="shortcut icon" href="../icon/kamon.gif">
+<title>色々な像</title>
+
+<!-- リンクを新しいタブで開く設定(全部のaタグに効く) -->
+<base target="_blank">
 
 <style>
 
+/* ▼ アニメーションの中身:左端(0)から、自分の幅ぶん左(-100%)まで動かす */
 @keyframes infinity-scroll-left {
-from {
-  transform: translateX(0);
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
 }
-  to {
-  transform: translateX(-100%);
-}
-}
+
+/* ▼ 画像の列を並べる外枠。はみ出した部分は隠す */
 .scroll-infinity__wrap {
   display: flex;
   overflow: hidden;
 }
+
+/* ▼ 画像の列(ul)。横一列に並べ、リストの点を消す */
 .scroll-infinity__list {
   display: flex;
   list-style: none;
-  padding: 0
+  padding: 0;
 }
+
+/* ▼ 左へ流れるアニメーションを設定(10秒で1周、等速、ずっと繰り返す) */
 .scroll-infinity__list--left {
   animation: infinity-scroll-left 50s infinite linear 0.2s both;
 }
+
+/* ▼ 下の2つは、今のHTMLでは使われていないクラス用の設定(そのまま残しています) */
 .scroll-infinity__item {
   width: calc(100vw / 6);
 }
-.scroll-infinity__item>img {
+.scroll-infinity__item > img {
   width: 100%;
 }
 
-.scroll-infinity__wrap:hover .scroll-infinity__list--left{
+/* ▼ マウスを乗せている間はアニメーションを一時停止 */
+.scroll-infinity__wrap:hover .scroll-infinity__list--left {
   animation-play-state: paused;
 }
 
 </style>
+</head>
 
 <body bgcolor="#FBF4E6" topmargin="0" leftmargin="0">
-  
-<center><br>
-    <b><font size="5" face="�l�r ����" color="#808080">�F�X�ȑ�</font></b>
 
-<div class="scroll-infinity">
-	�@<div class="scroll-infinity__wrap">
- 	   �@ <ul class="scroll-infinity__list scroll-infinity__list--left">
-  
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/9cHtroibMgLRu8iZ2" target="_blank"><img src="https://lh3.googleusercontent.com/6j1ey9eHxN_bNJVq-lpJ7wRewe3DZ-zkZ1g-NxdzBmNgOThIAr4S93wQ63ZhCJCqfeCKzBrIKv2MYRI-MelXCCx_klyzmSxZzinwMj2Mh1T8XmIQjDqN5knynIRnZBfTodAripUw4rA" Title="Wat Charoen Mueang@�`�F�����C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/oDRDimZzhXJtQdYj2" target="_blank"><img src="https://lh3.googleusercontent.com/trhDBd2TTW8oD_QhDBXr9N9TnA3_d0wtKOs3q9-QyLv_xxaCyRYAPfzg6rlJlUGVPxMFK01P4OoCLHiinwDdh2rRmbXOoCl3Mj6J4vzKebLQXiGsVd4Z_XTjtxHUp4eaWYwnTHvKRvQ" Title="Wat Phra Kaew Chiang Khong@�`�F�����C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/tX2Kfv729dsupLC39" target="_blank"><img src="https://3.bp.blogspot.com/-GGY6GKMbcFU/XRM-UkISY2I/AAAAAAAEKdQ/lbPnRlg6mxUKaw64jdzDXJrnPELKNitdACLcBGAs/s680/190626041.jpg" Title="Wat Huai Kiang@�`�F�����C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/j1qMe37RWiHjoGkZ6" target="_blank"><img src="https://1.bp.blogspot.com/-MGhBeN0hTcI/YVAZzjQidqI/AAAAAAAIJgg/cvlUJwo1F9MfZGJXujiP1Ezave0ejNrlACLcBGAsYHQ/s680/150920099.jpg" Title="Wat U-Mong Maha Therachan@�`�F���}�C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://goo.gl/photos/gKPayGqfgRB48Yfs6" target="_blank"><img src="https://1.bp.blogspot.com/-Ai0lDjqSbt4/YVEGGrqF38I/AAAAAAAIJos/FYaf2311bvA8Ij_rD_wT4hassv6Wqd_GQCLcBGAsYHQ/s680/090803070.jpg" Title="Wat Phrathat Doi Saket@�`�F���}�C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/yKsWQ6ZTropzXSFt9" target="_blank"><img src="https://1.bp.blogspot.com/-Gfbw1-Uf50E/YVBDWUT4alI/AAAAAAAIJmY/6wRyhWKM2sYj7nEg7Dp07F1kpH4OcAwyQCLcBGAsYHQ/s680/181221101.jpg" Title="Wat Buppharam@�`�F���}�C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/Fu98ZV6LopDhonjS6" target="_blank"><img src="https://1.bp.blogspot.com/-v2XFvtYnsbg/YVFRWHh5m5I/AAAAAAAIJrg/Ur3BbpgqKwsriFeC2QwA3qaTl0SmJdaiwCLcBGAsYHQ/s680/151013044.jpg" Title="Wat Kritsana (Doi Yao)@�`�F���}�C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/rzXW1xJhSqwug6kN6" target="_blank"><img src="https://4.bp.blogspot.com/-NIB0ZyczzhE/XluvCjfZIqI/AAAAAAAE8Ec/KVdFO5L5qIEHRnNOkIXZHnXFyfbFTBh7QCLcBGAsYHQ/s680/200301031.jpg" Title="Wat Pracha Samakee@�i�R���p�m��" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/du4D2g6KyagWWr4b7" target="_blank"><img src="https://1.bp.blogspot.com/-yz4pDYsH0Xg/YUhyrLkpe7I/AAAAAAAIHFY/lZXL31VyDRM3XZVrJeSAiabUOG28Gq8-QCLcBGAsYHQ/s680/190819074.jpg" Title="Wat Ban Don Chum Chang@�i�R�����`���V�}" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/duB4kpJHg6KHhfSv9" target="_blank"><img src="https://1.bp.blogspot.com/-pdkUDitvRU4/X2MJWXDRxGI/AAAAAAAFVLg/5tadxyhFTfsY5r_nEmN8tyFe04dqXxTKACLcBGAsYHQ/s680/200207174.jpg" Title="Wat Sanam Chan@�`���`�����T�I" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/y4bwCHwCsLJ4n35K6" target="_blank"><img src="https://lh3.googleusercontent.com/jjTrSroJGwq_xxDk0dLbnwuRtbHWwr-eABVRbBkQ0RFnIZZlEY9bX7VwsHl1W-wmzqLM3PNEhc-luL2aDdzDkviChCHpmcakBiI7LDNkQU0JS_bVd-_Uo53CQ_8tMFqZrh1KI44PQlU" Title="Wat Pa Mettatham@���C�G�b�g" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/5UN5wGMaTEFV1TCw6" target="_blank"><img src="https://1.bp.blogspot.com/-SlZoxLRM86A/X2hWidReDwI/AAAAAAAFWh8/NqXPx7XYjn8y62m4M3RohJFcdmJO5grCwCLcBGAsYHQ/s680/190704149.jpg" Title="Wat Mai Kamwan@�s�`�b�g" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/sFYnW1C3XjGZ5sq76" target="_blank"><img src="https://1.bp.blogspot.com/-w7l1uhr9n6w/YWk9Y5cM3KI/AAAAAAAIKbs/ndUhAvNFUEUzcHxbs5KxDKC54aDNIyLkgCLcBGAsYHQ/s680/190321043.jpg" Title="Wat Rai Khin@�R���P��" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/UxoPLVMMwid6TPMd7" target="_blank"><img src="https://lh3.googleusercontent.com/pw/AIL4fc_X3Wv8fah1_yWSgiQO74Wm8kTwrK_IdF3hvfHhj5gp_iQzDUqJ685qjUoMs1Lgzb9c6FuBi7X0fkfq2xnpQ5o9kDnDIozselgFrWbsAGmuh__pIFy58u1gEMx3Ks_ypWi0u_TW8vvKvK0mh0oWUCwbUw=w180-h135-s-no?authuser=0" Title="Wat Sanam Chang@�`���`�����T�I" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/hKwxvgUyXqaQ3jUT8" target="_blank"><img src="https://2.bp.blogspot.com/-GIdPrAc2cPg/XeDcAZrWo4I/AAAAAAAEnDo/Y93nGDDlZNYH4P6q-8gRdZkiUXFTFwaBQCLcBGAsYHQ/s680/191128065.jpg" Title="Wat Then Plai@�X�p���u��" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/8ZykvT3DhktsNMtJ9" target="_blank"><img src="https://1.bp.blogspot.com/-DNjoTl8DL4M/X2g62wca4ZI/AAAAAAAFWeA/iA2YRlDXS1owHcoAxJL-jha_aXQqIQUCQCLcBGAsYHQ/s680/190704019.jpg" Title="Wat Lom@�s�T�k���[�N" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/ZrJySwO9UOmcrBOh2" target="_blank"><img src="https://1.bp.blogspot.com/-FWsGGdjajuI/X2HoX7vr-AI/AAAAAAAFU4g/rFJ7SHYwYe45KgS-vw1QoOQ9KZtSnyToACLcBGAsYHQ/s680/180418088.jpg" Title="Wat Huai Prasit@�`�F�����C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/n9ETC7MEcZeyWNE27" target="_blank"><img src="https://lh3.googleusercontent.com/nRLWFhJKgXNfSQ5P94nGfOCsCTpmVZ5KxvEhE2v-0e7Zxgd3XBOjsnmHHMX5Wqd4VieqGKTliW2d_nzlYJMA6WEVAdXnuNaF8a4-pvaKt7JiyUxova4Z5IkGsf-BKcmYrMxrgp4FLuU" Title="Wat Jetlin@�`�F���}�C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/F8t2pCpU9tSqskiT8" target="_blank"><img src="https://lh3.googleusercontent.com/4wt8P2gmEiQbtr4L8Egj6-sDo1KuYKhz1mMPrqBDJZwkwVul7LCdmEic_CSeIFPqEYIfhj-E4B9NxZnUbeKNwtiWkol5ZLKUwGEb2x9QPpgJZAoqtcRpprI41QXAiGbFV7vcG8FX20c" Title="Wat Phra That Doi Khao Kwai@�`�F�����C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/WmD6RHtLH51zVi2a9" target="_blank"><img src="https://1.bp.blogspot.com/-y2xTyEtEIcI/X2G6H5hnUKI/AAAAAAAFUzk/vNywDzpYTNoPAvop1rlTiYE1pYTG9wPHACLcBGAsYHQ/s680/190306126.jpg" Title="Wat Mae Kaet Noi@�`�F���}�C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/mXEiP9uA98qvHoo2A" target="_blank"><img src="https://2.bp.blogspot.com/-zpCUxVJ7-uI/XIeFigJUvtI/AAAAAAAD9gY/E2FygmSM7oQFAMB_hnA8NcbdtVctORa7wCLcBGAs/s680/190310094.jpg" Title="Wat Bun Koet@�p���I" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/MgWoTnN5CsJ4TKhX9" target="_blank"><img src="https://4.bp.blogspot.com/-1kL6bsX8BQk/XIeHSFI_YYI/AAAAAAAD9hY/aoWKPl-d8UEmHmumJ98ZygW1r70VIj8dQCLcBGAs/s680/190310041.jpg" Title="Wat Thung Nong@�p���I" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/r3Hfr5fBGfWHr1kg8" target="_blank"><img src="https://1.bp.blogspot.com/-ReFjxTQci9c/X2LEET3AxCI/AAAAAAAFVDg/82ptQlJ3I54RIfL928mgrQ4CqpDRqkCHACLcBGAsYHQ/s680/190625074.jpg" Title="Wat Chee Pong Nam Ron@�`�F�����C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/DtYy5JYNwMojQg3P9" target="_blank"><img src="https://1.bp.blogspot.com/-ecMsJFVBjrM/X2LA94puueI/AAAAAAAFVC4/Yv1ctBVQa0ADgM5BPNmv5QahGvy7ujyCQCLcBGAsYHQ/s680/190625183.jpg" Title="Wat Fang Min@�`�F�����C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/SQesUXSfRWFpsPtR6" target="_blank"><img src="https://1.bp.blogspot.com/-eFDS9mvzBGs/X0SsUSRQm1I/AAAAAAAFO_E/K2LhuHbNh0EOymFp04SsFTo_LNROAOdQACLcBGAsYHQ/s680/191205193.jpg" Title="Kumarnthong Chao Sua Heng@�A���^��" hspace="1" height="240"/></a></li>
-           
- 		  �@ </ul>
- 	   �@ <ul class="scroll-infinity__list scroll-infinity__list--left">
-  
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/9cHtroibMgLRu8iZ2" target="_blank"><img src="https://lh3.googleusercontent.com/6j1ey9eHxN_bNJVq-lpJ7wRewe3DZ-zkZ1g-NxdzBmNgOThIAr4S93wQ63ZhCJCqfeCKzBrIKv2MYRI-MelXCCx_klyzmSxZzinwMj2Mh1T8XmIQjDqN5knynIRnZBfTodAripUw4rA" Title="Wat Charoen Mueang@�`�F�����C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/oDRDimZzhXJtQdYj2" target="_blank"><img src="https://lh3.googleusercontent.com/trhDBd2TTW8oD_QhDBXr9N9TnA3_d0wtKOs3q9-QyLv_xxaCyRYAPfzg6rlJlUGVPxMFK01P4OoCLHiinwDdh2rRmbXOoCl3Mj6J4vzKebLQXiGsVd4Z_XTjtxHUp4eaWYwnTHvKRvQ" Title="Wat Phra Kaew Chiang Khong@�`�F�����C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/tX2Kfv729dsupLC39" target="_blank"><img src="https://3.bp.blogspot.com/-GGY6GKMbcFU/XRM-UkISY2I/AAAAAAAEKdQ/lbPnRlg6mxUKaw64jdzDXJrnPELKNitdACLcBGAs/s680/190626041.jpg" Title="Wat Huai Kiang@�`�F�����C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/j1qMe37RWiHjoGkZ6" target="_blank"><img src="https://1.bp.blogspot.com/-MGhBeN0hTcI/YVAZzjQidqI/AAAAAAAIJgg/cvlUJwo1F9MfZGJXujiP1Ezave0ejNrlACLcBGAsYHQ/s680/150920099.jpg" Title="Wat U-Mong Maha Therachan@�`�F���}�C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://goo.gl/photos/gKPayGqfgRB48Yfs6" target="_blank"><img src="https://1.bp.blogspot.com/-Ai0lDjqSbt4/YVEGGrqF38I/AAAAAAAIJos/FYaf2311bvA8Ij_rD_wT4hassv6Wqd_GQCLcBGAsYHQ/s680/090803070.jpg" Title="Wat Phrathat Doi Saket@�`�F���}�C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/yKsWQ6ZTropzXSFt9" target="_blank"><img src="https://1.bp.blogspot.com/-Gfbw1-Uf50E/YVBDWUT4alI/AAAAAAAIJmY/6wRyhWKM2sYj7nEg7Dp07F1kpH4OcAwyQCLcBGAsYHQ/s680/181221101.jpg" Title="Wat Buppharam@�`�F���}�C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/Fu98ZV6LopDhonjS6" target="_blank"><img src="https://1.bp.blogspot.com/-v2XFvtYnsbg/YVFRWHh5m5I/AAAAAAAIJrg/Ur3BbpgqKwsriFeC2QwA3qaTl0SmJdaiwCLcBGAsYHQ/s680/151013044.jpg" Title="Wat Kritsana (Doi Yao)@�`�F���}�C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/rzXW1xJhSqwug6kN6" target="_blank"><img src="https://4.bp.blogspot.com/-NIB0ZyczzhE/XluvCjfZIqI/AAAAAAAE8Ec/KVdFO5L5qIEHRnNOkIXZHnXFyfbFTBh7QCLcBGAsYHQ/s680/200301031.jpg" Title="Wat Pracha Samakee@�i�R���p�m��" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/du4D2g6KyagWWr4b7" target="_blank"><img src="https://1.bp.blogspot.com/-yz4pDYsH0Xg/YUhyrLkpe7I/AAAAAAAIHFY/lZXL31VyDRM3XZVrJeSAiabUOG28Gq8-QCLcBGAsYHQ/s680/190819074.jpg" Title="Wat Ban Don Chum Chang@�i�R�����`���V�}" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/duB4kpJHg6KHhfSv9" target="_blank"><img src="https://1.bp.blogspot.com/-pdkUDitvRU4/X2MJWXDRxGI/AAAAAAAFVLg/5tadxyhFTfsY5r_nEmN8tyFe04dqXxTKACLcBGAsYHQ/s680/200207174.jpg" Title="Wat Sanam Chan@�`���`�����T�I" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/y4bwCHwCsLJ4n35K6" target="_blank"><img src="https://lh3.googleusercontent.com/jjTrSroJGwq_xxDk0dLbnwuRtbHWwr-eABVRbBkQ0RFnIZZlEY9bX7VwsHl1W-wmzqLM3PNEhc-luL2aDdzDkviChCHpmcakBiI7LDNkQU0JS_bVd-_Uo53CQ_8tMFqZrh1KI44PQlU" Title="Wat Pa Mettatham@���C�G�b�g" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/5UN5wGMaTEFV1TCw6" target="_blank"><img src="https://1.bp.blogspot.com/-SlZoxLRM86A/X2hWidReDwI/AAAAAAAFWh8/NqXPx7XYjn8y62m4M3RohJFcdmJO5grCwCLcBGAsYHQ/s680/190704149.jpg" Title="Wat Mai Kamwan@�s�`�b�g" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/sFYnW1C3XjGZ5sq76" target="_blank"><img src="https://1.bp.blogspot.com/-w7l1uhr9n6w/YWk9Y5cM3KI/AAAAAAAIKbs/ndUhAvNFUEUzcHxbs5KxDKC54aDNIyLkgCLcBGAsYHQ/s680/190321043.jpg" Title="Wat Rai Khin@�R���P��" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/UxoPLVMMwid6TPMd7" target="_blank"><img src="https://lh3.googleusercontent.com/pw/AIL4fc_X3Wv8fah1_yWSgiQO74Wm8kTwrK_IdF3hvfHhj5gp_iQzDUqJ685qjUoMs1Lgzb9c6FuBi7X0fkfq2xnpQ5o9kDnDIozselgFrWbsAGmuh__pIFy58u1gEMx3Ks_ypWi0u_TW8vvKvK0mh0oWUCwbUw=w180-h135-s-no?authuser=0" Title="Wat Sanam Chang@�`���`�����T�I" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/hKwxvgUyXqaQ3jUT8" target="_blank"><img src="https://2.bp.blogspot.com/-GIdPrAc2cPg/XeDcAZrWo4I/AAAAAAAEnDo/Y93nGDDlZNYH4P6q-8gRdZkiUXFTFwaBQCLcBGAsYHQ/s680/191128065.jpg" Title="Wat Then Plai@�X�p���u��" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/8ZykvT3DhktsNMtJ9" target="_blank"><img src="https://1.bp.blogspot.com/-DNjoTl8DL4M/X2g62wca4ZI/AAAAAAAFWeA/iA2YRlDXS1owHcoAxJL-jha_aXQqIQUCQCLcBGAsYHQ/s680/190704019.jpg" Title="Wat Lom@�s�T�k���[�N" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/ZrJySwO9UOmcrBOh2" target="_blank"><img src="https://1.bp.blogspot.com/-FWsGGdjajuI/X2HoX7vr-AI/AAAAAAAFU4g/rFJ7SHYwYe45KgS-vw1QoOQ9KZtSnyToACLcBGAsYHQ/s680/180418088.jpg" Title="Wat Huai Prasit@�`�F�����C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/n9ETC7MEcZeyWNE27" target="_blank"><img src="https://lh3.googleusercontent.com/nRLWFhJKgXNfSQ5P94nGfOCsCTpmVZ5KxvEhE2v-0e7Zxgd3XBOjsnmHHMX5Wqd4VieqGKTliW2d_nzlYJMA6WEVAdXnuNaF8a4-pvaKt7JiyUxova4Z5IkGsf-BKcmYrMxrgp4FLuU" Title="Wat Jetlin@�`�F���}�C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/F8t2pCpU9tSqskiT8" target="_blank"><img src="https://lh3.googleusercontent.com/4wt8P2gmEiQbtr4L8Egj6-sDo1KuYKhz1mMPrqBDJZwkwVul7LCdmEic_CSeIFPqEYIfhj-E4B9NxZnUbeKNwtiWkol5ZLKUwGEb2x9QPpgJZAoqtcRpprI41QXAiGbFV7vcG8FX20c" Title="Wat Phra That Doi Khao Kwai@�`�F�����C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/WmD6RHtLH51zVi2a9" target="_blank"><img src="https://1.bp.blogspot.com/-y2xTyEtEIcI/X2G6H5hnUKI/AAAAAAAFUzk/vNywDzpYTNoPAvop1rlTiYE1pYTG9wPHACLcBGAsYHQ/s680/190306126.jpg" Title="Wat Mae Kaet Noi@�`�F���}�C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/mXEiP9uA98qvHoo2A" target="_blank"><img src="https://2.bp.blogspot.com/-zpCUxVJ7-uI/XIeFigJUvtI/AAAAAAAD9gY/E2FygmSM7oQFAMB_hnA8NcbdtVctORa7wCLcBGAs/s680/190310094.jpg" Title="Wat Bun Koet@�p���I" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/MgWoTnN5CsJ4TKhX9" target="_blank"><img src="https://4.bp.blogspot.com/-1kL6bsX8BQk/XIeHSFI_YYI/AAAAAAAD9hY/aoWKPl-d8UEmHmumJ98ZygW1r70VIj8dQCLcBGAs/s680/190310041.jpg" Title="Wat Thung Nong@�p���I" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/r3Hfr5fBGfWHr1kg8" target="_blank"><img src="https://1.bp.blogspot.com/-ReFjxTQci9c/X2LEET3AxCI/AAAAAAAFVDg/82ptQlJ3I54RIfL928mgrQ4CqpDRqkCHACLcBGAsYHQ/s680/190625074.jpg" Title="Wat Chee Pong Nam Ron@�`�F�����C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/DtYy5JYNwMojQg3P9" target="_blank"><img src="https://1.bp.blogspot.com/-ecMsJFVBjrM/X2LA94puueI/AAAAAAAFVC4/Yv1ctBVQa0ADgM5BPNmv5QahGvy7ujyCQCLcBGAsYHQ/s680/190625183.jpg" Title="Wat Fang Min@�`�F�����C" hspace="1" height="240"/></a></li>
-           <li class="d-demo__item"><a href="https://photos.app.goo.gl/SQesUXSfRWFpsPtR6" target="_blank"><img src="https://1.bp.blogspot.com/-eFDS9mvzBGs/X0SsUSRQm1I/AAAAAAAFO_E/K2LhuHbNh0EOymFp04SsFTo_LNROAOdQACLcBGAsYHQ/s680/191205193.jpg" Title="Kumarnthong Chao Sua Heng@�A���^��" hspace="1" height="240"/></a></li>
-           
- 		  �@ </ul>
-		�@</div>
-</div>
+<!-- ▼ ページ全体を中央寄せにする外枠(表) -->
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" height="100%">
+    <tr>
+      <td width="100%" height="100%">
 
-</center>
-   
+        <div class="scroll-infinity">
+          <div class="scroll-infinity__wrap">
+
+            <!-- ▼ 1本目の画像列 -->
+            <ul class="scroll-infinity__list scroll-infinity__list--left">
+            
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/9cHtroibMgLRu8iZ2" target="_blank"><img src="https://lh3.googleusercontent.com/6j1ey9eHxN_bNJVq-lpJ7wRewe3DZ-zkZ1g-NxdzBmNgOThIAr4S93wQ63ZhCJCqfeCKzBrIKv2MYRI-MelXCCx_klyzmSxZzinwMj2Mh1T8XmIQjDqN5knynIRnZBfTodAripUw4rA" Title="Wat Charoen Mueang@チェンライ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/oDRDimZzhXJtQdYj2" target="_blank"><img src="https://lh3.googleusercontent.com/trhDBd2TTW8oD_QhDBXr9N9TnA3_d0wtKOs3q9-QyLv_xxaCyRYAPfzg6rlJlUGVPxMFK01P4OoCLHiinwDdh2rRmbXOoCl3Mj6J4vzKebLQXiGsVd4Z_XTjtxHUp4eaWYwnTHvKRvQ" Title="Wat Phra Kaew Chiang Khong@チェンライ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/tX2Kfv729dsupLC39" target="_blank"><img src="https://3.bp.blogspot.com/-GGY6GKMbcFU/XRM-UkISY2I/AAAAAAAEKdQ/lbPnRlg6mxUKaw64jdzDXJrnPELKNitdACLcBGAs/s680/190626041.jpg" Title="Wat Huai Kiang@チェンライ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/j1qMe37RWiHjoGkZ6" target="_blank"><img src="https://1.bp.blogspot.com/-MGhBeN0hTcI/YVAZzjQidqI/AAAAAAAIJgg/cvlUJwo1F9MfZGJXujiP1Ezave0ejNrlACLcBGAsYHQ/s680/150920099.jpg" Title="Wat U-Mong Maha Therachan@チェンマイ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://goo.gl/photos/gKPayGqfgRB48Yfs6" target="_blank"><img src="https://1.bp.blogspot.com/-Ai0lDjqSbt4/YVEGGrqF38I/AAAAAAAIJos/FYaf2311bvA8Ij_rD_wT4hassv6Wqd_GQCLcBGAsYHQ/s680/090803070.jpg" Title="Wat Phrathat Doi Saket@チェンマイ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/yKsWQ6ZTropzXSFt9" target="_blank"><img src="https://1.bp.blogspot.com/-Gfbw1-Uf50E/YVBDWUT4alI/AAAAAAAIJmY/6wRyhWKM2sYj7nEg7Dp07F1kpH4OcAwyQCLcBGAsYHQ/s680/181221101.jpg" Title="Wat Buppharam@チェンマイ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/Fu98ZV6LopDhonjS6" target="_blank"><img src="https://1.bp.blogspot.com/-v2XFvtYnsbg/YVFRWHh5m5I/AAAAAAAIJrg/Ur3BbpgqKwsriFeC2QwA3qaTl0SmJdaiwCLcBGAsYHQ/s680/151013044.jpg" Title="Wat Kritsana (Doi Yao)@チェンマイ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/rzXW1xJhSqwug6kN6" target="_blank"><img src="https://4.bp.blogspot.com/-NIB0ZyczzhE/XluvCjfZIqI/AAAAAAAE8Ec/KVdFO5L5qIEHRnNOkIXZHnXFyfbFTBh7QCLcBGAsYHQ/s680/200301031.jpg" Title="Wat Pracha Samakee@ナコンパノム" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/du4D2g6KyagWWr4b7" target="_blank"><img src="https://1.bp.blogspot.com/-yz4pDYsH0Xg/YUhyrLkpe7I/AAAAAAAIHFY/lZXL31VyDRM3XZVrJeSAiabUOG28Gq8-QCLcBGAsYHQ/s680/190819074.jpg" Title="Wat Ban Don Chum Chang@ナコンラチャシマ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/duB4kpJHg6KHhfSv9" target="_blank"><img src="https://1.bp.blogspot.com/-pdkUDitvRU4/X2MJWXDRxGI/AAAAAAAFVLg/5tadxyhFTfsY5r_nEmN8tyFe04dqXxTKACLcBGAsYHQ/s680/200207174.jpg" Title="Wat Sanam Chan@チャチュンサオ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/y4bwCHwCsLJ4n35K6" target="_blank"><img src="https://lh3.googleusercontent.com/jjTrSroJGwq_xxDk0dLbnwuRtbHWwr-eABVRbBkQ0RFnIZZlEY9bX7VwsHl1W-wmzqLM3PNEhc-luL2aDdzDkviChCHpmcakBiI7LDNkQU0JS_bVd-_Uo53CQ_8tMFqZrh1KI44PQlU" Title="Wat Pa Mettatham@ロイエット" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/5UN5wGMaTEFV1TCw6" target="_blank"><img src="https://1.bp.blogspot.com/-SlZoxLRM86A/X2hWidReDwI/AAAAAAAFWh8/NqXPx7XYjn8y62m4M3RohJFcdmJO5grCwCLcBGAsYHQ/s680/190704149.jpg" Title="Wat Mai Kamwan@ピチット" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/sFYnW1C3XjGZ5sq76" target="_blank"><img src="https://1.bp.blogspot.com/-w7l1uhr9n6w/YWk9Y5cM3KI/AAAAAAAIKbs/ndUhAvNFUEUzcHxbs5KxDKC54aDNIyLkgCLcBGAsYHQ/s680/190321043.jpg" Title="Wat Rai Khin@コンケン" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/UxoPLVMMwid6TPMd7" target="_blank"><img src="https://lh3.googleusercontent.com/pw/AIL4fc_X3Wv8fah1_yWSgiQO74Wm8kTwrK_IdF3hvfHhj5gp_iQzDUqJ685qjUoMs1Lgzb9c6FuBi7X0fkfq2xnpQ5o9kDnDIozselgFrWbsAGmuh__pIFy58u1gEMx3Ks_ypWi0u_TW8vvKvK0mh0oWUCwbUw=w180-h135-s-no?authuser=0" Title="Wat Sanam Chang@チャチュンサオ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/hKwxvgUyXqaQ3jUT8" target="_blank"><img src="https://2.bp.blogspot.com/-GIdPrAc2cPg/XeDcAZrWo4I/AAAAAAAEnDo/Y93nGDDlZNYH4P6q-8gRdZkiUXFTFwaBQCLcBGAsYHQ/s680/191128065.jpg" Title="Wat Then Plai@スパンブリ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/8ZykvT3DhktsNMtJ9" target="_blank"><img src="https://1.bp.blogspot.com/-DNjoTl8DL4M/X2g62wca4ZI/AAAAAAAFWeA/iA2YRlDXS1owHcoAxJL-jha_aXQqIQUCQCLcBGAsYHQ/s680/190704019.jpg" Title="Wat Lom@ピサヌローク" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/ZrJySwO9UOmcrBOh2" target="_blank"><img src="https://1.bp.blogspot.com/-FWsGGdjajuI/X2HoX7vr-AI/AAAAAAAFU4g/rFJ7SHYwYe45KgS-vw1QoOQ9KZtSnyToACLcBGAsYHQ/s680/180418088.jpg" Title="Wat Huai Prasit@チェンライ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/n9ETC7MEcZeyWNE27" target="_blank"><img src="https://lh3.googleusercontent.com/nRLWFhJKgXNfSQ5P94nGfOCsCTpmVZ5KxvEhE2v-0e7Zxgd3XBOjsnmHHMX5Wqd4VieqGKTliW2d_nzlYJMA6WEVAdXnuNaF8a4-pvaKt7JiyUxova4Z5IkGsf-BKcmYrMxrgp4FLuU" Title="Wat Jetlin@チェンマイ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/F8t2pCpU9tSqskiT8" target="_blank"><img src="https://lh3.googleusercontent.com/4wt8P2gmEiQbtr4L8Egj6-sDo1KuYKhz1mMPrqBDJZwkwVul7LCdmEic_CSeIFPqEYIfhj-E4B9NxZnUbeKNwtiWkol5ZLKUwGEb2x9QPpgJZAoqtcRpprI41QXAiGbFV7vcG8FX20c" Title="Wat Phra That Doi Khao Kwai@チェンライ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/WmD6RHtLH51zVi2a9" target="_blank"><img src="https://1.bp.blogspot.com/-y2xTyEtEIcI/X2G6H5hnUKI/AAAAAAAFUzk/vNywDzpYTNoPAvop1rlTiYE1pYTG9wPHACLcBGAsYHQ/s680/190306126.jpg" Title="Wat Mae Kaet Noi@チェンマイ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/mXEiP9uA98qvHoo2A" target="_blank"><img src="https://2.bp.blogspot.com/-zpCUxVJ7-uI/XIeFigJUvtI/AAAAAAAD9gY/E2FygmSM7oQFAMB_hnA8NcbdtVctORa7wCLcBGAs/s680/190310094.jpg" Title="Wat Bun Koet@パヤオ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/MgWoTnN5CsJ4TKhX9" target="_blank"><img src="https://4.bp.blogspot.com/-1kL6bsX8BQk/XIeHSFI_YYI/AAAAAAAD9hY/aoWKPl-d8UEmHmumJ98ZygW1r70VIj8dQCLcBGAs/s680/190310041.jpg" Title="Wat Thung Nong@パヤオ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/r3Hfr5fBGfWHr1kg8" target="_blank"><img src="https://1.bp.blogspot.com/-ReFjxTQci9c/X2LEET3AxCI/AAAAAAAFVDg/82ptQlJ3I54RIfL928mgrQ4CqpDRqkCHACLcBGAsYHQ/s680/190625074.jpg" Title="Wat Chee Pong Nam Ron@チェンライ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/DtYy5JYNwMojQg3P9" target="_blank"><img src="https://1.bp.blogspot.com/-ecMsJFVBjrM/X2LA94puueI/AAAAAAAFVC4/Yv1ctBVQa0ADgM5BPNmv5QahGvy7ujyCQCLcBGAsYHQ/s680/190625183.jpg" Title="Wat Fang Min@チェンライ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/SQesUXSfRWFpsPtR6" target="_blank"><img src="https://1.bp.blogspot.com/-eFDS9mvzBGs/X0SsUSRQm1I/AAAAAAAFO_E/K2LhuHbNh0EOymFp04SsFTo_LNROAOdQACLcBGAsYHQ/s680/191205193.jpg" Title="Kumarnthong Chao Sua Heng@アユタヤ" hspace="1" height="240"/></a></li>
+
+            
+           </ul>
+
+            <!-- ▼ 2本目の画像列(1本目と同じ内容。つなぎ目なしに無限ループして見せるためのコピー) -->
+            <ul class="scroll-infinity__list scroll-infinity__list--left">
+            
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/9cHtroibMgLRu8iZ2" target="_blank"><img src="https://lh3.googleusercontent.com/6j1ey9eHxN_bNJVq-lpJ7wRewe3DZ-zkZ1g-NxdzBmNgOThIAr4S93wQ63ZhCJCqfeCKzBrIKv2MYRI-MelXCCx_klyzmSxZzinwMj2Mh1T8XmIQjDqN5knynIRnZBfTodAripUw4rA" Title="Wat Charoen Mueang@チェンライ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/oDRDimZzhXJtQdYj2" target="_blank"><img src="https://lh3.googleusercontent.com/trhDBd2TTW8oD_QhDBXr9N9TnA3_d0wtKOs3q9-QyLv_xxaCyRYAPfzg6rlJlUGVPxMFK01P4OoCLHiinwDdh2rRmbXOoCl3Mj6J4vzKebLQXiGsVd4Z_XTjtxHUp4eaWYwnTHvKRvQ" Title="Wat Phra Kaew Chiang Khong@チェンライ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/tX2Kfv729dsupLC39" target="_blank"><img src="https://3.bp.blogspot.com/-GGY6GKMbcFU/XRM-UkISY2I/AAAAAAAEKdQ/lbPnRlg6mxUKaw64jdzDXJrnPELKNitdACLcBGAs/s680/190626041.jpg" Title="Wat Huai Kiang@チェンライ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/j1qMe37RWiHjoGkZ6" target="_blank"><img src="https://1.bp.blogspot.com/-MGhBeN0hTcI/YVAZzjQidqI/AAAAAAAIJgg/cvlUJwo1F9MfZGJXujiP1Ezave0ejNrlACLcBGAsYHQ/s680/150920099.jpg" Title="Wat U-Mong Maha Therachan@チェンマイ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://goo.gl/photos/gKPayGqfgRB48Yfs6" target="_blank"><img src="https://1.bp.blogspot.com/-Ai0lDjqSbt4/YVEGGrqF38I/AAAAAAAIJos/FYaf2311bvA8Ij_rD_wT4hassv6Wqd_GQCLcBGAsYHQ/s680/090803070.jpg" Title="Wat Phrathat Doi Saket@チェンマイ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/yKsWQ6ZTropzXSFt9" target="_blank"><img src="https://1.bp.blogspot.com/-Gfbw1-Uf50E/YVBDWUT4alI/AAAAAAAIJmY/6wRyhWKM2sYj7nEg7Dp07F1kpH4OcAwyQCLcBGAsYHQ/s680/181221101.jpg" Title="Wat Buppharam@チェンマイ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/Fu98ZV6LopDhonjS6" target="_blank"><img src="https://1.bp.blogspot.com/-v2XFvtYnsbg/YVFRWHh5m5I/AAAAAAAIJrg/Ur3BbpgqKwsriFeC2QwA3qaTl0SmJdaiwCLcBGAsYHQ/s680/151013044.jpg" Title="Wat Kritsana (Doi Yao)@チェンマイ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/rzXW1xJhSqwug6kN6" target="_blank"><img src="https://4.bp.blogspot.com/-NIB0ZyczzhE/XluvCjfZIqI/AAAAAAAE8Ec/KVdFO5L5qIEHRnNOkIXZHnXFyfbFTBh7QCLcBGAsYHQ/s680/200301031.jpg" Title="Wat Pracha Samakee@ナコンパノム" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/du4D2g6KyagWWr4b7" target="_blank"><img src="https://1.bp.blogspot.com/-yz4pDYsH0Xg/YUhyrLkpe7I/AAAAAAAIHFY/lZXL31VyDRM3XZVrJeSAiabUOG28Gq8-QCLcBGAsYHQ/s680/190819074.jpg" Title="Wat Ban Don Chum Chang@ナコンラチャシマ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/duB4kpJHg6KHhfSv9" target="_blank"><img src="https://1.bp.blogspot.com/-pdkUDitvRU4/X2MJWXDRxGI/AAAAAAAFVLg/5tadxyhFTfsY5r_nEmN8tyFe04dqXxTKACLcBGAsYHQ/s680/200207174.jpg" Title="Wat Sanam Chan@チャチュンサオ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/y4bwCHwCsLJ4n35K6" target="_blank"><img src="https://lh3.googleusercontent.com/jjTrSroJGwq_xxDk0dLbnwuRtbHWwr-eABVRbBkQ0RFnIZZlEY9bX7VwsHl1W-wmzqLM3PNEhc-luL2aDdzDkviChCHpmcakBiI7LDNkQU0JS_bVd-_Uo53CQ_8tMFqZrh1KI44PQlU" Title="Wat Pa Mettatham@ロイエット" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/5UN5wGMaTEFV1TCw6" target="_blank"><img src="https://1.bp.blogspot.com/-SlZoxLRM86A/X2hWidReDwI/AAAAAAAFWh8/NqXPx7XYjn8y62m4M3RohJFcdmJO5grCwCLcBGAsYHQ/s680/190704149.jpg" Title="Wat Mai Kamwan@ピチット" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/sFYnW1C3XjGZ5sq76" target="_blank"><img src="https://1.bp.blogspot.com/-w7l1uhr9n6w/YWk9Y5cM3KI/AAAAAAAIKbs/ndUhAvNFUEUzcHxbs5KxDKC54aDNIyLkgCLcBGAsYHQ/s680/190321043.jpg" Title="Wat Rai Khin@コンケン" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/UxoPLVMMwid6TPMd7" target="_blank"><img src="https://lh3.googleusercontent.com/pw/AIL4fc_X3Wv8fah1_yWSgiQO74Wm8kTwrK_IdF3hvfHhj5gp_iQzDUqJ685qjUoMs1Lgzb9c6FuBi7X0fkfq2xnpQ5o9kDnDIozselgFrWbsAGmuh__pIFy58u1gEMx3Ks_ypWi0u_TW8vvKvK0mh0oWUCwbUw=w180-h135-s-no?authuser=0" Title="Wat Sanam Chang@チャチュンサオ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/hKwxvgUyXqaQ3jUT8" target="_blank"><img src="https://2.bp.blogspot.com/-GIdPrAc2cPg/XeDcAZrWo4I/AAAAAAAEnDo/Y93nGDDlZNYH4P6q-8gRdZkiUXFTFwaBQCLcBGAsYHQ/s680/191128065.jpg" Title="Wat Then Plai@スパンブリ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/8ZykvT3DhktsNMtJ9" target="_blank"><img src="https://1.bp.blogspot.com/-DNjoTl8DL4M/X2g62wca4ZI/AAAAAAAFWeA/iA2YRlDXS1owHcoAxJL-jha_aXQqIQUCQCLcBGAsYHQ/s680/190704019.jpg" Title="Wat Lom@ピサヌローク" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/ZrJySwO9UOmcrBOh2" target="_blank"><img src="https://1.bp.blogspot.com/-FWsGGdjajuI/X2HoX7vr-AI/AAAAAAAFU4g/rFJ7SHYwYe45KgS-vw1QoOQ9KZtSnyToACLcBGAsYHQ/s680/180418088.jpg" Title="Wat Huai Prasit@チェンライ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/n9ETC7MEcZeyWNE27" target="_blank"><img src="https://lh3.googleusercontent.com/nRLWFhJKgXNfSQ5P94nGfOCsCTpmVZ5KxvEhE2v-0e7Zxgd3XBOjsnmHHMX5Wqd4VieqGKTliW2d_nzlYJMA6WEVAdXnuNaF8a4-pvaKt7JiyUxova4Z5IkGsf-BKcmYrMxrgp4FLuU" Title="Wat Jetlin@チェンマイ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/F8t2pCpU9tSqskiT8" target="_blank"><img src="https://lh3.googleusercontent.com/4wt8P2gmEiQbtr4L8Egj6-sDo1KuYKhz1mMPrqBDJZwkwVul7LCdmEic_CSeIFPqEYIfhj-E4B9NxZnUbeKNwtiWkol5ZLKUwGEb2x9QPpgJZAoqtcRpprI41QXAiGbFV7vcG8FX20c" Title="Wat Phra That Doi Khao Kwai@チェンライ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/WmD6RHtLH51zVi2a9" target="_blank"><img src="https://1.bp.blogspot.com/-y2xTyEtEIcI/X2G6H5hnUKI/AAAAAAAFUzk/vNywDzpYTNoPAvop1rlTiYE1pYTG9wPHACLcBGAsYHQ/s680/190306126.jpg" Title="Wat Mae Kaet Noi@チェンマイ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/mXEiP9uA98qvHoo2A" target="_blank"><img src="https://2.bp.blogspot.com/-zpCUxVJ7-uI/XIeFigJUvtI/AAAAAAAD9gY/E2FygmSM7oQFAMB_hnA8NcbdtVctORa7wCLcBGAs/s680/190310094.jpg" Title="Wat Bun Koet@パヤオ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/MgWoTnN5CsJ4TKhX9" target="_blank"><img src="https://4.bp.blogspot.com/-1kL6bsX8BQk/XIeHSFI_YYI/AAAAAAAD9hY/aoWKPl-d8UEmHmumJ98ZygW1r70VIj8dQCLcBGAs/s680/190310041.jpg" Title="Wat Thung Nong@パヤオ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/r3Hfr5fBGfWHr1kg8" target="_blank"><img src="https://1.bp.blogspot.com/-ReFjxTQci9c/X2LEET3AxCI/AAAAAAAFVDg/82ptQlJ3I54RIfL928mgrQ4CqpDRqkCHACLcBGAsYHQ/s680/190625074.jpg" Title="Wat Chee Pong Nam Ron@チェンライ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/DtYy5JYNwMojQg3P9" target="_blank"><img src="https://1.bp.blogspot.com/-ecMsJFVBjrM/X2LA94puueI/AAAAAAAFVC4/Yv1ctBVQa0ADgM5BPNmv5QahGvy7ujyCQCLcBGAsYHQ/s680/190625183.jpg" Title="Wat Fang Min@チェンライ" hspace="1" height="240"/></a></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/SQesUXSfRWFpsPtR6" target="_blank"><img src="https://1.bp.blogspot.com/-eFDS9mvzBGs/X0SsUSRQm1I/AAAAAAAFO_E/K2LhuHbNh0EOymFp04SsFTo_LNROAOdQACLcBGAsYHQ/s680/191205193.jpg" Title="Kumarnthong Chao Sua Heng@アユタヤ" hspace="1" height="240"/></a></li>
+
+            
+            </ul>
+
+          </div><!-- scroll-infinity__wrap を閉じる -->
+        </div><!-- scroll-infinity を閉じる -->
+
+      </td>
+    </tr>
+  </table>
+</div><!-- 中央寄せの外枠を閉じる -->
+
+<script>
+  // ▼ 開始位置をランダムにする処理
+
+  // 0〜10秒の間でランダムな数を作り、マイナスにする。
+  // (10 はCSSのアニメーション時間 10s と同じ数字。CSSの秒数を変えたらここも合わせる)
+  // animation-delay がマイナスだと「その秒数ぶん進んだ状態」から始まる。
+  var offset = -(Math.random() * 50);
+
+  // 流れる2本の画像列(ul)を全部探して、同じ値を設定する。
+  // 2本の値がずれると継ぎ目に隙間ができるので、必ず同じ値にする。
+  document.querySelectorAll('.scroll-infinity__list--left').forEach(function (el) {
+    el.style.animationDelay = offset + 's';
+  });
+</script>
+
 </body>
 
 </html>

@@ -1,59 +1,73 @@
-﻿<html>
+﻿<!DOCTYPE html>
+<html lang="ja">
 
 <head>
+<!-- 文字コード。元はshift_jisでしたが、今回はUTF-8で保存し直したので合わせています -->
+<meta charset="utf-8">
 <meta http-equiv="Content-Language" content="ja">
-<meta name="GENERATOR" content="Microsoft FrontPage 12.0">
-<meta name="ProgId" content="FrontPage.Editor.Document">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<link rel="shortcut icon" href="../icon/kamon.gif">
 <title>お勧め</title>
-</head>
+
+<!-- リンクを新しいタブで開く設定(全部のaタグに効く) -->
+<base target="_blank">
 
 <style>
 
+/* ▼ アニメーションの中身:左端(0)から、自分の幅ぶん左(-100%)まで動かす */
 @keyframes infinity-scroll-left {
-from {
-  transform: translateX(0);
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
 }
-  to {
-  transform: translateX(-100%);
-}
-}
+
+/* ▼ 画像の列を並べる外枠。はみ出した部分は隠す */
 .scroll-infinity__wrap {
   display: flex;
   overflow: hidden;
 }
+
+/* ▼ 画像の列(ul)。横一列に並べ、リストの点を消す */
 .scroll-infinity__list {
   display: flex;
   list-style: none;
-  padding: 0
+  padding: 0;
 }
+
+/* ▼ 左へ流れるアニメーションを設定(10秒で1周、等速、ずっと繰り返す) */
 .scroll-infinity__list--left {
   animation: infinity-scroll-left 384s infinite linear 0.2s both;
 }
+
+/* ▼ 下の2つは、今のHTMLでは使われていないクラス用の設定(そのまま残しています) */
 .scroll-infinity__item {
   width: calc(100vw / 6);
 }
-.scroll-infinity__item>img {
+.scroll-infinity__item > img {
   width: 100%;
 }
 
-.scroll-infinity__wrap:hover .scroll-infinity__list--left{
+/* ▼ マウスを乗せている間はアニメーションを一時停止 */
+.scroll-infinity__wrap:hover .scroll-infinity__list--left {
   animation-play-state: paused;
 }
 
 </style>
+</head>
 
 <body bgcolor="#FBF4E6" topmargin="0" leftmargin="0">
 
+<!-- ▼ ページ全体を中央寄せにする外枠(表) -->
 <div align="center">
-    <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" height="100%">
-      <tr>
-        <td width="100%" height="100%">
-		<div class="scroll-infinity">
-			<div class="scroll-infinity__wrap">
-  			  <ul class="scroll-infinity__list scroll-infinity__list--left">
-  
-  
+  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" height="100%">
+    <tr>
+      <td width="100%" height="100%">
+
+        <div class="scroll-infinity">
+          <div class="scroll-infinity__wrap">
+
+            <!-- ▼ 1本目の画像列 -->
+            <ul class="scroll-infinity__list scroll-infinity__list--left">
+            
            <li class="d-demo__item"><a href="https://goo.gl/photos/xbcw7E4FMKwNkctu5" target="_blank"><img src="https://lh3.googleusercontent.com/-Tw9_ov8QxUQ/S6sQNDXTjSI/AAAAAAAAACs/JPKbvm-3lfk/s680/07080630.jpg" hspace="1" height="240"/></li>
            <li class="d-demo__item"><a href="https://photos.app.goo.gl/U7QXt1p45DbjOA3W2" target="_blank"><img src="https://lh5.googleusercontent.com/-Hq9tfN05XxY/T0sCvkbTHzI/AAAAAAAADv0/wKFCOwFHZs4/s680/120224050.jpg" hspace="1" height="240"/></li>
            <li class="d-demo__item"><a href="https://goo.gl/photos/aQvNUGjvoF97V8W18" target="_blank"><img src="https://lh6.googleusercontent.com/-muoSJaup4pk/TljEGF0x6gI/AAAAAAAAHv0/OaAr3cDmkjk/s680/110825112.jpg" hspace="1" height="240"/></li>
@@ -248,19 +262,12 @@ from {
            <li class="d-demo__item"><a href="https://photos.app.goo.gl/2LpkG2TkZ7HLbnKH9" target="_blank"><img src="https://lh3.googleusercontent.com/-XU_5j2Thr9s/TlhoTT4JBII/AAAAAAAACIg/sgcdPCjU-50/s680/110823141.jpg" hspace="1" height="240"/></li>
 
 
+            
+           </ul>
 
-
-
-
-
-
-
-
-
-
-  </ul>
-  <ul class="scroll-infinity__list scroll-infinity__list--left">
-
+            <!-- ▼ 2本目の画像列(1本目と同じ内容。つなぎ目なしに無限ループして見せるためのコピー) -->
+            <ul class="scroll-infinity__list scroll-infinity__list--left">
+            
            <li class="d-demo__item"><a href="https://goo.gl/photos/xbcw7E4FMKwNkctu5" target="_blank"><img src="https://lh3.googleusercontent.com/-Tw9_ov8QxUQ/S6sQNDXTjSI/AAAAAAAAACs/JPKbvm-3lfk/s680/07080630.jpg" hspace="1" height="240"/></li>
            <li class="d-demo__item"><a href="https://photos.app.goo.gl/U7QXt1p45DbjOA3W2" target="_blank"><img src="https://lh5.googleusercontent.com/-Hq9tfN05XxY/T0sCvkbTHzI/AAAAAAAADv0/wKFCOwFHZs4/s680/120224050.jpg" hspace="1" height="240"/></li>
            <li class="d-demo__item"><a href="https://goo.gl/photos/aQvNUGjvoF97V8W18" target="_blank"><img src="https://lh6.googleusercontent.com/-muoSJaup4pk/TljEGF0x6gI/AAAAAAAAHv0/OaAr3cDmkjk/s680/110825112.jpg" hspace="1" height="240"/></li>
@@ -455,32 +462,31 @@ from {
            <li class="d-demo__item"><a href="https://photos.app.goo.gl/2LpkG2TkZ7HLbnKH9" target="_blank"><img src="https://lh3.googleusercontent.com/-XU_5j2Thr9s/TlhoTT4JBII/AAAAAAAACIg/sgcdPCjU-50/s680/110823141.jpg" hspace="1" height="240"/></li>
 
 
+            
+            </ul>
 
+          </div><!-- scroll-infinity__wrap を閉じる -->
+        </div><!-- scroll-infinity を閉じる -->
 
-
-
-
-
-
-
-  </ul>
-</div>
-</div>
-      
       </td>
-      </tr>
-    </table>
-    </center>
-  </div>
-      
-      
-      
-      
+    </tr>
+  </table>
+</div><!-- 中央寄せの外枠を閉じる -->
 
-  </center>
-</div>
+<script>
+  // ▼ 開始位置をランダムにする処理
 
+  // 0〜10秒の間でランダムな数を作り、マイナスにする。
+  // (10 はCSSのアニメーション時間 10s と同じ数字。CSSの秒数を変えたらここも合わせる)
+  // animation-delay がマイナスだと「その秒数ぶん進んだ状態」から始まる。
+  var offset = -(Math.random() * 384);
 
+  // 流れる2本の画像列(ul)を全部探して、同じ値を設定する。
+  // 2本の値がずれると継ぎ目に隙間ができるので、必ず同じ値にする。
+  document.querySelectorAll('.scroll-infinity__list--left').forEach(function (el) {
+    el.style.animationDelay = offset + 's';
+  });
+</script>
 
 </body>
 
