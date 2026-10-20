@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<!-- 文字コード。元はshift_jisでしたが、今回はUTF-8で保存し直したので合わせています -->
+<meta charset="utf-8">
+<meta http-equiv="Content-Language" content="ja">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<link rel="shortcut icon" href="../icon/kamon.gif">
+<title>舟形お堂</title>
+
+<!-- リンクを新しいタブで開く設定(全部のaタグに効く) -->
+<base target="_blank">
+
+<style>
+
+/* ▼ アニメーションの中身:左端(0)から、自分の幅ぶん左(-100%)まで動かす */
+@keyframes infinity-scroll-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+/* ▼ 画像の列を並べる外枠。はみ出した部分は隠す */
+.scroll-infinity__wrap {
+  display: flex;
+  overflow: hidden;
+}
+
+/* ▼ 画像の列(ul)。横一列に並べ、リストの点を消す */
+.scroll-infinity__list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+/* ▼ 左へ流れるアニメーションを設定(10秒で1周、等速、ずっと繰り返す) */
+.scroll-infinity__list--left {
+  animation: infinity-scroll-left 40s infinite linear 0.2s both;
+}
+
+/* ▼ 下の2つは、今のHTMLでは使われていないクラス用の設定(そのまま残しています) */
+.scroll-infinity__item {
+  width: calc(100vw / 6);
+}
+.scroll-infinity__item > img {
+  width: 100%;
+}
+
+/* ▼ マウスを乗せている間はアニメーションを一時停止 */
+.scroll-infinity__wrap:hover .scroll-infinity__list--left {
+  animation-play-state: paused;
+}
+
+</style>
+</head>
+
+<body bgcolor="#FBF4E6" topmargin="0" leftmargin="0">
+
+<!-- ▼ ページ全体を中央寄せにする外枠(表) -->
+<div align="center">
+  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" height="100%">
+    <tr>
+      <td width="100%" height="100%">
+
+        <div class="scroll-infinity">
+          <div class="scroll-infinity__wrap">
+
+            <!-- ▼ 1本目の画像列 -->
+            <ul class="scroll-infinity__list scroll-infinity__list--left">
+            
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/mYUss2HNbXfriZDH8"><img src="https://lh3.googleusercontent.com/pw/AP1GczOZbcyCuL_RTJsVwfkJ4nnGypJccZrsH286RGXkiAzF8Lpc4XL0NYuqg69InRfB_l7PoHSsDurviFJwRNxTObAix9xvzF8fR_aS6cRyufJN1AtCS4oGaLiYm4PA0bTHfi9X9BnJFgFIjtOfvT7xyeBGCg=w1159-h869-s-no-gm?authuser=0" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/PfQAd8F7MvTNQ5k67"><img src="https://lh3.googleusercontent.com/pw/AP1GczOZo1kAIOyAzglWJUdx86WdD6KCeHm-C9LsbmX1h683UDFggF-goSiMfa7ef4tfxRzHasQXC0xFA45Y1pIIJ1MRl75FR45zjpyT3nWVVrA8AzZGL7mH6UDbK_hsHJ86foLn_jXDvTCeQ-iU_6sH3N-C2g=w1159-h869-s-no-gm?authuser=0" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://goo.gl/photos/sKz6G8edcsgjHCKz6"><img src="https://lh3.googleusercontent.com/vgDx2-QTyJUDGFzzjwZcXnYVeEekrqgYBndequ1IgjY-YhzqwyHO6zapcb5Ym9TRhEZj0tu8fnEl3Q" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://goo.gl/photos/eaMxueSoWtoPJpd1A"><img src="https://1.bp.blogspot.com/-Jl6GPU_XqyE/X2fUq1Mt3oI/AAAAAAAFWWE/HA3Uqk3o9Yslf_bUlola20HDZKTxEDfhACLcBGAsYHQ/s680/100321083.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/1m2YQwhFrAKrb9TD8"><img src="https://lh3.googleusercontent.com/pw/AP1GczNjlmjJG8qHCM9AT2c7etsY_sHUbHU93ltFY2iJfWSKwKtFmOfHjDFdDQORpU67Vhyz0A3NJW5j92tQ17Qdzcs_9N3YNdiqLrAuaw_dshOjALTnBYwrj0p4dzdLk3ObeY53nnIdRwhwMH2_YUDfWzMZRg=w1159-h869-s-no-gm?authuser=0" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/jbaSAwbixGiQ2FMW7"><img src="https://1.bp.blogspot.com/-9-mynWY0l-I/X2nTnbOtsTI/AAAAAAAFWy0/nm2rOrqWpNkR46E3RhBxK_rGGaJnDjhXgCLcBGAsYHQ/s680/180827076.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/ivsGSRUrBsEj7fJ98"><img src="https://1.bp.blogspot.com/-KFunvyxp0Ho/X13bAzCtfpI/AAAAAAAFUSk/daEEpI31pcEuRaaHNEXRV8tXWEtErN2VACLcBGAsYHQ/s680/191128107.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://goo.gl/photos/KxDgg9mskXufqJGP7"><img src="https://3.bp.blogspot.com/-lK67-LqgJVA/XzBvwlTzVXI/AAAAAAAFOBA/ZNPXlLoKLEMIlNHpTd8_QapxQ1jsahkwgCLcBGAsYHQ/s680/120321040.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/y241tjKdBdBAevbU6"><img src="https://1.bp.blogspot.com/-Hzql6QV0gk0/X2naFTKsocI/AAAAAAAFWzM/jwhg7N3AWqcoJXPtQ1Y_p53gn4y3wqJDACLcBGAsYHQ/s680/190409010.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/6cozg8LSr368qmxG8"><img src="https://2.bp.blogspot.com/-RNxjCD2S0cQ/XQZBWYyvemI/AAAAAAAEIiw/4LhzCI7HmMIfw2FK_jHEv5MztdobXo7wwCLcBGAs/s680/190616006.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://goo.gl/photos/CAyCnfED51m6NvQ68"><img src="https://1.bp.blogspot.com/-zCq6t0LuMiI/X0c6qwxceFI/AAAAAAAFPNw/fx-ZZFNY1cMEiiH-prR6qOLX1biqcHxmwCLcBGAsYHQ/s680/130720040.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/1Efw3zLEJ2RJzWZe7"><img src="https://lh5.googleusercontent.com/-geM6sh-mmoQ/Semf7NY7nrI/AAAAAAAAI30/SNJnKp38dYs/s680/09041021.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/iab7F1bFWgDgkXtv7"><img src="https://lh5.googleusercontent.com/-pe1aru8jnI4/UWVATzg0PhI/AAAAAAAAK9I/6HMn43cCpRI/s680/DSC04819.JPG" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/h6mjT8stdSQPMS83A"><img src="https://1.bp.blogspot.com/-j3pv75jBFmg/Xdp8EafvD8I/AAAAAAAEmIc/p3P_22DSp38fFV9TiXUBnjkBWrUHr7-RwCLcBGAsYHQ/s680/191124054.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/Vn2eTdo9M7h6z6Y29"><img src="https://1.bp.blogspot.com/-6dqSwFfAQFg/XeeierFSawI/AAAAAAAEoYo/EFGhittk5oUDOHOdYCfE3dJdSaZl5pzyACLcBGAsYHQ/s680/191204072.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/C1tr5qdSun6tjsft8"><img src="https://1.bp.blogspot.com/-KSi0a0GWr9E/XLWS7EeBSTI/AAAAAAAEDXY/suy8hoXNLBUZBNQrNMJYSa_Y_x38x-QnACLcBGAs/s680/190416016.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/KRD7asyUg6UkoEpY7"><img src="https://1.bp.blogspot.com/-iSzEvGm8-fY/X1xsCi-ErBI/AAAAAAAFT9g/aVzYm0LUF_Imyhx8bDoCnrVIoUAxcNzvgCLcBGAsYHQ/s680/190803038.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/Fi8wWTS71u7zx4sY9"><img src="https://4.bp.blogspot.com/-MQwbOen3Cco/XIGMdoheCJI/AAAAAAAD8eE/YJdLA_2WNCcFRK_i827iADUfugtrp8b9ACLcBGAs/s680/190306137.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/kwdKT4p3AKEQ6aVg6"><img src="https://1.bp.blogspot.com/-K3xaRDZG814/X111v1Dq9wI/AAAAAAAFUEw/iPqj0JKWZNQuvkGvhmFkyK98UIizrSMGACLcBGAsYHQ/s680/191125079.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://goo.gl/photos/TSmZNxbmCmuyZmgo8"><img src="https://lh3.googleusercontent.com/e4O8rfqpcuNTb1AFGk5mp8_BYAOD4F8J0YVt5z1gpGEQC3IYuRBrQN_sIKN9NHjTO1XQkGi7UMVwLg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/Y4oUdzitP6Xvroho8"><img src="https://lh3.googleusercontent.com/pw/AIL4fc_GXbsPI6K4IVnhsgoZ0pS7hMs0EwgYvc3vcH9NpJPg7riqiGJXdofwd932_j1ob8AQgfMi_K-tkm5Qkez5pyieXvKwDrVytbpAAFTjMhTMJ37AhDJebsd3WlclGCVsRvCOdBPXLx6etH6YSOC14lzTKg=w1275-h956-s-no?authuser=0" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/v98swezmL2HVcDMB8"><img src="https://1.bp.blogspot.com/-KIIFOoEJqlQ/X203G9JzOsI/AAAAAAAFXjg/NqeriRJ0LiwYg98ts59jgVITS7gzFJZowCLcBGAsYHQ/s680/191124078.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/Sq6RVXe2xJyUP1786"><img src="https://1.bp.blogspot.com/-VXtmcz7V-YI/X2iAyntY1lI/AAAAAAAFWlY/rvjHZMG9-l4FHcCsrW9UTNHHuwTddS9sQCLcBGAsYHQ/s680/191207206.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/6STY4uSirEE45Vt99"><img src="https://1.bp.blogspot.com/-5v5Y8RxkyiU/X2HIxPl4tJI/AAAAAAAFU2Q/r2RrWZl_nQYWBQxFZzmDphd7mVnyp9cbACLcBGAsYHQ/s680/160203033.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/MB7bRsrPVZS3PLtP7"><img src="https://1.bp.blogspot.com/-RVhB_FkTtJU/X131mLg6trI/AAAAAAAFUTs/Kr3aXawTytQ8LgAehkVO7EA-7y2J0E6QACLcBGAsYHQ/s680/150121064.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/bxxhgHGuvAe4sn928"><img src="https://3.bp.blogspot.com/-mJxMnKkK4Po/Xc1B8UXTAeI/AAAAAAAEkCs/rbSWDQuSkzcO_sx-Q7W_HL-iLBbO8nw3wCLcBGAsYHQ/s680/191114008.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/JAMA98aTZpoNvoQ57"><img src="https://1.bp.blogspot.com/-hCJfTUtZOeM/XTBSq6xfCfI/AAAAAAAENwQ/Yt0cC1G89hk99ZQiCfbENx98UP5HejGDwCLcBGAs/s680/190718047.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://goo.gl/photos/horXPfk1nmX93biHA"><img src="https://1.bp.blogspot.com/-3l32wCQukB4/X20w1badkBI/AAAAAAAFXiE/j2m9xaL9kD449TL3CLTLrBGvRyJIRxUVQCLcBGAsYHQ/s680/090810198.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/9LQJJP27FTvEV6rM7"><img src="https://lh5.googleusercontent.com/-0epzgE_QmeI/UWPwKqvHinI/AAAAAAAAK68/y377OofUYBw/s680/130409040.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/q7RjZW6bEC1gj1fG6"><img src="https://lh4.googleusercontent.com/-xPOcfeficzk/VENzWWOb4II/AAAAAAAAZ8M/Qw9UiQDkIYg/s680/141019027.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/uAsuuGcPLzDe94Tn7"><img src="https://lh4.googleusercontent.com/-GJrS8vbl2Ak/UWH59NPmCeI/AAAAAAAAKnc/tlfxzvz8sRA/s680/130407034.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/XaoN5XqUX5ADktCL9"><img src="https://lh3.googleusercontent.com/-jP3uqfSJMqI/Tlo0Ucuv0pI/AAAAAAAACgI/ReSEPsjBvD8/s680/110828039.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://goo.gl/photos/9GMDGZFNMTTVxi516"><img src="https://lh3.googleusercontent.com/HfAJVAb60-T_wMVkmzS7TKJif0Ie4bk9y6cWGcZdaza8-OL6wF7x7gzPChwcmYeue5MsEOoouncDXA" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://goo.gl/photos/kmooT8dYi4bpDTjF9"><img src="https://lh3.googleusercontent.com/-DdNBe9K19lE/TYtJ6IY_ANI/AAAAAAAADn8/v4jcdFJp6-c/s680/110315049.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/CW4p3hAvERZvgg2s9"><img src="https://lh3.googleusercontent.com/-bCV0--7uWCA/Vr3JKFpdXrI/AAAAAAABEeQ/ufqrlz0f8jI/s680-Ic42/160212090.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/QcMZpH28gyU5VVve8"><img src="https://2.bp.blogspot.com/-NmzQqCUAnv4/Xj_6D1NntmI/AAAAAAAE4YA/nBmkCvPKMwEjJP-X7Mqa_yO_m2PEYesGgCLcBGAsYHQ/s680/200209046.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/DXFBDkG4UK8Vynkq9"><img src="https://1.bp.blogspot.com/-ZPjj6F499WQ/X1yB3DN8SCI/AAAAAAAFT_E/rthxCFeSSZMZrYohsQsNdJeDjjdRprUNACLcBGAsYHQ/s680/110516016.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/qySDAAWfsmMFLwzy5"><img src="https://1.bp.blogspot.com/-oJFr1Mz2PYQ/X13AswwoYsI/AAAAAAAFUPQ/pgZE8NqZbQ8czLwsuAntirW6QW1bn8R1ACLcBGAsYHQ/s680/190809063.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="http://lh5.ggpht.com/_M674G_dhxK8/S_4jQ03_ijI/AAAAAAAAA7A/a3t2eqEFq2I/s1600/070210083.jpg"><img src="http://lh5.ggpht.com/_M674G_dhxK8/S_4jQ03_ijI/AAAAAAAAA7A/a3t2eqEFq2I/s680/070210083.jpg" hspace="1" height="240"/></li>
+
+            
+           </ul>
+
+            <!-- ▼ 2本目の画像列(1本目と同じ内容。つなぎ目なしに無限ループして見せるためのコピー) -->
+            <ul class="scroll-infinity__list scroll-infinity__list--left">
+            
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/mYUss2HNbXfriZDH8"><img src="https://lh3.googleusercontent.com/pw/AP1GczOZbcyCuL_RTJsVwfkJ4nnGypJccZrsH286RGXkiAzF8Lpc4XL0NYuqg69InRfB_l7PoHSsDurviFJwRNxTObAix9xvzF8fR_aS6cRyufJN1AtCS4oGaLiYm4PA0bTHfi9X9BnJFgFIjtOfvT7xyeBGCg=w1159-h869-s-no-gm?authuser=0" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/PfQAd8F7MvTNQ5k67"><img src="https://lh3.googleusercontent.com/pw/AP1GczOZo1kAIOyAzglWJUdx86WdD6KCeHm-C9LsbmX1h683UDFggF-goSiMfa7ef4tfxRzHasQXC0xFA45Y1pIIJ1MRl75FR45zjpyT3nWVVrA8AzZGL7mH6UDbK_hsHJ86foLn_jXDvTCeQ-iU_6sH3N-C2g=w1159-h869-s-no-gm?authuser=0" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://goo.gl/photos/sKz6G8edcsgjHCKz6"><img src="https://lh3.googleusercontent.com/vgDx2-QTyJUDGFzzjwZcXnYVeEekrqgYBndequ1IgjY-YhzqwyHO6zapcb5Ym9TRhEZj0tu8fnEl3Q" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://goo.gl/photos/eaMxueSoWtoPJpd1A"><img src="https://1.bp.blogspot.com/-Jl6GPU_XqyE/X2fUq1Mt3oI/AAAAAAAFWWE/HA3Uqk3o9Yslf_bUlola20HDZKTxEDfhACLcBGAsYHQ/s680/100321083.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/1m2YQwhFrAKrb9TD8"><img src="https://lh3.googleusercontent.com/pw/AP1GczNjlmjJG8qHCM9AT2c7etsY_sHUbHU93ltFY2iJfWSKwKtFmOfHjDFdDQORpU67Vhyz0A3NJW5j92tQ17Qdzcs_9N3YNdiqLrAuaw_dshOjALTnBYwrj0p4dzdLk3ObeY53nnIdRwhwMH2_YUDfWzMZRg=w1159-h869-s-no-gm?authuser=0" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/jbaSAwbixGiQ2FMW7"><img src="https://1.bp.blogspot.com/-9-mynWY0l-I/X2nTnbOtsTI/AAAAAAAFWy0/nm2rOrqWpNkR46E3RhBxK_rGGaJnDjhXgCLcBGAsYHQ/s680/180827076.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/ivsGSRUrBsEj7fJ98"><img src="https://1.bp.blogspot.com/-KFunvyxp0Ho/X13bAzCtfpI/AAAAAAAFUSk/daEEpI31pcEuRaaHNEXRV8tXWEtErN2VACLcBGAsYHQ/s680/191128107.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://goo.gl/photos/KxDgg9mskXufqJGP7"><img src="https://3.bp.blogspot.com/-lK67-LqgJVA/XzBvwlTzVXI/AAAAAAAFOBA/ZNPXlLoKLEMIlNHpTd8_QapxQ1jsahkwgCLcBGAsYHQ/s680/120321040.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/y241tjKdBdBAevbU6"><img src="https://1.bp.blogspot.com/-Hzql6QV0gk0/X2naFTKsocI/AAAAAAAFWzM/jwhg7N3AWqcoJXPtQ1Y_p53gn4y3wqJDACLcBGAsYHQ/s680/190409010.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/6cozg8LSr368qmxG8"><img src="https://2.bp.blogspot.com/-RNxjCD2S0cQ/XQZBWYyvemI/AAAAAAAEIiw/4LhzCI7HmMIfw2FK_jHEv5MztdobXo7wwCLcBGAs/s680/190616006.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://goo.gl/photos/CAyCnfED51m6NvQ68"><img src="https://1.bp.blogspot.com/-zCq6t0LuMiI/X0c6qwxceFI/AAAAAAAFPNw/fx-ZZFNY1cMEiiH-prR6qOLX1biqcHxmwCLcBGAsYHQ/s680/130720040.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/1Efw3zLEJ2RJzWZe7"><img src="https://lh5.googleusercontent.com/-geM6sh-mmoQ/Semf7NY7nrI/AAAAAAAAI30/SNJnKp38dYs/s680/09041021.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/iab7F1bFWgDgkXtv7"><img src="https://lh5.googleusercontent.com/-pe1aru8jnI4/UWVATzg0PhI/AAAAAAAAK9I/6HMn43cCpRI/s680/DSC04819.JPG" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/h6mjT8stdSQPMS83A"><img src="https://1.bp.blogspot.com/-j3pv75jBFmg/Xdp8EafvD8I/AAAAAAAEmIc/p3P_22DSp38fFV9TiXUBnjkBWrUHr7-RwCLcBGAsYHQ/s680/191124054.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/Vn2eTdo9M7h6z6Y29"><img src="https://1.bp.blogspot.com/-6dqSwFfAQFg/XeeierFSawI/AAAAAAAEoYo/EFGhittk5oUDOHOdYCfE3dJdSaZl5pzyACLcBGAsYHQ/s680/191204072.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/C1tr5qdSun6tjsft8"><img src="https://1.bp.blogspot.com/-KSi0a0GWr9E/XLWS7EeBSTI/AAAAAAAEDXY/suy8hoXNLBUZBNQrNMJYSa_Y_x38x-QnACLcBGAs/s680/190416016.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/KRD7asyUg6UkoEpY7"><img src="https://1.bp.blogspot.com/-iSzEvGm8-fY/X1xsCi-ErBI/AAAAAAAFT9g/aVzYm0LUF_Imyhx8bDoCnrVIoUAxcNzvgCLcBGAsYHQ/s680/190803038.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/Fi8wWTS71u7zx4sY9"><img src="https://4.bp.blogspot.com/-MQwbOen3Cco/XIGMdoheCJI/AAAAAAAD8eE/YJdLA_2WNCcFRK_i827iADUfugtrp8b9ACLcBGAs/s680/190306137.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/kwdKT4p3AKEQ6aVg6"><img src="https://1.bp.blogspot.com/-K3xaRDZG814/X111v1Dq9wI/AAAAAAAFUEw/iPqj0JKWZNQuvkGvhmFkyK98UIizrSMGACLcBGAsYHQ/s680/191125079.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://goo.gl/photos/TSmZNxbmCmuyZmgo8"><img src="https://lh3.googleusercontent.com/e4O8rfqpcuNTb1AFGk5mp8_BYAOD4F8J0YVt5z1gpGEQC3IYuRBrQN_sIKN9NHjTO1XQkGi7UMVwLg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/Y4oUdzitP6Xvroho8"><img src="https://lh3.googleusercontent.com/pw/AIL4fc_GXbsPI6K4IVnhsgoZ0pS7hMs0EwgYvc3vcH9NpJPg7riqiGJXdofwd932_j1ob8AQgfMi_K-tkm5Qkez5pyieXvKwDrVytbpAAFTjMhTMJ37AhDJebsd3WlclGCVsRvCOdBPXLx6etH6YSOC14lzTKg=w1275-h956-s-no?authuser=0" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/v98swezmL2HVcDMB8"><img src="https://1.bp.blogspot.com/-KIIFOoEJqlQ/X203G9JzOsI/AAAAAAAFXjg/NqeriRJ0LiwYg98ts59jgVITS7gzFJZowCLcBGAsYHQ/s680/191124078.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/Sq6RVXe2xJyUP1786"><img src="https://1.bp.blogspot.com/-VXtmcz7V-YI/X2iAyntY1lI/AAAAAAAFWlY/rvjHZMG9-l4FHcCsrW9UTNHHuwTddS9sQCLcBGAsYHQ/s680/191207206.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/6STY4uSirEE45Vt99"><img src="https://1.bp.blogspot.com/-5v5Y8RxkyiU/X2HIxPl4tJI/AAAAAAAFU2Q/r2RrWZl_nQYWBQxFZzmDphd7mVnyp9cbACLcBGAsYHQ/s680/160203033.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/MB7bRsrPVZS3PLtP7"><img src="https://1.bp.blogspot.com/-RVhB_FkTtJU/X131mLg6trI/AAAAAAAFUTs/Kr3aXawTytQ8LgAehkVO7EA-7y2J0E6QACLcBGAsYHQ/s680/150121064.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/bxxhgHGuvAe4sn928"><img src="https://3.bp.blogspot.com/-mJxMnKkK4Po/Xc1B8UXTAeI/AAAAAAAEkCs/rbSWDQuSkzcO_sx-Q7W_HL-iLBbO8nw3wCLcBGAsYHQ/s680/191114008.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/JAMA98aTZpoNvoQ57"><img src="https://1.bp.blogspot.com/-hCJfTUtZOeM/XTBSq6xfCfI/AAAAAAAENwQ/Yt0cC1G89hk99ZQiCfbENx98UP5HejGDwCLcBGAs/s680/190718047.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://goo.gl/photos/horXPfk1nmX93biHA"><img src="https://1.bp.blogspot.com/-3l32wCQukB4/X20w1badkBI/AAAAAAAFXiE/j2m9xaL9kD449TL3CLTLrBGvRyJIRxUVQCLcBGAsYHQ/s680/090810198.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/9LQJJP27FTvEV6rM7"><img src="https://lh5.googleusercontent.com/-0epzgE_QmeI/UWPwKqvHinI/AAAAAAAAK68/y377OofUYBw/s680/130409040.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/q7RjZW6bEC1gj1fG6"><img src="https://lh4.googleusercontent.com/-xPOcfeficzk/VENzWWOb4II/AAAAAAAAZ8M/Qw9UiQDkIYg/s680/141019027.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/uAsuuGcPLzDe94Tn7"><img src="https://lh4.googleusercontent.com/-GJrS8vbl2Ak/UWH59NPmCeI/AAAAAAAAKnc/tlfxzvz8sRA/s680/130407034.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/XaoN5XqUX5ADktCL9"><img src="https://lh3.googleusercontent.com/-jP3uqfSJMqI/Tlo0Ucuv0pI/AAAAAAAACgI/ReSEPsjBvD8/s680/110828039.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://goo.gl/photos/9GMDGZFNMTTVxi516"><img src="https://lh3.googleusercontent.com/HfAJVAb60-T_wMVkmzS7TKJif0Ie4bk9y6cWGcZdaza8-OL6wF7x7gzPChwcmYeue5MsEOoouncDXA" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://goo.gl/photos/kmooT8dYi4bpDTjF9"><img src="https://lh3.googleusercontent.com/-DdNBe9K19lE/TYtJ6IY_ANI/AAAAAAAADn8/v4jcdFJp6-c/s680/110315049.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/CW4p3hAvERZvgg2s9"><img src="https://lh3.googleusercontent.com/-bCV0--7uWCA/Vr3JKFpdXrI/AAAAAAABEeQ/ufqrlz0f8jI/s680-Ic42/160212090.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/QcMZpH28gyU5VVve8"><img src="https://2.bp.blogspot.com/-NmzQqCUAnv4/Xj_6D1NntmI/AAAAAAAE4YA/nBmkCvPKMwEjJP-X7Mqa_yO_m2PEYesGgCLcBGAsYHQ/s680/200209046.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/DXFBDkG4UK8Vynkq9"><img src="https://1.bp.blogspot.com/-ZPjj6F499WQ/X1yB3DN8SCI/AAAAAAAFT_E/rthxCFeSSZMZrYohsQsNdJeDjjdRprUNACLcBGAsYHQ/s680/110516016.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="https://photos.app.goo.gl/qySDAAWfsmMFLwzy5"><img src="https://1.bp.blogspot.com/-oJFr1Mz2PYQ/X13AswwoYsI/AAAAAAAFUPQ/pgZE8NqZbQ8czLwsuAntirW6QW1bn8R1ACLcBGAsYHQ/s680/190809063.jpg" hspace="1" height="240"/></li>
+           <li class="d-demo__item"><a href="http://lh5.ggpht.com/_M674G_dhxK8/S_4jQ03_ijI/AAAAAAAAA7A/a3t2eqEFq2I/s1600/070210083.jpg"><img src="http://lh5.ggpht.com/_M674G_dhxK8/S_4jQ03_ijI/AAAAAAAAA7A/a3t2eqEFq2I/s680/070210083.jpg" hspace="1" height="240"/></li>
+
+            
+            </ul>
+
+          </div><!-- scroll-infinity__wrap を閉じる -->
+        </div><!-- scroll-infinity を閉じる -->
+
+      </td>
+    </tr>
+  </table>
+</div><!-- 中央寄せの外枠を閉じる -->
+
+<script>
+  // ▼ 開始位置をランダムにする処理
+
+  // 0〜10秒の間でランダムな数を作り、マイナスにする。
+  // (10 はCSSのアニメーション時間 10s と同じ数字。CSSの秒数を変えたらここも合わせる)
+  // animation-delay がマイナスだと「その秒数ぶん進んだ状態」から始まる。
+  var offset = -(Math.random() * 40);
+
+  // 流れる2本の画像列(ul)を全部探して、同じ値を設定する。
+  // 2本の値がずれると継ぎ目に隙間ができるので、必ず同じ値にする。
+  document.querySelectorAll('.scroll-infinity__list--left').forEach(function (el) {
+    el.style.animationDelay = offset + 's';
+  });
+</script>
+
+</body>
+
+</html>
