@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>今日だけの画像表示サンプル</title>
+    <title>Photo of the Day / ภาพประจำวัน</title>
     <style>
         body {
             font-family: sans-serif;
@@ -24,11 +24,18 @@
             border-radius: 10px; /* 数字が大きいほど丸くなります */
         }
 
+    .auto-style1 {
+	font-family: "ＭＳ Ｐ明朝";
+}
+.auto-style2 {
+	font-weight: normal;
+}
+
     </style>
 </head>
 <body style="margin: 0; background-color: #FBF4E6">
 
-    <h1>今日の一枚</h1>
+    <h1 class="auto-style1">今日の一枚<br>Photo of the Day <span class="auto-style2">ภาพประจำวัน</span></h1>
 
     <div class="image-container">
         <!-- <img>タグを<a>タグで囲む構造に変更 -->
