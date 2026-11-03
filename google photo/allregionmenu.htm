@@ -14,12 +14,8 @@
 
 </head>
 <body style="background-color: #FBF4E6">
-<select onchange="if(this.value) { 
-    var target = (this.value === './YouTube/youtube.htm') ? '_parent' : 'allregionbottom';
-    window.open(this.value, target); 
-    this.selectedIndex=0; 
-}">
-    <option value="">全国メニュー</option>
+	<select onchange="if(this.value) { window.open(this.value, 'allregionbottom'); this.selectedIndex=0; }">
+	<option value="">全国メニュー</option>
     <option value="./album/mwat.htm">王 室 仏 教 寺 院</option>
     <option value="./album/minfoThai.htm">県 章・県 旗</option>
     <option value="./album/mlakmuang.htm">ラ ク ・ ム ア ン</option>
@@ -50,7 +46,7 @@
     <option value="./album/monsen.htm">温 泉</option>
     <option value="./slider/slider.htm">流 れ る 画 像</option>
     <option value="./YouTube/youtube.htm">YouTube</option>
-    <option value="./album/mothers.htm">そ の 他</option>
+    <option value="./other/mothers.htm">そ の 他</option>
 </select>
 </body>
 
