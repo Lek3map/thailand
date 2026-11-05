@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ランダムリダイレクト</title>
+    <script>
+        const pages = ["phone.htm","vendor.htm","tuk-tuk.htm","vehicles.htm","bike.htm"];
+        const randomIndex = Math.floor(Math.random() * pages.length);
+        window.location.href = pages[randomIndex];
+    </script>
+	<base target="slidertop">
+</head>
+<body style="margin: 0">
+    <p>ページを移動しています...</p>
+</body>
+</html>
