@@ -19,7 +19,7 @@
 </head>
 <body>
 <div id='map'></div>
-<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>1998年6月21日</div><div class='photo-thumb'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' title='交通手段' alt='交通手段' onerror="this.style.display='none'"></div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/map/1998/thumbs/98062101.jpg' title='' alt='' onerror="this.style.display='none'"><div class='thumb-label'></div></div></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>1998年6月21日</div><div class='photo-thumb'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' title='交通手段' alt='交通手段' onerror="this.style.display='none'"></div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/map/1998/thumbs/98062101.jpg' title='Mae Hong Son Airport' alt='Mae Hong Son Airport' onerror="this.style.display='none'"><div class='thumb-label'>Mae Hong Son Airport</div></div></div>
 <script>
 var map = L.map('map');
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -36,7 +36,7 @@ var icon_plane_png = L.icon({
     iconAnchor: [15, 30],
     popupAnchor: [0, -30]
 });
-markers[0] = L.marker([19.300491, 97.97513], {icon: icon_plane_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'></h3><a href='https://lek3map.github.io/thailand/map/1998/picture/98062101.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/1998/thumbs/98062101.jpg' style='width:100%; border-radius:4px;'></a><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=19.300491,97.97513' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=19.300491,97.97513&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[0] = L.marker([19.300491, 97.97513], {icon: icon_plane_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Mae Hong Son Airport</h3><a href='https://lek3map.github.io/thailand/map/1998/picture/98062101.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/1998/thumbs/98062101.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>メーホンソン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=19.300491,97.97513' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=19.300491,97.97513&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
 
 if (pathPoints.length > 0) {
     var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
