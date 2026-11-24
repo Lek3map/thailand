@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2009年8月10日の地図日記">
+<meta property="og:type" content="website">
+<title>2009年8月10日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; min-height: 40px; background: #222; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+    .thumb-label { color: #ccc; font-size: 12px; text-align: center; padding: 4px 2px; word-break: break-word; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2009年8月10日</div><div class='photo-thumb'><img src='https://lek3map.github.io/thailand/picture/kuruma.jpg' title='交通手段' alt='交通手段' onerror="this.style.display='none'"></div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090810017.jpg' title='Wat Lamnarai' alt='Wat Lamnarai' onerror="this.style.display='none'"><div class='thumb-label'>Wat Lamnarai</div></div><div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090810031.jpg' title='Pa Sak Chonlasit Dam' alt='Pa Sak Chonlasit Dam' onerror="this.style.display='none'"><div class='thumb-label'>Pa Sak Chonlasit Dam</div></div><div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090810041.jpg' title='Shrimp' alt='Shrimp' onerror="this.style.display='none'"><div class='thumb-label'>Shrimp</div></div><div class='photo-thumb' onclick='moveToMarker(3)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090810102.jpg' title='Wat Tham Kra Bok' alt='Wat Tham Kra Bok' onerror="this.style.display='none'"><div class='thumb-label'>Wat Tham Kra Bok</div></div><div class='photo-thumb' onclick='moveToMarker(4)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090810108.jpg' title='Wat Phanit Than Mikaram' alt='Wat Phanit Than Mikaram' onerror="this.style.display='none'"><div class='thumb-label'>Wat Phanit Than Mikaram</div></div><div class='photo-thumb' onclick='moveToMarker(5)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090810118.jpg' title='Wat Nong Sai Chao' alt='Wat Nong Sai Chao' onerror="this.style.display='none'"><div class='thumb-label'>Wat Nong Sai Chao</div></div><div class='photo-thumb' onclick='moveToMarker(6)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090810159.jpg' title='Wat Khung Tha Lao' alt='Wat Khung Tha Lao' onerror="this.style.display='none'"><div class='thumb-label'>Wat Khung Tha Lao</div></div><div class='photo-thumb' onclick='moveToMarker(7)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090810168.jpg' title='Wat Thong Khung' alt='Wat Thong Khung' onerror="this.style.display='none'"><div class='thumb-label'>Wat Thong Khung</div></div></div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [];
+
+var icon_dam_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/dam.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+var icon_starr_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/starr.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+var icon_tera_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/tera.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+markers[0] = L.marker([15.215216, 101.141489], {icon: icon_tera_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Wat Lamnarai<br>วัดลำนารายณ์</h3><a href='https://lek3map.github.io/thailand/map/2009/picture/090810017.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090810017.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ロブリ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=15.215216,101.141489' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=15.215216,101.141489&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[1] = L.marker([14.865792, 101.065185], {icon: icon_dam_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Pa Sak Chonlasit Dam<br>เขื่อนป่าสักชลสิทธิ์</h3><a href='https://lek3map.github.io/thailand/map/2009/picture/090810031.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090810031.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ロブリ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=14.865792,101.065185' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=14.865792,101.065185&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[2] = L.marker([14.863158, 101.061441], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Shrimp</h3><a href='https://lek3map.github.io/thailand/map/2009/picture/090810041.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090810041.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ロブリ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=14.863158,101.061441' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=14.863158,101.061441&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[3] = L.marker([14.704078, 100.826125], {icon: icon_tera_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Wat Tham Kra Bok<br>วัดถ้ำกระบอก</h3><a href='https://goo.gl/photos/ZKAiSKTRmrkgAbis9' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090810102.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>サラブリ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=14.704078,100.826125' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=14.704078,100.826125&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[4] = L.marker([14.950673, 100.584812], {icon: icon_tera_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Wat Phanit Than Mikaram<br>วัดพานิชธรรมิการาม</h3><a href='https://goo.gl/photos/HmUPart6TthL5kiy9' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090810108.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ロブリ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=14.950673,100.584812' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=14.950673,100.584812&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[5] = L.marker([14.994162, 100.577087], {icon: icon_tera_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Wat Nong Sai Chao<br>วัดหนองทรายขาว</h3><a href='https://goo.gl/photos/XvGQ6gCvE85bCyWX7' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090810118.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ロブリ</div><div style='text-align:left; margin-top:8px;'>ラフー</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=14.994162,100.577087' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=14.994162,100.577087&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[6] = L.marker([14.98184, 100.475743], {icon: icon_tera_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Wat Khung Tha Lao<br>วัดคุ้งท่าเลา</h3><a href='https://lek3map.github.io/thailand/map/2009/picture/090810159.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090810159.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ロブリ</div><div style='text-align:left; margin-top:8px;'>この門だけです、虫歯になる前に歯を磨いた方が良いようです。</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=14.98184,100.475743' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=14.98184,100.475743&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[7] = L.marker([14.951149, 100.479316], {icon: icon_tera_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Wat Thong Khung<br>วัดท้องคุ้ง</h3><a href='https://goo.gl/photos/horXPfk1nmX93biHA' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090810168.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ロブリ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=14.951149,100.479316' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=14.951149,100.479316&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>

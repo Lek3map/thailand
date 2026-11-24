@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2009年7月28日の地図日記">
+<meta property="og:type" content="website">
+<title>2009年7月28日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; min-height: 40px; background: #222; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+    .thumb-label { color: #ccc; font-size: 12px; text-align: center; padding: 4px 2px; word-break: break-word; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2009年7月28日</div><div class='photo-thumb'><img src='https://lek3map.github.io/thailand/picture/kuruma.jpg' title='交通手段' alt='交通手段' onerror="this.style.display='none'"></div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090728004.jpg' title='Phra Brommaratchanuson Don Chedi' alt='Phra Brommaratchanuson Don Chedi' onerror="this.style.display='none'"><div class='thumb-label'>Phra Brommaratchanuson Don Chedi</div></div><div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090728009.jpg' title='Buffalo Statue' alt='Buffalo Statue' onerror="this.style.display='none'"><div class='thumb-label'>Buffalo Statue</div></div><div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090728075.jpg' title='Sam Chuk Market' alt='Sam Chuk Market' onerror="this.style.display='none'"><div class='thumb-label'>Sam Chuk Market</div></div><div class='photo-thumb' onclick='moveToMarker(3)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090728119.jpg' title='Bird Park' alt='Bird Park' onerror="this.style.display='none'"><div class='thumb-label'>Bird Park</div></div><div class='photo-thumb' onclick='moveToMarker(4)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090728204.jpg' title='Clock Tower' alt='Clock Tower' onerror="this.style.display='none'"><div class='thumb-label'>Clock Tower</div></div><div class='photo-thumb' onclick='moveToMarker(5)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090728205.jpg' title='Dragon In The Park' alt='Dragon In The Park' onerror="this.style.display='none'"><div class='thumb-label'>Dragon In The Park</div></div><div class='photo-thumb' onclick='moveToMarker(6)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090728222.jpg' title='Wat Kiri Wong' alt='Wat Kiri Wong' onerror="this.style.display='none'"><div class='thumb-label'>Wat Kiri Wong</div></div><div class='photo-thumb' onclick='moveToMarker(7)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090728250.jpg' title='Clock Tower' alt='Clock Tower' onerror="this.style.display='none'"><div class='thumb-label'>Clock Tower</div></div><div class='photo-thumb' onclick='moveToMarker(8)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090728253.jpg' title='Bung Si Fai' alt='Bung Si Fai' onerror="this.style.display='none'"><div class='thumb-label'>Bung Si Fai</div></div></div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [];
+
+var icon_clock_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/clock.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+var icon_market_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/market.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+var icon_monument_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/monument.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+var icon_parks_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/parks.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+var icon_starr_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/starr.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+var icon_tera_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/tera.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+markers[0] = L.marker([14.633324, 100.02113], {icon: icon_monument_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Phra Brommaratchanuson Don Chedi<br>พระบรมราชานุสรณ์ดอนเจดีย์</h3><a href='https://lek3map.github.io/thailand/map/2009/picture/090728004.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090728004.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>スパンブリ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=14.633324,100.02113' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=14.633324,100.02113&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[1] = L.marker([14.581091, 100.150219], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Buffalo Statue</h3><a href='https://lek3map.github.io/thailand/map/2009/picture/090728009.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090728009.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>スパンブリ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=14.581091,100.150219' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=14.581091,100.150219&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[2] = L.marker([14.755347, 100.09518], {icon: icon_market_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Sam Chuk Market<br>สามชุกตลาด 100 ปี</h3><a href='https://photos.app.goo.gl/12JvNUtAqGHJKr6j7' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090728075.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>スパンブリ</div><div style='text-align:left; margin-top:8px;'>サームチュック100年市場</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=14.755347,100.09518' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=14.755347,100.09518&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[3] = L.marker([15.206872, 100.153062], {icon: icon_parks_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Bird Park</h3><a href='https://photos.app.goo.gl/3xxNAx6DeNCCgvQz5' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090728119.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>チャイナート</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=15.206872,100.153062' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=15.206872,100.153062&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[4] = L.marker([15.694127, 100.122662], {icon: icon_clock_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Clock Tower<br>หอนาฬิกา</h3><a href='https://lek3map.github.io/thailand/map/2009/picture/090728204.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090728204.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ナコンサワン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=15.694127,100.122662' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=15.694127,100.122662&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[5] = L.marker([15.697572, 100.121809], {icon: icon_monument_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Dragon In The Park</h3><a href='https://lek3map.github.io/thailand/map/2009/picture/090728205.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090728205.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ナコンサワン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=15.697572,100.121809' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=15.697572,100.121809&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[6] = L.marker([15.718197, 100.125875], {icon: icon_tera_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Wat Kiri Wong<br>วัดคีรีวงศ์</h3><a href='https://goo.gl/photos/Vh179RV3PT3pe76D6' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090728222.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ナコンサワン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=15.718197,100.125875' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=15.718197,100.125875&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[7] = L.marker([16.427997, 100.343446], {icon: icon_clock_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Clock Tower<br>หอนาฬิกา</h3><a href='https://lek3map.github.io/thailand/map/2009/picture/090728250.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090728250.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ピチット</div><div style='text-align:left; margin-top:8px;'>ピチットの象徴はワニ、だから時計台だってワニ、周りで踊っているのが見えるかな？</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=16.427997,100.343446' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=16.427997,100.343446&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[8] = L.marker([16.427523, 100.343113], {icon: icon_parks_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Bung Si Fai<br>บึงสีไฟ</h3><a href='https://goo.gl/photos/TxsYzfUK6jdLpHLt5' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/090728253.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ピチット</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=16.427523,100.343113' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=16.427523,100.343113&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2009年8月7日の地図日記">
+<meta property="og:type" content="website">
+<title>2009年8月7日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; min-height: 40px; background: #222; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+    .thumb-label { color: #ccc; font-size: 12px; text-align: center; padding: 4px 2px; word-break: break-word; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2009年8月7日</div><div class='photo-thumb'><img src='https://lek3map.github.io/thailand/picture/kuruma.jpg' title='交通手段' alt='交通手段' onerror="this.style.display='none'"></div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/09080707.jpg' title='Chiang Khan Kang Immigration' alt='Chiang Khan Kang Immigration' onerror="this.style.display='none'"><div class='thumb-label'>Chiang Khan Kang Immigration</div></div><div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/09080718.jpg' title='Chiang Khan Post Office' alt='Chiang Khan Post Office' onerror="this.style.display='none'"><div class='thumb-label'>Chiang Khan Post Office</div></div><div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/09080730.jpg' title='Pak Chom Post Office' alt='Pak Chom Post Office' onerror="this.style.display='none'"><div class='thumb-label'>Pak Chom Post Office</div></div><div class='photo-thumb' onclick='moveToMarker(3)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/09080731.jpg' title='Ban Khok Wao School' alt='Ban Khok Wao School' onerror="this.style.display='none'"><div class='thumb-label'>Ban Khok Wao School</div></div><div class='photo-thumb' onclick='moveToMarker(4)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/09080778.jpg' title='Nong Khai Station' alt='Nong Khai Station' onerror="this.style.display='none'"><div class='thumb-label'>Nong Khai Station</div></div></div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [];
+
+var icon_postbox_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/postbox.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+var icon_starr_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/starr.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+var icon_station_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/station.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+markers[0] = L.marker([17.898846, 101.664814], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Chiang Khan Kang Immigration</h3><a href='https://lek3map.github.io/thailand/map/2009/picture/09080707.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/09080707.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ルーイ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=17.898846,101.664814' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=17.898846,101.664814&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[1] = L.marker([17.898177, 101.665292], {icon: icon_postbox_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Chiang Khan Post Office</h3><a href='https://lek3map.github.io/thailand/map/2009/picture/09080718.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/09080718.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ルーイ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=17.898177,101.665292' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=17.898177,101.665292&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[2] = L.marker([18.02367, 101.885576], {icon: icon_postbox_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Pak Chom Post Office</h3><a href='https://lek3map.github.io/thailand/map/2009/picture/09080730.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/09080730.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ルーイ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=18.02367,101.885576' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=18.02367,101.885576&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[3] = L.marker([18.174009, 102.039739], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Ban Khok Wao School</h3><a href='https://lek3map.github.io/thailand/map/2009/picture/09080731.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/09080731.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ルーイ</div><div style='text-align:left; margin-top:8px;'>校札（子供達が作ったそうだ）など写真を撮っていたら校長が手招くので見学させてもらった、日本（ＮＧＯ）の援助なども入っていて中々カラフルな学校だった。</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=18.174009,102.039739' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=18.174009,102.039739&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[4] = L.marker([17.864516, 102.731026], {icon: icon_station_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Nong Khai Station</h3><a href='https://lek3map.github.io/thailand/map/2009/picture/09080778.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/09080778.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ノンカイ</div><div style='text-align:left; margin-top:8px;'>以前は終着駅だったが今はビエンチャン（ラオス）まで行く事が出来る</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=17.864516,102.731026' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=17.864516,102.731026&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>

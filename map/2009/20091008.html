@@ -2,26 +2,24 @@
 <html lang='ja'>
 <head>
 <meta charset='utf-8'>
-<meta property="og:title" content="2009年10月08日の地図日記">
-<meta property="og:image" content="https://lek3map.github.io/thailand/picture/hyoushi_note.png">
+<meta property="og:title" content="2009年10月8日の地図日記">
 <meta property="og:type" content="website">
-<title>2009年10月08日の地図日記</title>
+<title>2009年10月8日の地図日記</title>
 <link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
 <script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
 <style>
     body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
     #map { flex: 1; }
     #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
-    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; min-height: 40px; background: #222; }
     .photo-thumb:hover { border-color: #007bff; }
     .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+    .thumb-label { color: #ccc; font-size: 12px; text-align: center; padding: 4px 2px; word-break: break-word; }
 </style>
 </head>
 <body>
 <div id='map'></div>
-<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2009年10月08日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='http://lh6.ggpht.com/_M674G_dhxK8/S_92itDAG5I/AAAAAAAABLY/2uMnK7MjnPo/s680/091008002.jpg' title='The Original Cannon For The Pattani District Chapter'></div>
-<div class='photo-thumb' onclick='moveToMarker(1)'><img src='http://lh5.ggpht.com/_M674G_dhxK8/S_92gyUyJLI/AAAAAAAABLQ/8zmSZtlDkCw/091008005.jpg' title='Ministry Of Defence'></div>
-</div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2009年10月8日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' title='出発地' alt='出発地' onerror="this.style.display='none'"><div class='thumb-label'>出発地</div></div><div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/091008002.jpg' title='The Original Cannon For The Pattani District Chapter' alt='The Original Cannon For The Pattani District Chapter' onerror="this.style.display='none'"><div class='thumb-label'>The Original Cannon For The Pattani District Chapter</div></div><div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/091008005.jpg' title='Ministry Of Defence' alt='Ministry Of Defence' onerror="this.style.display='none'"><div class='thumb-label'>Ministry Of Defence</div></div></div>
 <script>
 var map = L.map('map');
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -30,24 +28,29 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 var markers = {};
 var markerGroup = L.featureGroup().addTo(map);
-var pathPoints = [];
+var pathPoints = [[13.723715, 100.548755], [13.723731666666668, 100.54870166666667], [13.72358, 100.54868666666667], [13.723695, 100.54863], [13.72358, 100.54951333333334], [13.723695, 100.54848666666666], [13.72339, 100.54852333333334], [13.723673333333334, 100.54865833333334], [13.723673333333334, 100.54856333333333], [13.72369, 100.54851666666667], [13.723706666666667, 100.54851666666667], [13.72368, 100.54854], [13.723523333333333, 100.548635], [13.72351, 100.54860833333333], [13.7235, 100.54859666666667], [13.723501666666667, 100.54858], [13.723506666666667, 100.548565], [13.723511666666667, 100.548565], [13.723515, 100.54856666666667], [13.723518333333333, 100.54858166666666], [13.723521666666667, 100.54860666666667], [13.723523333333333, 100.54862333333334], [13.723523333333333, 100.54863166666667], [13.723523333333333, 100.54863833333333], [13.723523333333333, 100.54864166666667], [13.723523333333333, 100.54864666666667], [13.723525, 100.54865833333334], [13.723525, 100.548675], [13.723526666666666, 100.54869166666667], [13.723528333333334, 100.54870333333334], [13.723528333333334, 100.54871], [13.723528333333334, 100.54871333333334], [13.723528333333334, 100.54873], [13.723528333333334, 100.54873333333333], [13.723528333333334, 100.54874], [13.723526666666666, 100.548745], [13.723526666666666, 100.54875333333334], [13.723526666666666, 100.54876333333333], [13.723528333333334, 100.548775], [13.723528333333334, 100.548785], [13.723528333333334, 100.54879166666667], [13.723515, 100.54923833333334], [13.72355, 100.54894666666667], [13.723515, 100.54898666666666], [13.723423333333333, 100.54845666666667], [13.723426666666667, 100.54835833333334], [13.723463333333333, 100.549135], [13.723465, 100.54910833333334], [13.723456666666667, 100.54895166666667], [13.723455, 100.54884666666666], [13.723455, 100.548775], [13.723461666666667, 100.548795], [13.723465, 100.54880333333334], [13.723466666666667, 100.54879666666666], [13.723466666666667, 100.5488], [13.723468333333333, 100.54880166666666], [13.723475, 100.54942], [13.723658333333333, 100.54881833333333], [13.723915, 100.548935], [13.723798333333333, 100.54895666666667], [13.723813333333334, 100.54924166666666], [13.723855, 100.54857], [13.723798333333333, 100.548505], [13.723661666666667, 100.548405], [13.72448, 100.54888833333334], [13.724335, 100.54884166666666], [13.724318333333333, 100.54878833333333], [13.724258333333333, 100.548855], [13.724188333333334, 100.54885166666666], [13.724231666666666, 100.54885333333333], [13.724273333333333, 100.54883], [13.724078333333333, 100.54864666666667], [13.724113333333333, 100.54865666666667], [13.724363333333333, 100.54870166666667], [13.724328333333334, 100.54871166666666], [13.724291666666666, 100.54875], [13.724163333333333, 100.5487], [13.724288333333334, 100.54879166666667], [13.724766666666667, 100.54871333333334], [13.724681666666667, 100.54848], [13.724821666666667, 100.54849], [13.725033333333334, 100.54780833333334], [13.725096666666667, 100.547715], [13.724708333333334, 100.54771666666667], [13.724648333333333, 100.54702666666667], [13.724863333333333, 100.54672333333333], [13.7251, 100.54645], [13.72552, 100.54623833333333], [13.725836666666666, 100.54628166666667], [13.726, 100.54631666666667], [13.726435, 100.54602], [13.726335, 100.546165], [13.726306666666666, 100.54617], [13.726741666666667, 100.54616333333334], [13.726773333333334, 100.54621166666666], [13.726721666666666, 100.54620333333334], [13.726671666666666, 100.546215], [13.727013333333334, 100.54694833333333], [13.727025, 100.54667166666667], [13.727061666666666, 100.54667], [13.727075, 100.54666], [13.727065, 100.54653833333333], [13.726843333333333, 100.54653666666667], [13.726901666666667, 100.546555], [13.727008333333334, 100.54677833333334], [13.726886666666667, 100.54640833333333], [13.726766666666666, 100.54579], [13.726923333333334, 100.54649166666667], [13.726908333333334, 100.54642166666666], [13.727115, 100.54633166666666], [13.726943333333333, 100.54642666666666], [13.726798333333333, 100.54643666666666], [13.726856666666666, 100.54647166666666], [13.72699, 100.54645166666667], [13.726963333333334, 100.546265], [13.726985, 100.54635999999999], [13.726931666666667, 100.54634833333333], [13.726901666666667, 100.54634666666666], [13.726908333333334, 100.54634166666666], [13.726926666666667, 100.54652666666667], [13.72703, 100.54628666666666], [13.727153333333334, 100.54623333333333], [13.727443333333333, 100.54639833333333], [13.727401666666667, 100.54630833333333], [13.727321666666667, 100.54631333333333], [13.727311666666667, 100.54626666666667], [13.727313333333333, 100.546245], [13.727311666666667, 100.54623666666667], [13.727291666666666, 100.54623833333333], [13.727301666666667, 100.546245], [13.727366666666667, 100.54630333333333], [13.727366666666667, 100.5463], [13.727371666666667, 100.54631], [13.727313333333333, 100.54607333333334], [13.727023333333333, 100.54600166666667], [13.726921666666666, 100.54599833333333], [13.72646, 100.54579833333334], [13.72676, 100.54589333333334], [13.726858333333332, 100.5459], [13.726885, 100.54594333333333], [13.726721666666666, 100.54658166666667], [13.727268333333333, 100.54645], [13.727203333333334, 100.54638666666666], [13.727118333333333, 100.54642333333334], [13.726668333333333, 100.54640166666667], [13.725678333333333, 100.54647666666666], [13.72548, 100.54633833333334], [13.725331666666667, 100.54642166666666], [13.725021666666667, 100.54665833333334], [13.725501666666666, 100.54692833333333], [13.72494, 100.54791333333333], [13.724923333333333, 100.54842], [13.725108333333333, 100.54858333333334], [13.724871666666667, 100.54863333333333], [13.724731666666667, 100.548645], [13.724693333333333, 100.54872333333333], [13.72401, 100.54890166666667], [13.724058333333334, 100.548795], [13.72413, 100.54878], [13.724171666666667, 100.548825], [13.724515, 100.54876166666666], [13.72441, 100.54874166666667], [13.724846666666666, 100.54869], [13.724648333333333, 100.54865833333334], [13.724658333333334, 100.54862166666666], [13.723645, 100.54866833333334]];
 
-
-                var icon_starr_png = L.icon({
-                    iconUrl: 'https://lek3map.github.io/thailand/icon/starr.png',
-                    iconSize: [30, 30],
-                    iconAnchor: [15, 30],
-                    popupAnchor: [0, -30]
-                });
-                var icon_yakata_png = L.icon({
-                    iconUrl: 'https://lek3map.github.io/thailand/icon/yakata.png',
-                    iconSize: [30, 30],
-                    iconAnchor: [15, 30],
-                    popupAnchor: [0, -30]
-                });
-markers[0] = L.marker([13.751651, 100.493842], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='http://lh6.ggpht.com/_M674G_dhxK8/S_92itDAG5I/AAAAAAAABLY/2uMnK7MjnPo/s1600/091008002.jpg' target='_blank'><img src='http://lh6.ggpht.com/_M674G_dhxK8/S_92itDAG5I/AAAAAAAABLY/2uMnK7MjnPo/s680/091008002.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>The Original Cannon For The Pattani District Chapter</h3><div style='color:#666; font-size:1.1em;'>バンコク</div><div style='font-size:1.1em; color:#333; margin:10px 0;'>パタニ県の県章にデザインされている大砲はパタニ王国の官吏・林道乾によって制作されたパヤー・ターニー（マレー語ではスリ・パタニ）である。以前パタニに設置されていたものであるが、1785年（タイ仏暦2328年）、バンコクに移された。</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=13.751651,100.493842' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
-markers[1] = L.marker([13.751724, 100.494314], {icon: icon_yakata_png}).addTo(markerGroup).bindPopup("<div style='width:250px;'><a href='http://lh5.ggpht.com/_M674G_dhxK8/S_92gyUyJLI/AAAAAAAABLQ/8zmSZtlDkCw/091008005.jpg' target='_blank'><img src='http://lh5.ggpht.com/_M674G_dhxK8/S_92gyUyJLI/AAAAAAAABLQ/8zmSZtlDkCw/091008005.jpg' style='width:100%; border-radius:4px;'></a><h3 style='margin:10px 0 5px 0;'>Ministry Of Defence</h3><div style='color:#666; font-size:1.1em;'>バンコク</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=13.751724,100.494314' target='_blank' style='font-weight:bold;'>📍 Google Maps</a></div>");
-
+var icon_starr_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/starr.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+var icon_start_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+var icon_yakata_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/yakata.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+markers[0] = L.marker([13.723715, 100.548755], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>出発地</h3><a href='https://lek3map.github.io/thailand/picture/aruki.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>バンコク</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=13.723715,100.548755' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=13.723715,100.548755&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[1] = L.marker([13.751651, 100.493842], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>The Original Cannon For The Pattani District Chapter</h3><a href='https://lek3map.github.io/thailand/map/2009/picture/091008002.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/091008002.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>バンコク</div><div style='text-align:left; margin-top:8px;'>パタニ県の県章にデザインされている大砲はパタニ王国の官吏・林道乾によって制作されたパヤー・ターニー（マレー語ではスリ・パタニ）である。以前パタニに設置されていたものであるが、1785年（タイ仏暦2328年）、バンコクに移された。</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=13.751651,100.493842' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=13.751651,100.493842&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[2] = L.marker([13.751724, 100.494314], {icon: icon_yakata_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Ministry Of Defence</h3><a href='https://lek3map.github.io/thailand/map/2009/picture/091008005.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2009/thumbs/091008005.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>バンコク</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=13.751724,100.494314' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=13.751724,100.494314&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
 
 if (pathPoints.length > 0) {
     var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
