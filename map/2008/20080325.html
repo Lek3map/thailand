@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2008年3月25日の地図日記">
+<meta property="og:type" content="website">
+<title>2008年3月25日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; min-height: 40px; background: #222; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+    .thumb-label { color: #ccc; font-size: 12px; text-align: center; padding: 4px 2px; word-break: break-word; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2008年3月25日</div><div class='photo-thumb'><img src='https://lek3map.github.io/thailand/picture/kuruma.jpg' title='交通手段' alt='交通手段' onerror="this.style.display='none'"></div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/map/2008/thumbs/08032518.jpg' title='Damnoen Saduak Floating Market' alt='Damnoen Saduak Floating Market' onerror="this.style.display='none'"><div class='thumb-label'>Damnoen Saduak Floating Market</div></div><div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lek3map.github.io/thailand/map/2008/thumbs/08032544.jpg' title='Fish' alt='Fish' onerror="this.style.display='none'"><div class='thumb-label'>Fish</div></div><div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lek3map.github.io/thailand/map/2008/thumbs/08032554.jpg' title='Bang Rachan Memorial Park' alt='Bang Rachan Memorial Park' onerror="this.style.display='none'"><div class='thumb-label'>Bang Rachan Memorial Park</div></div><div class='photo-thumb' onclick='moveToMarker(3)'><img src='https://lek3map.github.io/thailand/map/2008/thumbs/08032573.jpg' title='Welcome Gate' alt='Welcome Gate' onerror="this.style.display='none'"><div class='thumb-label'>Welcome Gate</div></div><div class='photo-thumb' onclick='moveToMarker(4)'><img src='https://lek3map.github.io/thailand/map/2008/thumbs/08032576.jpg' title='Welcome Gate' alt='Welcome Gate' onerror="this.style.display='none'"><div class='thumb-label'>Welcome Gate</div></div><div class='photo-thumb' onclick='moveToMarker(5)'><img src='https://lek3map.github.io/thailand/map/2008/thumbs/08032578.jpg' title='Clock Tower' alt='Clock Tower' onerror="this.style.display='none'"><div class='thumb-label'>Clock Tower</div></div></div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [];
+
+var icon_clock_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/clock.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+var icon_gate_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/gate.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+var icon_market_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/market.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+var icon_monument_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/monument.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+var icon_starr_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/starr.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+markers[0] = L.marker([13.531941, 99.896235], {icon: icon_market_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Damnoen Saduak Floating Market</h3><a href='https://goo.gl/photos/trtVLYt4kTvuJnxu7' target='_blank'><img src='https://lek3map.github.io/thailand/map/2008/thumbs/08032518.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ラチャブリ</div><div style='text-align:left; margin-top:8px;'>多分このあたり</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=13.531941,99.896235' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=13.531941,99.896235&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[1] = L.marker([14.894525, 100.408173], {icon: icon_starr_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Fish</h3><a href='https://lek3map.github.io/thailand/map/2008/picture/08032544.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2008/thumbs/08032544.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>シンブリ</div><div style='text-align:left; margin-top:8px;'>シンブリのシンボルはサカナです、だからあっちにサカナ、こっちにさかなと魚だらけなのです</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=14.894525,100.408173' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=14.894525,100.408173&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[2] = L.marker([14.805339, 100.320797], {icon: icon_monument_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Bang Rachan Memorial Park<br>อุทยานค่ายบางระจัน</h3><a href='https://lek3map.github.io/thailand/map/2008/picture/08032554.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2008/thumbs/08032554.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>シンブリ</div><div style='text-align:left; margin-top:8px;'>１７６６年ビルマ軍がシンブリに侵攻してきた際，バーンラチャンの住民が圧倒的な数のビルマ軍勢にもひるまず身を挺して勇敢に闘い，砦を守ったことを記念して造られた記念公園。 ２０００年にこの有名な歴史上の戦いの映画が製作された、その中に水牛に乗って敵軍に突撃するシーンがあるのだが、あるホームページに水牛はそんなに早く走れないのであれはないだろうとの記述がありましたが、水牛がどのくらい早く走れるのか、その名も「バッファロー・レース」というのが毎年チョンブリであるので信じられない人は是非見に行って下さい、あれはありだと納得出来るはずです、迫力満点ですよ。</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=14.805339,100.320797' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=14.805339,100.320797&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[3] = L.marker([15.412395, 100.146883], {icon: icon_gate_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Welcome Gate</h3><a href='https://lek3map.github.io/thailand/map/2008/picture/08032573.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2008/thumbs/08032573.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ウタイタニ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=15.412395,100.146883' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=15.412395,100.146883&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[4] = L.marker([15.972149, 99.831519], {icon: icon_gate_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Welcome Gate</h3><a href='https://lek3map.github.io/thailand/map/2008/picture/08032576.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2008/thumbs/08032576.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>カムペンペット</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=15.972149,99.831519' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=15.972149,99.831519&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[5] = L.marker([16.482479, 99.522341], {icon: icon_clock_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Clock Tower<br>หอนาฬิกา</h3><a href='https://lek3map.github.io/thailand/map/2008/picture/08032578.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2008/thumbs/08032578.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>カムペンペット</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=16.482479,99.522341' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=16.482479,99.522341&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>

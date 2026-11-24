@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2006年4月3日の地図日記">
+<meta property="og:type" content="website">
+<title>2006年4月3日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; min-height: 40px; background: #222; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+    .thumb-label { color: #ccc; font-size: 12px; text-align: center; padding: 4px 2px; word-break: break-word; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2006年4月3日</div><div class='photo-thumb'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' title='交通手段' alt='交通手段' onerror="this.style.display='none'"></div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/map/2006/thumbs/060403014.jpg' title='Bus Terminal' alt='Bus Terminal' onerror="this.style.display='none'"><div class='thumb-label'>Bus Terminal</div></div><div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lek3map.github.io/thailand/map/2006/thumbs/060403034.jpg' title='Lak Muang' alt='Lak Muang' onerror="this.style.display='none'"><div class='thumb-label'>Lak Muang</div></div><div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lek3map.github.io/thailand/map/2006/thumbs/060403041.jpg' title='Clock Tower' alt='Clock Tower' onerror="this.style.display='none'"><div class='thumb-label'>Clock Tower</div></div><div class='photo-thumb' onclick='moveToMarker(3)'><img src='https://lek3map.github.io/thailand/map/2006/thumbs/060403052.jpg' title='Saraburi Station' alt='Saraburi Station' onerror="this.style.display='none'"><div class='thumb-label'>Saraburi Station</div></div><div class='photo-thumb' onclick='moveToMarker(4)'><img src='https://lek3map.github.io/thailand/map/2006/thumbs/060403067.jpg' title='Bus Terminal' alt='Bus Terminal' onerror="this.style.display='none'"><div class='thumb-label'>Bus Terminal</div></div><div class='photo-thumb' onclick='moveToMarker(5)'><img src='https://lek3map.github.io/thailand/map/2006/thumbs/060403083.jpg' title='Bus Terminal' alt='Bus Terminal' onerror="this.style.display='none'"><div class='thumb-label'>Bus Terminal</div></div><div class='photo-thumb' onclick='moveToMarker(6)'><img src='https://lek3map.github.io/thailand/map/2006/thumbs/060403101.jpg' title='Chao Pho Phraya Lae Monument' alt='Chao Pho Phraya Lae Monument' onerror="this.style.display='none'"><div class='thumb-label'>Chao Pho Phraya Lae Monument</div></div><div class='photo-thumb' onclick='moveToMarker(7)'><img src='https://lek3map.github.io/thailand/map/2006/thumbs/060403107.jpg' title='Post Office' alt='Post Office' onerror="this.style.display='none'"><div class='thumb-label'>Post Office</div></div></div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [];
+
+var icon_bus_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/bus.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+var icon_clock_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/clock.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+var icon_lakmuang_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/lakmuang.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+var icon_monument_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/monument.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+var icon_postbox_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/postbox.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+var icon_station_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/station.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+markers[0] = L.marker([14.59474, 100.451651], {icon: icon_bus_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Bus Terminal</h3><a href='https://lek3map.github.io/thailand/map/2006/picture/060403014.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2006/thumbs/060403014.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>アントン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=14.59474,100.451651' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=14.59474,100.451651&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[1] = L.marker([14.528831, 100.909268], {icon: icon_lakmuang_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Lak Muang</h3><a href='https://lek3map.github.io/thailand/map/2006/picture/060403034.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2006/thumbs/060403034.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>サラブリ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=14.528831,100.909268' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=14.528831,100.909268&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[2] = L.marker([14.529117, 100.912503], {icon: icon_clock_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Clock Tower<br>หอนาฬิกา</h3><a href='https://lek3map.github.io/thailand/map/2006/picture/060403041.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2006/thumbs/060403041.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>サラブリ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=14.529117,100.912503' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=14.529117,100.912503&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[3] = L.marker([14.527596, 100.916312], {icon: icon_station_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Saraburi Station</h3><a href='https://lek3map.github.io/thailand/map/2006/picture/060403052.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2006/thumbs/060403052.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>サラブリ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=14.527596,100.916312' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=14.527596,100.916312&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[4] = L.marker([14.52354, 100.918897], {icon: icon_bus_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Bus Terminal</h3><a href='https://photos.app.goo.gl/QwLpeR3wQmYDWT1K7' target='_blank'><img src='https://lek3map.github.io/thailand/map/2006/thumbs/060403067.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>サラブリ</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=14.52354,100.918897' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=14.52354,100.918897&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[5] = L.marker([15.812508, 102.0352225], {icon: icon_bus_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Bus Terminal</h3><a href='https://lek3map.github.io/thailand/map/2006/picture/060403083.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2006/thumbs/060403083.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>チャイヤプーム</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=15.812508,102.0352225' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=15.812508,102.0352225&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[6] = L.marker([15.806877, 102.031526], {icon: icon_monument_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Chao Pho Phraya Lae Monument</h3><a href='https://lek3map.github.io/thailand/map/2006/picture/060403101.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2006/thumbs/060403101.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>チャイヤプーム</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=15.806877,102.031526' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=15.806877,102.031526&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[7] = L.marker([15.806789, 102.029353], {icon: icon_postbox_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Post Office</h3><a href='https://lek3map.github.io/thailand/map/2006/picture/060403107.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2006/thumbs/060403107.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>チャイヤプーム</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=15.806789,102.029353' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=15.806789,102.029353&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>
