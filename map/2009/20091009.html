@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<meta charset='utf-8'>
+<meta property="og:title" content="2009年10月9日の地図日記">
+<meta property="og:type" content="website">
+<title>2009年10月9日の地図日記</title>
+<link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
+<script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+<style>
+    body { display: flex; height: 100vh; margin: 0; background: #111; font-family: sans-serif; }
+    #map { flex: 1; }
+    #sidebar { width: 200px; overflow-y: auto; background: #111; padding: 10px; border-left: 1px solid #333; }
+    .photo-thumb { margin-bottom: 10px; cursor: pointer; border: 2px solid transparent; min-height: 40px; background: #222; }
+    .photo-thumb:hover { border-color: #007bff; }
+    .photo-thumb img { width: 100%; border-radius: 4px; display: block; }
+    .thumb-label { color: #ccc; font-size: 12px; text-align: center; padding: 4px 2px; word-break: break-word; }
+</style>
+</head>
+<body>
+<div id='map'></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2009年10月9日</div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/icon/start.png' title='出発地' alt='出発地' onerror="this.style.display='none'"><div class='thumb-label'>出発地</div></div></div>
+<script>
+var map = L.map('map');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var markers = {};
+var markerGroup = L.featureGroup().addTo(map);
+var pathPoints = [[13.732786666666666, 100.52937666666666], [13.732586666666666, 100.529175], [13.732628333333333, 100.52903666666667], [13.732708333333333, 100.52905833333334], [13.732755, 100.52907666666667], [13.732871666666666, 100.529045], [13.733053333333332, 100.52907333333333], [13.73341, 100.52874], [13.734088333333334, 100.52878666666666], [13.7339, 100.52978], [13.734155, 100.52828666666667], [13.734068333333333, 100.528715], [13.73405, 100.52873333333334], [13.734001666666666, 100.52902333333333], [13.733951666666666, 100.52922833333334], [13.733885, 100.52946166666666], [13.733838333333333, 100.52960333333333], [13.7346, 100.52874833333334], [13.736096666666667, 100.52926166666667], [13.738573333333333, 100.52968333333334], [13.74033, 100.529945], [13.741556666666666, 100.53018], [13.744153333333333, 100.53045166666666], [13.744133333333334, 100.530775], [13.745096666666667, 100.54333666666666], [13.74578, 100.54120333333333], [13.745503333333334, 100.54061166666666], [13.745436666666667, 100.54057166666666], [13.745425, 100.54051333333334], [13.746275, 100.54033166666666], [13.746373333333333, 100.540295], [13.747973333333332, 100.54091333333334], [13.748328333333333, 100.54045], [13.748455, 100.540385], [13.748651666666667, 100.54056666666666], [13.74891, 100.54067], [13.749145, 100.54069833333334], [13.749485, 100.54094], [13.74961, 100.54083666666666], [13.749736666666667, 100.54080833333333], [13.749971666666667, 100.54085833333333], [13.749911666666666, 100.54076833333333], [13.74993, 100.540655], [13.750368333333334, 100.540425], [13.750413333333332, 100.540195], [13.751088333333334, 100.542375], [13.750791666666666, 100.540045], [13.751106666666667, 100.53994833333333], [13.75076, 100.53853666666667], [13.750561666666666, 100.53805166666666], [13.750685, 100.53799333333333], [13.75075, 100.53785833333333], [13.750776666666667, 100.53771833333333], [13.751008333333333, 100.53789166666667], [13.750903333333333, 100.53784], [13.75078, 100.53744166666667], [13.750008333333334, 100.53672833333333], [13.750705, 100.53844833333333], [13.750821666666667, 100.53885], [13.750645, 100.53905666666667], [13.750623333333333, 100.53928833333333], [13.750231666666666, 100.53961666666666], [13.750103333333334, 100.53980166666666], [13.750623333333333, 100.54064333333334], [13.750016666666667, 100.53981833333333], [13.749835, 100.54073666666666], [13.749465, 100.54162166666667], [13.749188333333333, 100.54158333333334], [13.749, 100.54154166666666], [13.74894, 100.54156], [13.748865, 100.541355], [13.748691666666666, 100.54127833333334], [13.748638333333334, 100.54112166666667], [13.748568333333333, 100.54093833333333], [13.748396666666666, 100.54089166666667], [13.748243333333333, 100.54075833333333], [13.748201666666667, 100.54069666666666], [13.748165, 100.54052333333334], [13.748071666666666, 100.54039333333333]];
+
+var icon_start_png = L.icon({
+    iconUrl: 'https://lek3map.github.io/thailand/icon/start.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+    popupAnchor: [0, -30]
+});
+markers[0] = L.marker([13.732786666666666, 100.52937666666666], {icon: icon_start_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>出発地</h3><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=13.732786666666666,100.52937666666666' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=13.732786666666666,100.52937666666666&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+
+if (pathPoints.length > 0) {
+    var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
+    map.fitBounds(polyline.getBounds(), {padding: [30, 30]});
+} else if (Object.keys(markers).length > 0) {
+    map.fitBounds(markerGroup.getBounds(), {padding: [50, 50]});
+} else {
+    map.setView([13.7563, 100.5018], 6);
+}
+
+function moveToMarker(id) { 
+    var m = markers[id]; 
+    if(m) { map.flyTo(m.getLatLng(), 15); m.openPopup(); } 
+}
+</script>
+</body>
+</html>
