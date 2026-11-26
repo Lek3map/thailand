@@ -19,7 +19,7 @@
 </head>
 <body>
 <div id='map'></div>
-<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2005年7月21日</div><div class='photo-thumb'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' title='交通手段' alt='交通手段' onerror="this.style.display='none'"></div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/map/2005/thumbs/05072101.jpg' title='Takua Pa Bus Terminal' alt='Takua Pa Bus Terminal' onerror="this.style.display='none'"><div class='thumb-label'>Takua Pa Bus Terminal</div></div><div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lek3map.github.io/thailand/map/2005/thumbs/05072122.jpg' title='Prayadumrong' alt='Prayadumrong' onerror="this.style.display='none'"><div class='thumb-label'>Prayadumrong</div></div><div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lek3map.github.io/thailand/map/2005/thumbs/05072130.jpg' title='Lak Muang' alt='Lak Muang' onerror="this.style.display='none'"><div class='thumb-label'>Lak Muang</div></div></div>
+<div id='sidebar'><div style='color:white; text-align:center; margin-bottom:15px;'>2005年7月21日</div><div class='photo-thumb'><img src='https://lek3map.github.io/thailand/picture/aruki.jpg' title='交通手段' alt='交通手段' onerror="this.style.display='none'"></div><div class='photo-thumb' onclick='moveToMarker(0)'><img src='https://lek3map.github.io/thailand/map/2005/thumbs/05072101.jpg' title='Takua Pa Bus Terminal' alt='Takua Pa Bus Terminal' onerror="this.style.display='none'"><div class='thumb-label'>Takua Pa Bus Terminal</div></div><div class='photo-thumb' onclick='moveToMarker(1)'><img src='https://lek3map.github.io/thailand/map/2005/thumbs/05072122.jpg' title='Prayadumrong' alt='Prayadumrong' onerror="this.style.display='none'"><div class='thumb-label'>Prayadumrong</div></div><div class='photo-thumb' onclick='moveToMarker(2)'><img src='https://lek3map.github.io/thailand/map/2005/thumbs/05072130.jpg' title='Lak Muang' alt='Lak Muang' onerror="this.style.display='none'"><div class='thumb-label'>Lak Muang</div></div><div style='text-align:center; margin-top:12px; padding-top:8px; border-top:1px solid #333;'><a href='../../使い方.html' style='color:#66aaff; font-size:12px;'>地図の使い方</a></div></div>
 <script>
 var map = L.map('map');
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -48,9 +48,44 @@ var icon_monument_png = L.icon({
     iconAnchor: [15, 30],
     popupAnchor: [0, -30]
 });
-markers[0] = L.marker([8.871078, 98.350758], {icon: icon_bus_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Takua Pa Bus Terminal</h3><a href='https://lek3map.github.io/thailand/map/2005/picture/05072101.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2005/thumbs/05072101.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>パンガー</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=8.871078,98.350758' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=8.871078,98.350758&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
-markers[1] = L.marker([9.960994, 98.639175], {icon: icon_monument_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Prayadumrong<br>อนุสาวรีย์พระยาดำรงค์จริตมหิศรภักดี</h3><a href='https://lek3map.github.io/thailand/map/2005/picture/05072122.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2005/thumbs/05072122.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ラノン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=9.960994,98.639175' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=9.960994,98.639175&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
-markers[2] = L.marker([9.962537, 98.640701], {icon: icon_lakmuang_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Lak Muang</h3><a href='https://lek3map.github.io/thailand/map/2005/picture/05072130.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2005/thumbs/05072130.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ラノン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=9.962537,98.640701' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=9.962537,98.640701&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a></div>");
+markers[0] = L.marker([8.871078, 98.350758], {icon: icon_bus_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Takua Pa Bus Terminal</h3><a href='https://lek3map.github.io/thailand/map/2005/picture/05072101.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2005/thumbs/05072101.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>パンガー</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=8.871078,98.350758' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=8.871078,98.350758&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a><br><button onclick='copyPlace(0, this)' style='margin-top:8px; padding:0 8px; font-size:12px; cursor:pointer;'>コピー</button> <button onclick='downloadPlace(0)' style='margin-top:8px; padding:0 8px; font-size:12px; cursor:pointer;'>CSVで保存</button></div>");
+markers[1] = L.marker([9.960994, 98.639175], {icon: icon_monument_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Prayadumrong<br>อนุสาวรีย์พระยาดำรงค์จริตมหิศรภักดี</h3><a href='https://lek3map.github.io/thailand/map/2005/picture/05072122.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2005/thumbs/05072122.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ラノン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=9.960994,98.639175' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=9.960994,98.639175&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a><br><button onclick='copyPlace(1, this)' style='margin-top:8px; padding:0 8px; font-size:12px; cursor:pointer;'>コピー</button> <button onclick='downloadPlace(1)' style='margin-top:8px; padding:0 8px; font-size:12px; cursor:pointer;'>CSVで保存</button></div>");
+markers[2] = L.marker([9.962537, 98.640701], {icon: icon_lakmuang_png}).addTo(markerGroup).bindPopup("<div style='width:250px; text-align:center;'><h3 style='margin:10px 0 5px 0;'>Lak Muang</h3><a href='https://lek3map.github.io/thailand/map/2005/picture/05072130.jpg' target='_blank'><img src='https://lek3map.github.io/thailand/map/2005/thumbs/05072130.jpg' style='width:100%; border-radius:4px;'></a><div style='color:#666; font-size:1.1em;'>ラノン</div><hr style='border:0; border-top:1px solid #eee;'><a href='https://www.google.com/maps?q=9.962537,98.640701' target='_blank' style='font-weight:bold;'>📍 Google Maps</a>　<a href='https://www.google.com/maps?q=9.962537,98.640701&hl=th' target='_blank' style='font-weight:bold;'>タイ語</a><br><button onclick='copyPlace(2, this)' style='margin-top:8px; padding:0 8px; font-size:12px; cursor:pointer;'>コピー</button> <button onclick='downloadPlace(2)' style='margin-top:8px; padding:0 8px; font-size:12px; cursor:pointer;'>CSVで保存</button></div>");
+var PLACES = [{"date": "2005-07-21", "name": "Takua Pa Bus Terminal", "tname": "", "place": "パンガー", "des": "", "lat": 8.871078, "lon": 98.350758, "maps": "https://www.google.com/maps?q=8.871078,98.350758", "thumb": "https://lek3map.github.io/thailand/map/2005/thumbs/05072101.jpg", "album": "https://lek3map.github.io/thailand/map/2005/picture/05072101.jpg"}, {"date": "2005-07-21", "name": "Prayadumrong", "tname": "อนุสาวรีย์พระยาดำรงค์จริตมหิศรภักดี", "place": "ラノン", "des": "", "lat": 9.960994, "lon": 98.639175, "maps": "https://www.google.com/maps?q=9.960994,98.639175", "thumb": "https://lek3map.github.io/thailand/map/2005/thumbs/05072122.jpg", "album": "https://lek3map.github.io/thailand/map/2005/picture/05072122.jpg"}, {"date": "2005-07-21", "name": "Lak Muang", "tname": "", "place": "ラノン", "des": "", "lat": 9.962537, "lon": 98.640701, "maps": "https://www.google.com/maps?q=9.962537,98.640701", "thumb": "https://lek3map.github.io/thailand/map/2005/thumbs/05072130.jpg", "album": "https://lek3map.github.io/thailand/map/2005/picture/05072130.jpg"}];
+
+function placeRow(p) {
+    return [p.date, p.name, p.tname, p.place, p.des, p.lat, p.lon, p.maps, p.thumb].join('\t');
+}
+function placeCsv(p) {
+    var head = ['日付', '名前', 'タイ語名', '場所', '説明', '緯度', '経度', 'Google Maps', 'サムネイル'];
+    function q(v) { return '"' + String(v).replace(/"/g, '""') + '"'; }
+    var vals = [p.date, p.name, p.tname, p.place, p.des, p.lat, p.lon, p.maps, p.thumb];
+    return head.map(q).join(',') + '\r\n' + vals.map(q).join(',') + '\r\n';
+}
+function copyPlace(i, btn) {
+    var text = placeRow(PLACES[i]);
+    function done() { btn.textContent = 'コピーしました'; setTimeout(function() { btn.textContent = 'コピー'; }, 2000); }
+    function fallback() {
+        var ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); }
+        catch (e) { btn.textContent = 'コピーできませんでした'; }
+        document.body.removeChild(ta);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(fallback);
+    } else { fallback(); }
+}
+function downloadPlace(i) {
+    var p = PLACES[i];
+    var blob = new Blob(['\ufeff' + placeCsv(p)], {type: 'text/csv;charset=utf-8'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = p.date.replace(/-/g, '') + '-' + (i + 1) + '.csv';
+    document.body.appendChild(a); a.click();
+    setTimeout(function() { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+}
+
 
 if (pathPoints.length > 0) {
     var polyline = L.polyline(pathPoints, {color: '#ff0000', weight: 4, opacity: 0.8}).addTo(map);
